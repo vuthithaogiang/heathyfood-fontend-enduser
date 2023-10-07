@@ -1,0 +1,7 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    margin-top: var(--height-header);
+}
