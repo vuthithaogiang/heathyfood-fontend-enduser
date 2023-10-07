@@ -1,10 +1,187 @@
-.wrapper {
-    width: 100%;
-    height: var(--height-header);
-    position: fixed;
-    display: flex;
-    justify-content: center;
+// Breakpoints, dimension, container, row, column, v.v
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
 
+@mixin breakpoint($key) {
+    $breakpoint: map-get(
+        $map: $grid-breakpoints,
+        $key: $key,
+    );
+
+    @if ($breakpoint) {
+        @media (max-width: ($breakpoint - 0.02)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not in breakpoint!";
+    }
+}
+// end
+
+%flexItemsCenter {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
     z-index: 90;
-    background-color: aquamarine;
+    background-color: var(--header-bg-color);
+}
+
+.top-bar-more {
+    display: none;
+    cursor: pointer;
+
+    @include breakpoint(lg) {
+        display: block;
+    }
+}
+
+.top-bar {
+    @extend %flexItemsCenter;
+    padding: 15px 0;
+
+    @include breakpoint(sm) {
+        padding: 9px 0;
+        justify-content: space-between;
+    }
+    @include breakpoint(lg) {
+        padding: 11px 0;
+    }
+}
+
+.logo {
+    @extend %flexItemsCenter;
+    gap: 14px;
+    cursor: pointer;
+
+    @include breakpoint(lg) {
+        gap: 10px;
+        margin-left: 40px;
+    }
+
+    @include breakpoint(sm) {
+        margin-left: 0;
+    }
+}
+
+.logo-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1.45;
+
+    @include breakpoint(lg) {
+        font-size: 1.8rem;
+    }
+}
+
+.logo-img {
+    @include breakpoint(lg) {
+        width: 24px;
+    }
+}
+
+.navbar {
+    margin-left: 144px;
+
+    @include breakpoint(xl) {
+        margin-left: 50px;
+    }
+
+    @include breakpoint(lg) {
+        display: none;
+    }
+}
+
+.navbar ul.list {
+    @extend %flexItemsCenter;
+    gap: 30px;
+}
+
+.navbar-link {
+    @extend %flexItemsCenter;
+    gap: 6px;
+    span {
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.67;
+    }
+    .arrow-icon {
+        margin-top: 3px;
+    }
+}
+
+.top-action {
+    @extend %flexItemsCenter;
+    margin-left: auto;
+
+    @include breakpoint(sm) {
+        margin-left: 0;
+    }
+}
+.top-action-group {
+    @extend %flexItemsCenter;
+
+    border-radius: 8px;
+    background-color: var(--top-action-bg-color);
+    box-shadow: 0px 20px 60px 10px var(--top-action-group-shadow);
+    min-width: 50px;
+    height: 50px;
+
+    .btn {
+        @extend %flexItemsCenter;
+        padding: 13px 20px;
+        cursor: pointer;
+    }
+
+    + .top-action-group {
+        margin-left: 20px;
+    }
+
+    @include breakpoint(md) {
+        display: none;
+    }
+}
+.top-action-group:nth-child(1) {
+    .btn {
+        padding: 13px 13px;
+    }
+    @include breakpoint(lg) {
+        display: none;
+    }
+}
+.separate {
+    width: 1px;
+    height: 30px;
+    background: var(--top-action-group-separeate);
+}
+.action-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.46;
+    margin-left: 10px;
+}
+
+.top-action-user {
+    height: 50px;
+    width: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 14px 2px rgba(0, 0, 0, 0.08);
+    margin-left: 20px;
+    img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+        display: block;
+    }
 }

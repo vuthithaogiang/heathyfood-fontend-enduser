@@ -1,5 +1,6 @@
 // Breakpoints, dimension, container, row, column, v.v
 $grid-breakpoints: (
+    xs: 0,
     sm: 576px,
     md: 768px,
     lg: 992px,
@@ -19,24 +20,5 @@ $grid-breakpoints: (
         }
     } @else {
         @error "The value #{$key} is not in breakpoint!";
-    }
-}
-// end
-
-.wrapper {
-    display: flex;
-    flex-direction: column;
-}
-.inner {
-    margin-top: var(--height-header);
-    min-height: 1000px;
-    background-color: var(--body-bg-color);
-
-    @include breakpoint(sm) {
-        margin-top: calc(50px + 2 * 9px);
-    }
-
-    @include breakpoint(lg) {
-        margin-top: calc(50px + 2 * 11px);
     }
 }
