@@ -849,7 +849,7 @@ function Header() {
     const navigate = useNavigate();
 
     const [size, setSize] = useState(null);
-    const [subCategoryActive, setSubCategoryActive] = useState('FRUITS_AND_VEGETABLES');
+    const [subCategoryActive, setSubCategoryActive] = useState(null);
     const scrollRef = useRef();
 
     const scrollToTop = () => {
@@ -916,12 +916,25 @@ function Header() {
                     });
                 };
             });
+
+            const links = $$('.js-dropdown-list > li > a');
+
+            links.forEach((link) => {
+                link.onclick = () => {
+                    if (window.innerWidth > 991) return;
+                    const item = link.closest('li');
+                    item.classList.toggle('navbar-item--active');
+                };
+            });
         }
+
         calArrowPos();
         initJsToggle();
 
         if (window.innerWidth < 991) {
             setSubCategoryActive(null);
+        } else {
+            setSubCategoryActive('FRUITS_AND_VEGETABLES');
         }
     }, [size]);
 
@@ -954,6 +967,18 @@ function Header() {
                         >
                             <img src={images.arrowLeftIcon} alt="" />
                         </button>
+
+                        <a href="#!" className={cx('nav-btn', 'd-none', 'd-md-flex')}>
+                            <img src={images.cartIcon} alt="" className={cx('icon', 'nav-btn-icon')} />
+                            <span className={cx('nav-btn-title')}>Cart</span>
+                            <span className={cx('nav-btn-qnt')}>3</span>
+                        </a>
+                        <a href="#!" className={cx('nav-btn', 'd-none', 'd-md-flex')}>
+                            <img src={images.heartIcon} alt="" className={cx('icon', 'nav-btn-icon')} />
+                            <span className={cx('nav-btn-title')}>Favourire</span>
+                            <span className={cx('nav-btn-qnt')}>6</span>
+                        </a>
+
                         <ul className={cx('list', 'js-dropdown-list')}>
                             {NAVBAR_lIST.map((item, index) => (
                                 <li key={index} className={cx('navbar-item')}>

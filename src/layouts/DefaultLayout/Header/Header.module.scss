@@ -105,14 +105,19 @@ $grid-breakpoints: (
         inset: 0 50% 0 0;
         background-color: var(--bg-navbar-tablet);
         margin-left: 0;
-
+        border-radius: 0 12px 12px 0;
         translate: -100%;
         transition: translate 0.5s;
+    }
+
+    @include breakpoint(sm) {
+        inset: 0 20% 0 0;
     }
 }
 
 //built css -> ko dung scss
 .navbar[class$='show'] {
+    box-shadow: 0px 40px 90px 20px var(--side-bar-shadow-color);
     @include breakpoint(lg) {
         translate: 0;
     }
@@ -130,6 +135,9 @@ $grid-breakpoints: (
     @include breakpoint(lg) {
         padding: 10px 40px;
         // display: block;
+    }
+    @include breakpoint(sm) {
+        padding: 0px 20px 10px;
     }
 }
 
@@ -154,8 +162,17 @@ $grid-breakpoints: (
         flex-direction: column;
         align-items: flex-start;
 
-        height: calc(100% - 26px);
+        height: calc(100% - 40px);
         overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    @include breakpoint(md) {
+        height: calc(100% - 140px);
+    }
+
+    @include breakpoint(sm) {
+        height: calc(100% - 124px);
     }
 }
 
@@ -166,6 +183,19 @@ $grid-breakpoints: (
 
     @include breakpoint(lg) {
         width: 100%;
+
+        &:hover .drop-down {
+            display: none;
+        }
+    }
+}
+
+@include breakpoint(lg) {
+    .navbar-item[class$='navbar-item--active'] .drop-down {
+        display: block !important;
+    }
+    .navbar-item[class$='navbar-item--active'] .arrow-icon {
+        rotate: 0deg;
     }
 }
 
@@ -181,6 +211,11 @@ $grid-breakpoints: (
     }
     .arrow-icon {
         margin-top: 3px;
+        transition: rotate 0.6s;
+
+        @include breakpoint(lg) {
+            rotate: -90deg;
+        }
     }
 
     @include breakpoint(lg) {
@@ -188,6 +223,38 @@ $grid-breakpoints: (
         padding: 0 40px;
         font-size: 1.6rem;
         line-height: 1.5;
+    }
+
+    @include breakpoint(sm) {
+        padding: 0 20px;
+        height: 44px;
+    }
+}
+
+.nav-btn {
+    align-items: center;
+    padding: 0 40px;
+    height: 50px;
+
+    @include breakpoint(sm) {
+        padding: 0 20px;
+        height: 44px;
+    }
+
+    .nav-btn-title,
+    .nav-btn-qnt {
+        font-size: 1.5rem;
+
+        font-weight: 500;
+        line-height: 1.47;
+    }
+
+    .nav-btn-qnt {
+        margin-left: auto;
+    }
+
+    .nav-btn-title {
+        margin-left: 20px;
     }
 }
 
@@ -267,7 +334,6 @@ $grid-breakpoints: (
 
     @include breakpoint(lg) {
         position: initial;
-        display: block;
         padding-top: 0;
     }
 
@@ -297,6 +363,10 @@ $grid-breakpoints: (
             &::before {
                 content: none;
             }
+        }
+
+        @include breakpoint(sm) {
+            padding: 0 20px;
         }
     }
 }
