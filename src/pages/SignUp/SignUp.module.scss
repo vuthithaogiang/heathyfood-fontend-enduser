@@ -105,7 +105,7 @@ $grid-breakpoints: (
         display: flex;
         align-items: center;
         border-radius: 10px;
-        border: 1.5px solid var(--auth-border-color);
+        border: 2px solid var(--auth-border-color);
         padding: 0 12px;
 
         &:focus-within {
@@ -152,6 +152,7 @@ $grid-breakpoints: (
     &.btn-primary {
         background-color: #ffb700;
         border-radius: 10px;
+        color: #1a162e;
     }
 
     &.btn-outline {
@@ -194,7 +195,7 @@ $grid-breakpoints: (
 }
 
 .auth-text {
-    margin-top: 80px;
+    margin-top: 50px;
     display: flex;
     gap: 10px;
     align-items: center;
