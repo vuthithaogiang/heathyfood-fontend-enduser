@@ -11,4 +11,11 @@ html.dark {
     --top-action-bg-color: #292e39;
     --top-action-group-shadow: rgba(0, 0, 0, 0.2);
     --top-action-group-separeate: #ededf6;
+
+    //.drop-down
+    --drop-down-bg-color: #2f3441;
+    --drop-down-shadow-color: rgba(23, 28, 40, 0.4);
+    --drop-down-arrow-color: brightness(0) saturate(100%) invert(19%) sepia(30%) saturate(346%) hue-rotate(185deg)
+        brightness(96%) contrast(96%);
+    --top-menu--border-color: #171c28;
 }
