@@ -21,6 +21,10 @@ const images = {
     category24: require('~/assets/images/cate-2.4.svg').default,
     category25: require('~/assets/images/cate-2.5.svg').default,
     arrowLeftIcon: require('~/assets/images/arrow-left-icon.svg').default,
+
+    slideShow1: require('~/assets/images/slideshow-1.jpg'),
+    slideShow2: require('~/assets/images/slideshow-2.jpg'),
+    slideShow3: require('~/assets/images/slideshow-3.jpg'),
 };
 
 export default images;

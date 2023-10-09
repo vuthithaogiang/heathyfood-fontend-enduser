@@ -1,7 +1,9 @@
+import Slideshow from './Slideshow';
+
 function Home() {
     return (
         <div className="">
-            <h2>Home page</h2>
+            <Slideshow />
         </div>
     );
 }

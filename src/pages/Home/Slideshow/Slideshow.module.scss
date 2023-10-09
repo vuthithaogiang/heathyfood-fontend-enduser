@@ -1,0 +1,129 @@
+// Breakpoints, dimension, container, row, column, v.v
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+
+@mixin breakpoint($key) {
+    $breakpoint: map-get(
+        $map: $grid-breakpoints,
+        $key: $key,
+    );
+
+    @if ($breakpoint) {
+        @media (max-width: ($breakpoint - 0.02)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not in breakpoint!";
+    }
+}
+// end
+
+.slideshow {
+    padding: 40px 0;
+    position: relative;
+
+    @include breakpoint(lg) {
+        padding: 30px 0;
+    }
+    @include breakpoint(md) {
+        padding: 16px 0;
+    }
+}
+
+.slideshow-inner {
+    display: flex;
+    overflow: hidden;
+}
+
+.slideshow-item {
+    position: relative;
+    padding-top: 34%;
+    width: 100%;
+    flex-shrink: 0;
+    .slideshow-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+        border-radius: 20px;
+    }
+
+    @include breakpoint(md) {
+        padding-top: 50%;
+    }
+}
+
+.slideshow-page {
+    width: 12.5%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 15%;
+    left: 5.2%;
+    column-gap: 24px;
+    @include breakpoint(lg) {
+        column-gap: 20px;
+    }
+}
+
+.slideshow-number {
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1.44;
+    color: #fff;
+
+    @include breakpoint(lg) {
+        font-size: 1.5rem;
+    }
+
+    @include breakpoint(md) {
+        font-size: 1.4rem;
+    }
+}
+
+.slideshow-slider {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    flex-shrink: 0;
+    background-color: #fff;
+
+    &::before,
+    &::after {
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+        content: '';
+        width: 14px;
+        height: 14px;
+        border: 4px solid #fff;
+        border-radius: 50%;
+        background-color: transparent;
+
+        @include breakpoint(lg) {
+            width: 7px;
+            height: 7px;
+        }
+
+        @include breakpoint(md) {
+            border-width: 3px;
+        }
+    }
+
+    &::before {
+        left: 0;
+        translate: -90% -50%;
+    }
+
+    &::after {
+        right: 0;
+        translate: 90% -50%;
+    }
+}
