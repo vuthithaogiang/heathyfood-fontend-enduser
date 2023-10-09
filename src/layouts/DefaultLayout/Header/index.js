@@ -847,19 +847,13 @@ function Header() {
     ];
 
     const navigate = useNavigate();
-    const $ = document.querySelector.bind(document);
-    const $$ = document.querySelectorAll.bind(document);
+
     const [size, setSize] = useState(null);
     const [subCategoryActive, setSubCategoryActive] = useState('FRUITS_AND_VEGETABLES');
     const scrollRef = useRef();
 
     const scrollToTop = () => {
         const scrollElement = scrollRef.current;
-        const height = scrollElement.scrollHeight;
-        //scrollElement.scrollHeight(0);
-
-        console.log(scrollElement);
-        console.log(height);
 
         scrollElement.scrollIntoView();
     };
@@ -890,39 +884,39 @@ function Header() {
         return stringWithUnderscores;
     }
 
-    const calArrowPos = () => {
-        if (isHidden($('.js-dropdown-list'))) return;
-
-        const items = $$('.js-dropdown-list > li');
-
-        items.forEach((item) => {
-            const arrowPos = item.offsetLeft + item.offsetWidth / 2;
-            setSize(arrowPos);
-            item.style.setProperty('--arrow-left-pos', `${arrowPos}px`);
-        });
-    };
-
-    function initJsToggle() {
-        $$('.js-toggle').forEach((button) => {
-            const target = button.getAttribute('toggle-target');
-            if (!target) {
-                document.body.innerText = `Cần thêm toggle-target cho: ${button.outerHTML}`;
-            }
-            button.onclick = () => {
-                if (!$(target)) {
-                    return (document.body.innerText = `Không tìm thấy phần tử "${target}"`);
-                }
-                const isHidden = $(target).classList.contains('hide');
-
-                requestAnimationFrame(() => {
-                    $(target).classList.toggle('hide', !isHidden);
-                    $(target).classList.toggle('show', isHidden);
-                });
-            };
-        });
-    }
-
     useEffect(() => {
+        const $ = document.querySelector.bind(document);
+        const $$ = document.querySelectorAll.bind(document);
+        const calArrowPos = () => {
+            if (isHidden($('.js-dropdown-list'))) return;
+
+            const items = $$('.js-dropdown-list > li');
+
+            items.forEach((item) => {
+                const arrowPos = item.offsetLeft + item.offsetWidth / 2;
+                setSize(arrowPos);
+                item.style.setProperty('--arrow-left-pos', `${arrowPos}px`);
+            });
+        };
+        function initJsToggle() {
+            $$('.js-toggle').forEach((button) => {
+                const target = button.getAttribute('toggle-target');
+                if (!target) {
+                    document.body.innerText = `Cần thêm toggle-target cho: ${button.outerHTML}`;
+                }
+                button.onclick = () => {
+                    if (!$(target)) {
+                        return (document.body.innerText = `Không tìm thấy phần tử "${target}"`);
+                    }
+                    const isHidden = $(target).classList.contains('hide');
+
+                    requestAnimationFrame(() => {
+                        $(target).classList.toggle('hide', !isHidden);
+                        $(target).classList.toggle('show', isHidden);
+                    });
+                };
+            });
+        }
         calArrowPos();
         initJsToggle();
 
