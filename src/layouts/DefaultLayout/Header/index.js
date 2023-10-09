@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -851,6 +851,18 @@ function Header() {
     const $$ = document.querySelectorAll.bind(document);
     const [size, setSize] = useState(null);
     const [subCategoryActive, setSubCategoryActive] = useState('FRUITS_AND_VEGETABLES');
+    const scrollRef = useRef();
+
+    const scrollToTop = () => {
+        const scrollElement = scrollRef.current;
+        const height = scrollElement.scrollHeight;
+        //scrollElement.scrollHeight(0);
+
+        console.log(scrollElement);
+        console.log(height);
+
+        scrollElement.scrollIntoView();
+    };
 
     function isHidden(element) {
         if (!element) return true;
@@ -890,19 +902,48 @@ function Header() {
         });
     };
 
+    function initJsToggle() {
+        $$('.js-toggle').forEach((button) => {
+            const target = button.getAttribute('toggle-target');
+            if (!target) {
+                document.body.innerText = `Cần thêm toggle-target cho: ${button.outerHTML}`;
+            }
+            button.onclick = () => {
+                if (!$(target)) {
+                    return (document.body.innerText = `Không tìm thấy phần tử "${target}"`);
+                }
+                const isHidden = $(target).classList.contains('hide');
+
+                requestAnimationFrame(() => {
+                    $(target).classList.toggle('hide', !isHidden);
+                    $(target).classList.toggle('show', isHidden);
+                });
+            };
+        });
+    }
+
     useEffect(() => {
         calArrowPos();
+        initJsToggle();
+
+        if (window.innerWidth < 991) {
+            setSubCategoryActive(null);
+        }
     }, [size]);
 
-    window.addEventListener('resize', calArrowPos);
-    console.log(subCategoryActive);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [subCategoryActive]);
+
+    // window.addEventListener('template-loaded', initJsToggle);
+    // window.addEventListener('resize', calArrowPos);
 
     return (
         <header className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('top-bar')}>
                     {/* More */}
-                    <button className={cx('top-bar-more')}>
+                    <button className={cx('top-bar-more', 'js-toggle', 'd-none', 'd-lg-block')} toggle-target="#navbar">
                         <img className={cx('icon', 'more-icon')} alt="" src={images.moreIcon} />
                     </button>
                     {/* Logo */}
@@ -912,7 +953,13 @@ function Header() {
                     </div>
 
                     {/* Navbar */}
-                    <nav className={cx('navbar')}>
+                    <nav id="navbar" className={cx('navbar', 'hide')}>
+                        <button
+                            className={cx('nav-bar-close-btn', 'js-toggle', 'icon', 'd-none', 'd-lg-block')}
+                            toggle-target="#navbar"
+                        >
+                            <img src={images.arrowLeftIcon} alt="" />
+                        </button>
                         <ul className={cx('list', 'js-dropdown-list')}>
                             {NAVBAR_lIST.map((item, index) => (
                                 <li key={index} className={cx('navbar-item')}>
@@ -927,7 +974,7 @@ function Header() {
                                                     <div className={cx('top-menu')}>
                                                         <div className={cx('top-menu-main')}>
                                                             <div className={cx('menu-column')}>
-                                                                <div className={cx('menu-column-icon')}>
+                                                                <div className={cx('menu-column-icon', 'd-lg-none')}>
                                                                     <img
                                                                         src={images.category11}
                                                                         alt=""
@@ -940,11 +987,19 @@ function Header() {
                                                                     />
                                                                 </div>
                                                                 <div className={cx('menu-column-content')}>
-                                                                    <h2 className={cx('menu-column-heading')}>
+                                                                    <h2
+                                                                        className={cx(
+                                                                            'menu-column-heading',
+                                                                            'd-lg-none',
+                                                                        )}
+                                                                    >
                                                                         All Departments
                                                                     </h2>
                                                                     {item.subMenu && (
-                                                                        <ul className={cx('menu-column-list')}>
+                                                                        <ul
+                                                                            className={cx('menu-column-list')}
+                                                                            ref={scrollRef}
+                                                                        >
                                                                             {item.subMenu.map((sub, index) => (
                                                                                 <li
                                                                                     key={index}
@@ -964,13 +1019,14 @@ function Header() {
                                                                                         className={cx(
                                                                                             'menu-column-link',
                                                                                         )}
-                                                                                        onClick={() =>
+                                                                                        onClick={() => {
                                                                                             setSubCategoryActive(
                                                                                                 convertToUppercaseAndReplaceSpaces(
                                                                                                     sub.cate,
                                                                                                 ),
-                                                                                            )
-                                                                                        }
+                                                                                            );
+                                                                                            scrollToTop();
+                                                                                        }}
                                                                                     >
                                                                                         {sub.cate}
                                                                                     </span>
@@ -1345,15 +1401,16 @@ function Header() {
                             ))}
                         </ul>
                     </nav>
+                    <div className={cx('nav-bar-overlay', 'js-toggle')} toggle-target="#navbar"></div>
 
                     {/* Actions */}
                     <div className={cx('top-action')}>
-                        <div className={cx('top-action-group')}>
-                            <button className={cx('btn')}>
+                        <div className={cx('top-action-group', 'd-md-none')}>
+                            <button className={cx('btn', 'd-lg-none')}>
                                 <img src={images.searchIcon} alt="" className={cx('action-icon', 'icon')} />
                             </button>
                         </div>
-                        <div className={cx('top-action-group')}>
+                        <div className={cx('top-action-group', 'd-md-none')}>
                             <button className={cx('btn')}>
                                 <img src={images.heartIcon} alt="" className={cx('action-icon', 'icon')} />
                                 <span className={cx('action-title')}>03</span>
