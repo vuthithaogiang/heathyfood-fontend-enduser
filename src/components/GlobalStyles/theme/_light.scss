@@ -32,6 +32,8 @@ html {
     --height-header: 80px;
     --body-bg-color: #f6f6f6;
     --header-bg-color: #eee;
+    --footer-bg-color: var(--header-bg-color);
+    --footer-text-color: #6e6d74;
     --top-action-bg-color: #fff;
     --top-action-group-shadow: rgba(237, 237, 246, 0.2);
     --top-action-group-separeate: #ededf6;

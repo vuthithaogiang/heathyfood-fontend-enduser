@@ -25,6 +25,12 @@ const images = {
     slideShow1: require('~/assets/images/slideshow-1.jpg'),
     slideShow2: require('~/assets/images/slideshow-2.jpg'),
     slideShow3: require('~/assets/images/slideshow-3.jpg'),
+
+    facebookIcon: require('~/assets/images/facebook-icon.svg').default,
+    linkedIcon: require('~/assets/images/linked-icon.svg').default,
+    tiktokIcon: require('~/assets/images/tiktok-icon.svg').default,
+    twitterIcon: require('~/assets/images/twitter-icon.svg').default,
+    youtubeIcon: require('~/assets/images/youtube-icon.svg').default,
 };
 
 export default images;

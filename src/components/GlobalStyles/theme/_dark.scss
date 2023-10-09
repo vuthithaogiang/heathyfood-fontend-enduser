@@ -8,6 +8,8 @@ html.dark {
     --height-header: 80px;
     --body-bg-color: #292e39;
     --header-bg-color: #171c28;
+    --footer-bg-color: var(--header-bg-color);
+    --footer-text-color: #6e6d74;
     --top-action-bg-color: #292e39;
     --top-action-group-shadow: rgba(0, 0, 0, 0.2);
     --top-action-group-separeate: #ededf6;

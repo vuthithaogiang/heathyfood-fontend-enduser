@@ -1,6 +1,234 @@
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+
+@mixin breakpoint($key) {
+    $breakpoint: map-get(
+        $map: $grid-breakpoints,
+        $key: $key,
+    );
+
+    @if ($breakpoint) {
+        @media (max-width: ($breakpoint - 0.02)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not in breakpoint!";
+    }
+}
+// end
+
 .wrapper {
+    background-color: var(--footer-bg-color);
+}
+
+.footer {
+    padding: 50px 0;
+}
+
+.footer-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.3fr 1.6fr;
+    gap: 60px;
+
+    @include breakpoint(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.footer-heading {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 1.8rem;
+}
+
+.footer-list {
+    margin-top: 18px;
+}
+
+.footer-link {
+    display: inline-block;
+    font-weight: 400 !important;
+    font-size: 1.5rem;
+
+    &:hover {
+        color: #0071dc;
+    }
+}
+
+.footer-link,
+.footer-text {
+    padding: 8px 0;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.footer-text,
+.copyright {
+    font-size: 1.5rem;
+    color: var(--footer-text-color);
+}
+
+.footer-text {
+    @include breakpoint(lg) {
+        width: min(400px, 100%);
+    }
+}
+
+.footer-label {
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.footer-logo-box {
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+    .logo-title {
+        font-size: 2.2rem;
+        font-weight: 600;
+        line-height: 1.45;
+
+        @include breakpoint(lg) {
+            font-size: 1.8rem;
+        }
+    }
+
+    .logo-img {
+        @include breakpoint(lg) {
+            width: 24px;
+        }
+    }
+}
+
+.footer-desc {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    line-height: 1.4;
+
+    @include breakpoint(lg) {
+        width: min(400px, 100%);
+    }
+}
+.footer-help-text {
+    margin-top: 40px;
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+
+.footer-form {
+    padding: 16px 0;
+    display: flex;
+    gap: 10px;
+
+    @include breakpoint(xl) {
+        flex-direction: column;
+    }
+    @include breakpoint(lg) {
+        flex-direction: row;
+    }
+}
+
+.footer-input {
     width: 100%;
-    background-color: #f5f5f5;
-    padding-top: 105px;
-    padding-bottom: 100px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 2px solid #d2d1d6;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--footer-text-color);
+
+    &::placeholder {
+        font-weight: 400;
+    }
+
+    @include breakpoint(lg) {
+        width: 50%;
+    }
+    @include breakpoint(sm) {
+        width: 100%;
+    }
+}
+
+.btn-primary {
+    font-size: 1.4rem;
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #1a162e;
+    background-color: #ffb700;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 9px 10px;
+}
+.footer-bottom {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include breakpoint(md) {
+        flex-direction: column-reverse;
+        row-gap: 40px;
+        align-items: flex-start;
+    }
+}
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+
+    filter: grayscale(80%);
+    transition: translate filter;
+    transition-duration: 0.3s;
+
+    &.facebook {
+        background-color: #4863a9;
+    }
+
+    &.youtube {
+        background-color: #f00;
+    }
+
+    &.twitter {
+        background-color: #4999e6;
+    }
+    &.tiktok {
+        background-color: #000;
+    }
+
+    &.linkedin {
+        background-color: #2f71ab;
+    }
+
+    &:hover {
+        filter: grayscale(0%);
+        translate: 0 -5px;
+    }
+}
+
+.footer-social-icon {
+    width: 16px;
+    fill: brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(1953%) hue-rotate(210deg) brightness(90%)
+        contrast(96%) !important;
+}
+
+.copyright {
+    font-size: 1.4rem;
 }
