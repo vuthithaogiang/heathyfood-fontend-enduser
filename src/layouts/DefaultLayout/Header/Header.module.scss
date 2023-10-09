@@ -510,3 +510,24 @@ $grid-breakpoints: (
         padding-left: 0;
     }
 }
+
+.btn {
+    padding: 9px 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.43;
+    cursor: pointer;
+
+    &.btn-text {
+        color: var(--footer-text-color);
+    }
+
+    &.btn-primary {
+        background-color: #ffb700;
+        border-radius: 6px;
+    }
+
+    + .btn {
+        margin-left: 10px;
+    }
+}

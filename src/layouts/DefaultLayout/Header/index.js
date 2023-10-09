@@ -1423,13 +1423,21 @@ function Header() {
                     <div className={cx('nav-bar-overlay', 'js-toggle')} toggle-target="#navbar"></div>
 
                     {/* Actions */}
+
                     <div className={cx('top-action')}>
                         <div className={cx('top-action-group', 'd-md-none')}>
                             <button className={cx('btn', 'd-lg-none')}>
                                 <img src={images.searchIcon} alt="" className={cx('action-icon', 'icon')} />
                             </button>
                         </div>
-                        <div className={cx('top-action-group', 'd-md-none')}>
+                        <button className={cx('btn', 'btn-text')} onClick={() => navigate('/login')}>
+                            Sign In
+                        </button>
+                        <button className={cx('btn', 'btn-primary')} onClick={() => navigate('/sign-up')}>
+                            Sign Up
+                        </button>
+
+                        {/* <div className={cx('top-action-group', 'd-md-none')}>
                             <button className={cx('btn')}>
                                 <img src={images.heartIcon} alt="" className={cx('action-icon', 'icon')} />
                                 <span className={cx('action-title')}>03</span>
@@ -1442,7 +1450,7 @@ function Header() {
                         </div>
                         <div className={cx('top-action-user')}>
                             <img src={images.avatar} alt="" />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

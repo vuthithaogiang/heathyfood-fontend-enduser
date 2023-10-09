@@ -31,6 +31,11 @@ const images = {
     tiktokIcon: require('~/assets/images/tiktok-icon.svg').default,
     twitterIcon: require('~/assets/images/twitter-icon.svg').default,
     youtubeIcon: require('~/assets/images/youtube-icon.svg').default,
+
+    intro: require('~/assets/images/intro.svg').default,
+    messageIcon: require('~/assets/images/message-icon.svg').default,
+    clockIcon: require('~/assets/images/clock-icon.svg').default,
+    gmailIcon: require('~/assets/images/gmail-icon.svg').default,
 };
 
 export default images;

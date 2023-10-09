@@ -1,0 +1,212 @@
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+
+@mixin breakpoint($key) {
+    $breakpoint: map-get(
+        $map: $grid-breakpoints,
+        $key: $key,
+    );
+
+    @if ($breakpoint) {
+        @media (max-width: ($breakpoint - 0.02)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not in breakpoint!";
+    }
+}
+// end
+
+.auth {
+    display: flex;
+    min-height: 100vh;
+}
+
+.auth-intro {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background-color: var(--auth-intro-bg-color);
+
+    .auth-intro-text {
+        max-width: 412px;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+}
+.auth-content {
+    flex: 1;
+    background-color: var(--auth-content-bg-color);
+
+    .auth-content-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: min(460px, 100%);
+        margin: 0 auto;
+    }
+
+    .auth-heading {
+        margin-top: 50px;
+        font-size: 3rem;
+        font-weight: 500;
+        line-height: 1.47;
+    }
+
+    .auth-desc {
+        margin-top: 10px;
+        padding: 0 30px;
+        color: var(--footer-text-color);
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.47;
+    }
+    .auth-link {
+        color: #0071dc;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.46;
+    }
+}
+
+.pull-right {
+    margin-left: auto;
+}
+
+.auth-form {
+    width: 100%;
+
+    .form-group {
+        margin-top: 30px;
+
+        &.inline {
+            display: flex;
+            align-items: center;
+        }
+        &.auth-btn-group {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .form-text-input {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        border: 1.5px solid var(--auth-border-color);
+        padding: 0 12px;
+
+        &:focus-within {
+            border-color: #77dae6;
+        }
+    }
+
+    .form-input {
+        flex: 1;
+        height: 100%;
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 1.44;
+
+        &::placeholder {
+            color: var(--auth-border-color);
+        }
+    }
+    .form-input-icon {
+        margin-left: 12px;
+    }
+
+    .form-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-checkbox-label {
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.45;
+        color: var(--auth-label-color);
+    }
+}
+
+.btn {
+    padding: 9px 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.43;
+    cursor: pointer;
+
+    &.btn-primary {
+        background-color: #ffb700;
+        border-radius: 10px;
+    }
+
+    &.btn-outline {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid var(--auth-border-color);
+        border-radius: 10px;
+        color: var(--text-signin-gmail-color);
+    }
+
+    + .btn {
+        margin-top: 30px;
+    }
+}
+
+.logo-box {
+    margin-top: 60px;
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+    .logo-title {
+        font-size: 2.2rem;
+        font-weight: 600;
+        line-height: 1.45;
+
+        @include breakpoint(lg) {
+            font-size: 1.8rem;
+        }
+    }
+
+    .logo-img {
+        @include breakpoint(lg) {
+            width: 24px;
+        }
+    }
+}
+
+.auth-text {
+    margin-top: 80px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 1.8rem;
+
+    font-weight: 400;
+    line-height: 1.44;
+
+    a[class='auth-link'] {
+        color: #0071dc;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.46;
+    }
+}
