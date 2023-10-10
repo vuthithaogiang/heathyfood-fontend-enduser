@@ -525,6 +525,12 @@ $grid-breakpoints: (
     &.btn-primary {
         background-color: #ffb700;
         border-radius: 6px;
+
+        @include breakpoint(md) {
+            font-size: 1.4rem;
+            padding: 0 8px;
+            height: 40px;
+        }
     }
 
     + .btn {

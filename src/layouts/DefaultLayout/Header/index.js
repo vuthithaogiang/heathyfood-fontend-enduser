@@ -1430,7 +1430,7 @@ function Header() {
                                 <img src={images.searchIcon} alt="" className={cx('action-icon', 'icon')} />
                             </button>
                         </div>
-                        <button className={cx('btn', 'btn-text')} onClick={() => navigate('/login')}>
+                        <button className={cx('btn', 'btn-text', 'd-md-none')} onClick={() => navigate('/login')}>
                             Sign In
                         </button>
                         <button className={cx('btn', 'btn-primary')} onClick={() => navigate('/sign-up')}>

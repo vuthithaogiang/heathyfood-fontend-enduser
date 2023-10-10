@@ -28,13 +28,28 @@ $grid-breakpoints: (
 }
 
 .auth-intro {
+    position: relative;
     flex: 1;
     display: flex;
+    padding: 0 30px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 50px;
     background-color: var(--auth-intro-bg-color);
+
+    .logo-box.auth-intro-logo {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        translate: -50%;
+    }
+    .auth-intro-next {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        translate: -50%;
+    }
 
     .auth-intro-text {
         max-width: 412px;
@@ -43,10 +58,27 @@ $grid-breakpoints: (
         font-weight: 500;
         line-height: 1.4;
     }
+    .auth-intro-img {
+        max-width: 100%;
+    }
 }
 .auth-content {
     flex: 1;
+    padding: 0 30px;
     background-color: var(--auth-content-bg-color);
+
+    @include breakpoint(md) {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        overflow-y: auto;
+
+        transition: translate 0.3s;
+
+        &[class$='hide'] {
+            translate: 100%;
+        }
+    }
 
     .auth-content-inner {
         display: flex;
@@ -148,6 +180,7 @@ $grid-breakpoints: (
     font-weight: 500;
     line-height: 1.43;
     cursor: pointer;
+    height: 50px;
 
     &.btn-primary {
         background-color: #ffb700;
@@ -210,4 +243,16 @@ $grid-breakpoints: (
         font-weight: 500;
         line-height: 1.46;
     }
+}
+
+.offscreen {
+    display: none;
+}
+
+.instructions {
+    color: red;
+    font-size: 1.2rem;
+    text-align: left;
+    padding: 8px 4px;
+    font-style: italic;
 }
