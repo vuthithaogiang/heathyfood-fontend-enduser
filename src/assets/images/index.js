@@ -5,7 +5,7 @@ const images = {
     heartIcon: require('~/assets/images/heartIcon.svg').default,
     cartIcon: require('~/assets/images/cartIcon.svg').default,
     avatar: require('~/assets/images/avatar.jpg'),
-    darkIcon: require('~/assets/images/dark-icon.svg').default,
+
     moreIcon: require('~/assets/images/more-icon.svg').default,
 
     category11: require('~/assets/images/cate-1.1.svg').default,
@@ -48,6 +48,12 @@ const images = {
     cate27: require('~/assets/images/cate-2.7.svg').default,
     cate28: require('~/assets/images/cate-2.8.svg').default,
     cate29: require('~/assets/images/cate-2.9.svg').default,
+    clockIcon1: require('~/assets/images/clock-icon1.svg').default,
+    locationIcon: require('~/assets/images/location-icon.svg').default,
+    decoration1: require('~/assets/images/decoration-1.svg').default,
+
+    brightIcon: require('~/assets/images/bright-icon.svg').default,
+    darkIcon: require('~/assets/images/dark-icon.svg').default,
 };
 
 export default images;

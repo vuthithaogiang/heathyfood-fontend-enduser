@@ -1,6 +1,7 @@
 import Introdction from './Introduction';
 import NutritionByCategory from './NutritionByCategory';
 import BestSeller from './BestSeller';
+import UpcomingEvent from './UpcomingEvent';
 
 function Home() {
     return (
@@ -8,6 +9,7 @@ function Home() {
             <Introdction />
             <NutritionByCategory />
             <BestSeller />
+            <UpcomingEvent />
         </div>
     );
 }

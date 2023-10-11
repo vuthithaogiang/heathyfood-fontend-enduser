@@ -657,11 +657,22 @@ function Header() {
     const [size, setSize] = useState(null);
     const [subCategoryActive, setSubCategoryActive] = useState(null);
     const scrollRef = useRef();
+    const [theme, setTheme] = useState('bright');
+
+    const auth = false;
 
     const scrollToTop = () => {
         const scrollElement = scrollRef.current;
 
         scrollElement.scrollIntoView();
+    };
+
+    const switchTheme = () => {
+        if (theme === 'bright') {
+            setTheme('dark');
+        } else {
+            setTheme('bright');
+        }
     };
 
     function isHidden(element) {
@@ -750,6 +761,15 @@ function Header() {
 
     // window.addEventListener('template-loaded', initJsToggle);
     // window.addEventListener('resize', calArrowPos);
+
+    useEffect(() => {
+        const html = window.document.documentElement;
+        if (theme === 'dark') {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+    }, [theme]);
 
     return (
         <header className={cx('wrapper')}>
@@ -1231,32 +1251,54 @@ function Header() {
                     {/* Actions */}
 
                     <div className={cx('top-action')}>
-                        <div className={cx('top-action-group', 'd-md-none')}>
-                            <button className={cx('btn', 'd-md-none')}>
-                                <img src={images.searchIcon} alt="" className={cx('action-icon', 'icon')} />
-                            </button>
-                        </div>
-                        <button className={cx('btn', 'btn-text', 'd-md-none')} onClick={() => navigate('/login')}>
-                            Sign In
-                        </button>
-                        <button className={cx('btn', 'btn-primary')} onClick={() => navigate('/sign-up')}>
-                            Sign Up
-                        </button>
+                        {auth === true && (
+                            <div className={cx('top-action-group', 'd-md-none')}>
+                                <button className={cx('btn', 'd-md-none')}>
+                                    <img src={images.searchIcon} alt="" className={cx('action-icon', 'icon')} />
+                                </button>
+                            </div>
+                        )}
+                        {auth === false && (
+                            <>
+                                <button
+                                    className={cx('btn', 'btn-text', 'd-md-none')}
+                                    onClick={() => navigate('/login')}
+                                >
+                                    Sign In
+                                </button>
+                                <button className={cx('btn', 'btn-primary')} onClick={() => navigate('/sign-up')}>
+                                    Sign Up
+                                </button>
+                            </>
+                        )}
 
-                        {/* <div className={cx('top-action-group', 'd-md-none')}>
-                            <button className={cx('btn')}>
-                                <img src={images.heartIcon} alt="" className={cx('action-icon', 'icon')} />
-                                <span className={cx('action-title')}>03</span>
-                            </button>
-                            <div className={cx('separate')}></div>
-                            <button className={cx('btn')}>
-                                <img src={images.cartIcon} alt="" className={cx('action-icon', 'icon')} />
-                                <span className={cx('action-title')}>$65.42</span>
-                            </button>
-                        </div>
-                        <div className={cx('top-action-user')}>
-                            <img src={images.avatar} alt="" />
-                        </div> */}
+                        {auth === false && (
+                            <>
+                                <div className={cx('theme')} onClick={switchTheme}>
+                                    {theme === 'bright' && <img className={cx('icon')} alt="" src={images.darkIcon} />}
+                                    {theme === 'dark' && <img className={cx('icon')} alt="" src={images.brightIcon} />}
+                                </div>
+                            </>
+                        )}
+
+                        {auth === true && (
+                            <>
+                                <div className={cx('top-action-group', 'd-md-none')}>
+                                    <button className={cx('btn')}>
+                                        <img src={images.heartIcon} alt="" className={cx('action-icon', 'icon')} />
+                                        <span className={cx('action-title')}>03</span>
+                                    </button>
+                                    <div className={cx('separate')}></div>
+                                    <button className={cx('btn')}>
+                                        <img src={images.cartIcon} alt="" className={cx('action-icon', 'icon')} />
+                                        <span className={cx('action-title')}>$65.42</span>
+                                    </button>
+                                </div>
+                                <div className={cx('top-action-user')}>
+                                    <img src={images.avatar} alt="" />
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

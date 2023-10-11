@@ -537,3 +537,21 @@ $grid-breakpoints: (
         margin-left: 10px;
     }
 }
+.theme {
+    margin-left: 12px;
+    border-radius: 8px;
+    background-color: var(--top-action-bg-color);
+    box-shadow: 0px 20px 60px 10px var(--top-action-group-shadow);
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+    }
+}

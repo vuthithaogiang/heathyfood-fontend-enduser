@@ -1,0 +1,239 @@
+// Breakpoints, dimension, container, row, column, v.v
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+
+@mixin breakpoint($key) {
+    $breakpoint: map-get(
+        $map: $grid-breakpoints,
+        $key: $key,
+    );
+
+    @if ($breakpoint) {
+        @media (max-width: ($breakpoint - 0.02)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not in breakpoint!";
+    }
+}
+// end
+
+.inner {
+    padding: 40px 0;
+
+    @include breakpoint(md) {
+        padding: 20px 0;
+    }
+}
+
+.inner header {
+    text-align: center;
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 4rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.35;
+
+        @include breakpoint(lg) {
+            font-size: 2.8rem;
+        }
+
+        @include breakpoint(md) {
+            font-size: 2rem;
+        }
+    }
+}
+
+.inner header p:nth-child(1) {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    @include breakpoint(lg) {
+        margin-bottom: 6px;
+    }
+
+    @include breakpoint(md) {
+        font-size: 1.2rem;
+    }
+}
+
+.list-event {
+    margin-top: 68px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 43px;
+    row-gap: 46px;
+    position: relative;
+
+    @include breakpoint(lg) {
+        column-gap: 16px;
+        row-gap: 16px;
+    }
+
+    @include breakpoint(md) {
+        grid-template-columns: 1fr;
+        margin-top: 20px;
+    }
+}
+
+.img-decor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.event {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 1s;
+    font-family: 'Inter', sans-serif;
+
+    &:hover {
+        border-radius: 6px;
+        background-color: var(--event-bg-color);
+        box-shadow: 12px 16px 40px -16px var(--event-sadow-color);
+    }
+    position: relative;
+    z-index: 1;
+
+    @include breakpoint(lg) {
+        display: block;
+    }
+}
+
+.thumb-event {
+    width: 193px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin: 10px 0 10px 8px;
+
+    @include breakpoint(xl) {
+        width: 160px;
+    }
+
+    @include breakpoint(lg) {
+        display: block;
+        width: 100%;
+        margin: initial;
+    }
+}
+
+.info-event {
+    @include breakpoint(lg) {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        color: #fff;
+    }
+}
+
+.date-in {
+    color: var(--event-text-color);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+    @include breakpoint(lg) {
+        color: #fff;
+    }
+
+    @include breakpoint(xl) {
+        font-size: 1.3rem;
+    }
+}
+
+.info-event h4 {
+    margin-top: 14px;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+
+    @include breakpoint(xl) {
+        font-size: 1.5rem;
+    }
+
+    @include breakpoint(lg) {
+        margin-top: 4px;
+    }
+}
+
+.time-and-location {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    @include breakpoint(lg) {
+        display: none;
+    }
+}
+
+.time-and-location .time,
+.time-and-location .location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    span {
+        color: var(--event-text-color);
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.43;
+        @include breakpoint(xl) {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 24px;
+    background: var(--primary-color);
+    width: fit-content;
+    margin: 60px auto 0 auto;
+    padding-right: 10px;
+    cursor: pointer;
+
+    @include breakpoint(lg) {
+        margin-top: 30px;
+    }
+
+    @include breakpoint(md) {
+        margin: initial;
+        margin-top: 20px;
+    }
+
+    span {
+        padding: 9px 0 9px 24px;
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.87;
+
+        @include breakpoint(md) {
+            font-size: 1.3rem;
+        }
+    }
+
+    img {
+        margin-top: 4px;
+    }
+}
