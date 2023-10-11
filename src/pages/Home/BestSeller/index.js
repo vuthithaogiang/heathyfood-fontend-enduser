@@ -119,7 +119,7 @@ function BestSeller() {
             <div className={cx('inner')}>
                 <header>
                     <p>New Arrival</p>
-                    <h2>Browser Our Bets Accessories</h2>
+                    <h2>Browser Our Best Accessories</h2>
                 </header>
                 <div className={cx('category')}>
                     {CATEGORIES.map((c) => (

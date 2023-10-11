@@ -667,14 +667,6 @@ function Header() {
         scrollElement.scrollIntoView();
     };
 
-    const switchTheme = () => {
-        if (theme === 'bright') {
-            setTheme('dark');
-        } else {
-            setTheme('bright');
-        }
-    };
-
     function isHidden(element) {
         if (!element) return true;
 
@@ -762,12 +754,30 @@ function Header() {
     // window.addEventListener('template-loaded', initJsToggle);
     // window.addEventListener('resize', calArrowPos);
 
+    const handleDarkModeSwitch = () => {
+        if (localStorage.getItem('theme') === 'bright') {
+            setTheme('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            setTheme('bright');
+            localStorage.setItem('theme', 'bright');
+        }
+    };
+
+    useEffect(() => {
+        if (localStorage.getItem('theme') === null) {
+            localStorage.setItem('theme', 'bright');
+        }
+    }, []);
+
     useEffect(() => {
         const html = window.document.documentElement;
-        if (theme === 'dark') {
+        if (localStorage.getItem('theme') === 'dark') {
             html.classList.add('dark');
+            setTheme('dark');
         } else {
             html.classList.remove('dark');
+            setTheme('bright');
         }
     }, [theme]);
 
@@ -1274,7 +1284,7 @@ function Header() {
 
                         {auth === false && (
                             <>
-                                <div className={cx('theme')} onClick={switchTheme}>
+                                <div className={cx('theme')} onClick={handleDarkModeSwitch}>
                                     {theme === 'bright' && <img className={cx('icon')} alt="" src={images.darkIcon} />}
                                     {theme === 'dark' && <img className={cx('icon')} alt="" src={images.brightIcon} />}
                                 </div>
