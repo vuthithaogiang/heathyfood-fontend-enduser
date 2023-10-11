@@ -32,11 +32,11 @@ $grid-breakpoints: (
     min-height: 1000px;
     background-color: var(--body-bg-color);
 
-    @include breakpoint(sm) {
-        margin-top: calc(50px + 2 * 9px);
-    }
+    // @include breakpoint(md) {
+    //     margin-top: 60px;
+    // }
 
     @include breakpoint(lg) {
-        margin-top: calc(50px + 2 * 11px);
+        margin-top: 60px;
     }
 }

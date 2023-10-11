@@ -145,6 +145,10 @@ $grid-breakpoints: (
     width: 100%;
     overflow: hidden;
     scroll-behavior: smooth;
+    @include breakpoint(lg) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     @include breakpoint(md) {
         display: grid;
@@ -157,7 +161,7 @@ $grid-breakpoints: (
     max-width: 308px;
     user-select: none;
 
-    @include breakpoint(md) {
+    @include breakpoint(lg) {
         min-width: none;
         max-width: none;
     }
