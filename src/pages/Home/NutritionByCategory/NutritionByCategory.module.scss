@@ -1,0 +1,117 @@
+// Breakpoints, dimension, container, row, column, v.v
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+
+@mixin breakpoint($key) {
+    $breakpoint: map-get(
+        $map: $grid-breakpoints,
+        $key: $key,
+    );
+
+    @if ($breakpoint) {
+        @media (max-width: ($breakpoint - 0.02)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not in breakpoint!";
+    }
+}
+// end
+
+.wrapper {
+    margin-top: 200px;
+    background-color: var(--category-bg-color);
+    padding: 40px 0 60px 0;
+    @include breakpoint(xl) {
+        margin-top: 30px;
+    }
+}
+
+.header {
+    text-align: center;
+    p {
+        margin-bottom: 20px;
+        color: var(--primary-color);
+
+        font-size: 1.6rem;
+
+        font-weight: 500;
+        line-height: 1.25;
+
+        @include breakpoint(lg) {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+    }
+
+    h2 {
+        margin-bottom: 40px;
+        font-size: 4rem;
+        font-weight: 500;
+        line-height: 1.35;
+        @include breakpoint(lg) {
+            font-size: 2rem;
+        }
+    }
+}
+
+.list-category {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 22px;
+    row-gap: 20px;
+
+    @include breakpoint(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpoint(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint(md) {
+        grid-template-columns: 1fr;
+    }
+    .item {
+        cursor: pointer;
+        border-radius: 4px;
+        background: var(--into-feature-component-bg-color);
+
+        display: flex;
+        align-items: center;
+        padding: 22px 0 20px 30px;
+        gap: 12px;
+
+        span {
+            font-size: 2rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+    }
+}
+
+.group-icon {
+    width: 36px;
+    height: 36px;
+    position: relative;
+
+    img:nth-child(1) {
+        object-fit: contain;
+        width: 30px;
+        height: 30px;
+    }
+    img:nth-child(2) {
+        object-fit: contain;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+}

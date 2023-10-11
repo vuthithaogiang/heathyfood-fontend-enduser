@@ -38,6 +38,16 @@ const images = {
     gmailIcon: require('~/assets/images/gmail-icon.svg').default,
     introArrow: require('~/assets/images/intro-arrow.svg').default,
     arrowIconRight: require('~/assets/images/arrow-icon-right.svg').default,
+
+    cate13: require('~/assets/images/cate-1.3.svg').default,
+    cate14: require('~/assets/images/cate-1.4.svg').default,
+    cate15: require('~/assets/images/cate-1.5.svg').default,
+    cate16: require('~/assets/images/cate-1.6.svg').default,
+
+    cate26: require('~/assets/images/cate-2.6.svg').default,
+    cate27: require('~/assets/images/cate-2.7.svg').default,
+    cate28: require('~/assets/images/cate-2.8.svg').default,
+    cate29: require('~/assets/images/cate-2.9.svg').default,
 };
 
 export default images;

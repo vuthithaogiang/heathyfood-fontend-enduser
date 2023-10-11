@@ -180,15 +180,24 @@ $grid-breakpoints: (
     display: flex;
     align-items: center;
     gap: 3px;
-    border: 1px solid var(--primary-color);
+
     border-radius: 16px;
     transition: background-color 0.3s;
     cursor: pointer;
     padding: 0 10px;
+    background-color: var(--primary-color);
+
+    filter: grayscale(50%);
+    transition: all 0.5s;
 
     &:hover {
-        background-color: var(--primary-color);
+        filter: grayscale(0%);
+        translate: 0 -5px;
     }
+
+    // &:hover {
+    //     background-color: var(--primary-color);
+    // }
 
     img {
         margin-top: 4px;

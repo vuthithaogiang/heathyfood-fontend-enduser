@@ -197,6 +197,10 @@ $grid-breakpoints: (
     filter: grayscale(80%);
     transition: translate filter;
     transition-duration: 0.3s;
+    &:hover {
+        filter: grayscale(0%);
+        translate: 0 -5px;
+    }
 
     &.facebook {
         background-color: #4863a9;
@@ -215,11 +219,6 @@ $grid-breakpoints: (
 
     &.linkedin {
         background-color: #2f71ab;
-    }
-
-    &:hover {
-        filter: grayscale(0%);
-        translate: 0 -5px;
     }
 }
 
