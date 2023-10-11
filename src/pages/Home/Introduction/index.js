@@ -20,22 +20,26 @@ function Introdction() {
             description:
                 'Join us we make information nutritions meals everyday for people suffering from food insecurity.',
         },
+        {
+            title: 'Products',
+            description:
+                'Join us we make information nutritions meals everyday for people suffering from food insecurity.',
+        },
     ];
     return (
         <div className={cx('introduction')}>
-            <div className={cx('intro-head')}>
-                <h2 className={cx('head-title')}>From the big picture to every tiny detail, we got you covered.</h2>
-                <button className={cx('intro-btn')}>
-                    Explore Now
-                    <img alt="" src={images.arrowIconRight} className={cx('icon')} />
-                </button>
-            </div>
             <div className={cx('intro-features')}>
                 <div className={cx('left')}>
                     <div className={cx('left-inner')}>
                         {LIST_FEATURES.map((item, index) => (
                             <div key={index} className={cx('feature-component')}>
-                                <p className={cx('feature-title')}>{item.title}</p>
+                                <div className={cx('group')}>
+                                    <p className={cx('feature-title')}>{item.title}</p>
+                                    <button className={cx('explore-now')}>
+                                        Go to
+                                        <img src={images.arrowIconRight} alt="" className={cx('icon')} />
+                                    </button>
+                                </div>
                                 <p className={cx('feature-desc')}>{item.description}</p>
                             </div>
                         ))}

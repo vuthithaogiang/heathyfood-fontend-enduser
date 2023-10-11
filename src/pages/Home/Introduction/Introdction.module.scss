@@ -24,7 +24,7 @@ $grid-breakpoints: (
 // end
 
 .introduction {
-    padding: 40px 0;
+    padding-top: 20px;
 }
 
 .intro-head {
@@ -94,9 +94,9 @@ $grid-breakpoints: (
 .intro-features .left {
     flex: 1;
     .left-inner {
-        margin-top: 67px;
+        margin-top: 42px;
         @include breakpoint(xl) {
-            margin-top: 30px;
+            margin-top: 0;
         }
     }
 }
@@ -133,8 +133,8 @@ $grid-breakpoints: (
     flex: 1;
     .intro-thumbnail {
         border-radius: 20px;
-        width: 348px;
-        height: 263px;
+        width: 397px;
+        height: 302px;
         object-fit: cover;
         position: absolute;
 
@@ -166,5 +166,31 @@ $grid-breakpoints: (
         bottom: -25%;
         left: 10%;
         z-index: 3;
+    }
+}
+
+.group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.explore-now {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    border: 1px solid var(--primary-color);
+    border-radius: 16px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    padding: 0 10px;
+
+    &:hover {
+        background-color: var(--primary-color);
+    }
+
+    img {
+        margin-top: 4px;
     }
 }
