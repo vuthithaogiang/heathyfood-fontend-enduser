@@ -1,4 +1,5 @@
 html.dark {
+    --logo-color: #77dae6;
     --primary-color: #ffb700;
     --text-color: #fff;
 
@@ -33,4 +34,6 @@ html.dark {
     --into-feature-component-bg-color: #3d4955;
 
     --category-bg-color: #171c28;
+    --cate-bg-color: var(--category-bg-color);
+    --date-publish-color: #c2b4b4;
 }

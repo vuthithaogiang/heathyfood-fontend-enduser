@@ -1,0 +1,272 @@
+// Breakpoints, dimension, container, row, column, v.v
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+
+@mixin breakpoint($key) {
+    $breakpoint: map-get(
+        $map: $grid-breakpoints,
+        $key: $key,
+    );
+
+    @if ($breakpoint) {
+        @media (max-width: ($breakpoint - 0.02)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not in breakpoint!";
+    }
+}
+// end
+
+.inner {
+    padding-bottom: 60px;
+
+    @include breakpoint(lg) {
+        padding-bottom: 20px;
+    }
+}
+
+.inner header {
+    margin-top: 60px;
+
+    text-align: center;
+
+    @include breakpoint(lg) {
+        margin-top: 20px;
+    }
+    p {
+        margin-bottom: 20px;
+        color: var(--primary-color);
+        @include breakpoint(lg) {
+            margin-bottom: 12px;
+        }
+
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    h2 {
+        margin-bottom: 25px;
+
+        font-size: 4rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.35;
+
+        @include breakpoint(lg) {
+            font-size: 2rem;
+            margin-bottom: 23px;
+        }
+    }
+}
+
+.category {
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.type-category {
+    margin-bottom: 24px;
+    color: var(--date-publish-color);
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.7;
+    border-radius: 30px;
+    background-color: var(--cate-bg-color);
+    padding: 5px 35px;
+    cursor: pointer;
+}
+
+.type-category.active {
+    color: #0071dc;
+}
+
+.btn {
+    margin-top: 62px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 24px;
+    background: var(--primary-color);
+    width: fit-content;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10;
+    cursor: pointer;
+    padding: 6px 24px;
+
+    @include breakpoint(lg) {
+        margin-top: 30px;
+    }
+    @include breakpoint(md) {
+        margin: initial;
+        margin-top: 20px;
+    }
+
+    span {
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 2.25;
+
+        @include breakpoint(lg) {
+            font-size: 1.3rem;
+        }
+    }
+
+    img {
+        margin-top: 4px;
+    }
+}
+
+.carousel {
+    width: calc(3 * 308px + 2 * 26px);
+    margin: auto;
+
+    @include breakpoint(lg) {
+        width: auto;
+    }
+}
+
+.list-news {
+    display: flex;
+    gap: 26px;
+    width: 100%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+
+    @include breakpoint(md) {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+.news-item {
+    min-width: 308px;
+    max-width: 308px;
+    user-select: none;
+
+    @include breakpoint(md) {
+        min-width: none;
+        max-width: none;
+    }
+
+    h4 {
+        margin-top: 8px;
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.7;
+        padding-right: 30px;
+        cursor: pointer;
+
+        @include breakpoint(lg) {
+            font-size: 1.6rem;
+        }
+    }
+
+    //TYPE
+    .brand {
+        font-size: 1.3rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #325aff;
+    }
+}
+
+.news-item .thumb {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    height: 230px;
+    border-radius: 12px;
+    cursor: all-scroll;
+
+    @include breakpoint(md) {
+        width: 100%;
+    }
+}
+
+.T-shirt {
+    color: #325aff;
+}
+
+.Short {
+    color: #a6cf4a;
+}
+
+.Sock {
+    color: #fb6238;
+}
+
+.date-publish {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.date-publish span:nth-child(2) {
+    color: #707070;
+
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.date-publish span:nth-child(3) {
+    color: var(--text-color);
+    font-weight: 500;
+    margin-left: auto;
+
+    font-size: 1.6rem;
+
+    @include breakpoint(lg) {
+        font-size: 1.2rem;
+    }
+}
+
+.desc-author {
+    margin-top: 21px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+
+.name-author {
+    color: #000;
+
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.desc-author span.author {
+    color: #707070;
+
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.85; /* 185.714% */
+}
