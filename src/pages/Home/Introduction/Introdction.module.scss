@@ -1,0 +1,170 @@
+// Breakpoints, dimension, container, row, column, v.v
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+
+@mixin breakpoint($key) {
+    $breakpoint: map-get(
+        $map: $grid-breakpoints,
+        $key: $key,
+    );
+
+    @if ($breakpoint) {
+        @media (max-width: ($breakpoint - 0.02)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not in breakpoint!";
+    }
+}
+// end
+
+.introduction {
+    padding: 40px 0;
+}
+
+.intro-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include breakpoint(md) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .head-title {
+        width: 56%;
+        font-family: 'Inter', sans-serif;
+        font-size: 4rem;
+
+        font-weight: 600;
+        line-height: 1.35;
+        @include breakpoint(lg) {
+            font-size: 3rem;
+            width: initial;
+            flex: 1;
+        }
+        @include breakpoint(md) {
+            font-size: 2rem;
+        }
+    }
+
+    .intro-btn {
+        padding: 10px 8px;
+        border-radius: 99px;
+        width: 171px;
+        font-size: 1.6rem;
+        line-height: 2;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        background-color: var(--primary-color);
+
+        @include breakpoint(lg) {
+            font-size: 1.4rem;
+            width: 145px;
+        }
+        @include breakpoint(md) {
+            width: 180px;
+            margin-top: 12px;
+            padding: 8px 4px;
+        }
+    }
+}
+
+.intro-features {
+    display: flex;
+    gap: 55px;
+    margin-top: 23px;
+
+    @include breakpoint(lg) {
+        flex-direction: column;
+        margin-top: 0;
+        gap: 20px;
+    }
+}
+
+.intro-features .left {
+    flex: 1;
+    .left-inner {
+        margin-top: 67px;
+        @include breakpoint(xl) {
+            margin-top: 30px;
+        }
+    }
+}
+
+.feature-component {
+    width: 493px;
+    border-radius: 15px;
+    // border: 2px solid var(--intro-border-color);
+    background-color: var(--into-feature-component-bg-color);
+    padding: 12px 30px 30px 30px;
+
+    @include breakpoint(lg) {
+        width: 100%;
+    }
+
+    + .feature-component {
+        margin-top: 16px;
+    }
+
+    .feature-title {
+        font-size: 2rem;
+        line-height: 2;
+        font-weight: 500;
+    }
+
+    .feature-desc {
+        color: #858b93;
+        line-height: 1.5;
+    }
+}
+
+.intro-features .right {
+    position: relative;
+    flex: 1;
+    .intro-thumbnail {
+        border-radius: 20px;
+        width: 348px;
+        height: 263px;
+        object-fit: cover;
+        position: absolute;
+
+        @include breakpoint(xl) {
+            position: initial;
+        }
+
+        @include breakpoint(lg) {
+            width: 100%;
+            height: 340px;
+        }
+    }
+    .intro-thumbnail:nth-child(1) {
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .intro-thumbnail:nth-child(2) {
+        top: 50%;
+        right: 0;
+        translate: 0 -30%;
+        z-index: 2;
+        @include breakpoint(xl) {
+            margin-top: 12px;
+            translate: initial;
+        }
+    }
+    .intro-thumbnail:nth-child(3) {
+        bottom: -25%;
+        left: 10%;
+        z-index: 3;
+    }
+}

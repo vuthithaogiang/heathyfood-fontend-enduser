@@ -37,6 +37,7 @@ const images = {
     clockIcon: require('~/assets/images/clock-icon.svg').default,
     gmailIcon: require('~/assets/images/gmail-icon.svg').default,
     introArrow: require('~/assets/images/intro-arrow.svg').default,
+    arrowIconRight: require('~/assets/images/arrow-icon-right.svg').default,
 };
 
 export default images;

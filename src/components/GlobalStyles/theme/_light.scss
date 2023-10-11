@@ -24,7 +24,7 @@ $grid-breakpoints: (
 // end
 
 html {
-    --primary-color: #5d3bee;
+    --primary-color: #ffb700;
     --text-color: #1a162e;
     --icon-color: brightness(0) saturate(100%) invert(8%) sepia(20%) saturate(1953%) hue-rotate(210deg) brightness(90%)
         contrast(96%);
@@ -57,4 +57,7 @@ html {
     --auth-label-color: #9e9da8;
 
     --text-signin-gmail-color: var(--text-color);
+
+    --intro-border-color: var(--auth-border-color);
+    --into-feature-component-bg-color: #fff;
 }

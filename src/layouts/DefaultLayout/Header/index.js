@@ -1426,7 +1426,7 @@ function Header() {
 
                     <div className={cx('top-action')}>
                         <div className={cx('top-action-group', 'd-md-none')}>
-                            <button className={cx('btn', 'd-lg-none')}>
+                            <button className={cx('btn', 'd-md-none')}>
                                 <img src={images.searchIcon} alt="" className={cx('action-icon', 'icon')} />
                             </button>
                         </div>
