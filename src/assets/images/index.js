@@ -54,6 +54,12 @@ const images = {
 
     brightIcon: require('~/assets/images/bright-icon.svg').default,
     darkIcon: require('~/assets/images/dark-icon.svg').default,
+
+    languageIcon: require('~/assets/images/language-icon.svg').default,
+    logoutIcon: require('~/assets/images/logout-icon.svg').default,
+    questionIcon: require('~/assets/images/question-icon.svg').default,
+    userIcon: require('~/assets/images/user-icon.svg').default,
+    reorderIcon: require('~/assets/images/reorder-icon.svg').default,
 };
 
 export default images;

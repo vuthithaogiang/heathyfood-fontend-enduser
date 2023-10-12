@@ -3,14 +3,20 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-// import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
+import Menu from '~/components/Popper/Menu';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    const navigate = useNavigate();
+
+    const [size, setSize] = useState(null);
+    const [subCategoryActive, setSubCategoryActive] = useState(null);
+    const scrollRef = useRef();
+    const [theme, setTheme] = useState('bright');
+
+    const auth = false;
+
     const NAVBAR_lIST = [
         {
             title: 'Nutrition',
@@ -652,14 +658,52 @@ function Header() {
         },
     ];
 
-    const navigate = useNavigate();
+    const MENU_ITEMS = [
+        {
+            icon: images.languageIcon,
+            title: 'English',
+            children: {
+                title: 'Language',
+                data: [
+                    {
+                        code: 'en',
+                        title: 'English',
+                    },
+                    {
+                        code: 'vie',
+                        title: 'Tiếng Việt',
+                    },
+                ],
+            },
+        },
+        {
+            icon: theme === 'bright' ? images.darkIcon : images.brightIcon,
+            title: 'Switch Theme',
+            to: '',
+        },
+        {
+            icon: images.userIcon,
+            title: 'Profile',
+            to: '',
+        },
+        {
+            icon: images.reorderIcon,
+            title: 'Reorder',
+            to: '',
+        },
+        {
+            icon: images.questionIcon,
+            title: 'Feedback & Helps',
+            to: '/contactus',
+        },
 
-    const [size, setSize] = useState(null);
-    const [subCategoryActive, setSubCategoryActive] = useState(null);
-    const scrollRef = useRef();
-    const [theme, setTheme] = useState('bright');
-
-    const auth = false;
+        {
+            icon: images.logoutIcon,
+            title: 'Logout',
+            to: '/account-setting',
+            separate: true,
+        },
+    ];
 
     const scrollToTop = () => {
         const scrollElement = scrollRef.current;
@@ -750,9 +794,6 @@ function Header() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [subCategoryActive]);
-
-    // window.addEventListener('template-loaded', initJsToggle);
-    // window.addEventListener('resize', calArrowPos);
 
     const handleDarkModeSwitch = () => {
         if (localStorage.getItem('theme') === 'bright') {
@@ -1305,7 +1346,9 @@ function Header() {
                                     </button>
                                 </div>
                                 <div className={cx('top-action-user')}>
-                                    <img src={images.avatar} alt="" />
+                                    <Menu items={MENU_ITEMS}>
+                                        <img className={cx('avatar')} src={images.avatar} alt="" />
+                                    </Menu>
                                 </div>
                             </>
                         )}
