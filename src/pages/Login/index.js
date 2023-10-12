@@ -2,12 +2,14 @@ import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
 import images from '~/assets/images';
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Login() {
     const emailRef = useRef();
     const [seePassword, setSeePassword] = useState(false);
+    const navigate = useNavigate();
 
     const toggleSeePassword = () => {
         setSeePassword(!seePassword);
@@ -135,9 +137,9 @@ function Login() {
                     </form>
                     <p className={cx('auth-text')}>
                         Don’t have an account yet?
-                        <a href="/login" className={cx('auth-link')}>
+                        <span onClick={() => navigate('/sign-up')} className={cx('auth-link')}>
                             Sign Up
-                        </a>
+                        </span>
                     </p>
                 </div>
             </div>

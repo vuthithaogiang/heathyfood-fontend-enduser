@@ -270,9 +270,9 @@ function SignUp() {
                             </form>
                             <p className={cx('auth-text')}>
                                 You have an account yet?
-                                <a href="/login" className={cx('auth-link')}>
+                                <span onClick={() => navigate('/login')} className={cx('auth-link')}>
                                     Log in
-                                </a>
+                                </span>
                             </p>
                         </div>
                     </div>
