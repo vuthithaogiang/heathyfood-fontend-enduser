@@ -15,8 +15,8 @@ function Header() {
     const scrollRef = useRef();
     const [theme, setTheme] = useState('bright');
 
-    const auth = true;
-
+    //Test Authentication
+    const auth = false;
     const hasImageAvatar = false;
 
     const NAVBAR_lIST = [

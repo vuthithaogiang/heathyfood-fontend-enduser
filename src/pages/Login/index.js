@@ -123,9 +123,13 @@ function Login() {
                                 <input type="checkbox" className={cx('form-checkbox-input')} />
                                 <span className={cx('form-checkbox-label')}>Set as default card</span>
                             </label>
-                            <a href="#!" className={cx('auth-link', 'pull-right')}>
-                                Recovery Password
-                            </a>
+                            <span
+                                onClick={() => navigate('/forgot-password')}
+                                href="#!"
+                                className={cx('auth-link', 'pull-right')}
+                            >
+                                Forgot Password
+                            </span>
                         </div>
                         <div className={cx('form-group', 'auth-btn-group')}>
                             <button className={cx('btn', 'btn-primary')}>Sign Up</button>
