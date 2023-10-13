@@ -8,7 +8,7 @@ function MenuHeader({ title, onBack }) {
     return (
         <header className={cx('header')}>
             <button className={cx('back-btn')} onClick={onBack}>
-                <img alt="" src={images.arrowLeftIcon} />
+                <img alt="" src={images.arrowLeftIcon} className={cx('icon')} />
             </button>
             <h4 className={cx('header-title')}>{title}</h4>
         </header>

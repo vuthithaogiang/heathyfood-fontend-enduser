@@ -15,7 +15,9 @@ function Header() {
     const scrollRef = useRef();
     const [theme, setTheme] = useState('bright');
 
-    const auth = false;
+    const auth = true;
+
+    const hasImageAvatar = false;
 
     const NAVBAR_lIST = [
         {
@@ -1347,7 +1349,11 @@ function Header() {
                                 </div>
                                 <div className={cx('top-action-user')}>
                                     <Menu items={MENU_ITEMS}>
-                                        <img className={cx('avatar')} src={images.avatar} alt="" />
+                                        <img
+                                            className={cx('avatar')}
+                                            src={hasImageAvatar === true ? images.avatar : images.avatarDefault}
+                                            alt=""
+                                        />
                                     </Menu>
                                 </div>
                             </>

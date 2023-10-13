@@ -60,6 +60,9 @@ const images = {
     questionIcon: require('~/assets/images/question-icon.svg').default,
     userIcon: require('~/assets/images/user-icon.svg').default,
     reorderIcon: require('~/assets/images/reorder-icon.svg').default,
+
+    avatarDeco: require('~/assets/images/avatar-deco.svg').default,
+    avatarDefault: require('~/assets/images/avatar-default.jpg'),
 };
 
 export default images;
