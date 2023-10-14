@@ -168,6 +168,7 @@ function SignUp() {
             // navigate('/login');
         } catch (error) {
             setLoading(false);
+            setSuccess(false);
             if (!error?.response) {
                 setError('No server Response');
             } else if (error.response?.status === 400) {
@@ -362,7 +363,7 @@ function SignUp() {
                 <div className={cx('modal')}>
                     <div className={cx('overlay')}></div>
                     <div className={cx('wrap-loading')}>
-                        <InfinitySpin width="200" color="#fff" />
+                        <InfinitySpin width="160" color="#fff" />
                     </div>
                 </div>
             )}
@@ -374,7 +375,9 @@ function SignUp() {
                         <div className={cx('modal-content-inner')}>
                             <header>
                                 <h2 className={cx('modal-heading')}>Thanks For Register</h2>
-                                <span onClick={toggleModal}>x</span>
+                                <span className={cx('icon')} onClick={toggleModal}>
+                                    x
+                                </span>
                             </header>
                             <p className={cx('modal-desc')}>
                                 You're welcome for registering with our system. We have sent a confirmation email to

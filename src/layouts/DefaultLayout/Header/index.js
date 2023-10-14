@@ -4,11 +4,13 @@ import images from '~/assets/images';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import Menu from '~/components/Popper/Menu';
+import useAuth from '~/hooks/useAuth';
 
 const cx = classNames.bind(styles);
 
 function Header() {
     const navigate = useNavigate();
+    const { auth } = useAuth();
 
     const [size, setSize] = useState(null);
     const [subCategoryActive, setSubCategoryActive] = useState(null);
@@ -16,7 +18,7 @@ function Header() {
     const [theme, setTheme] = useState('bright');
 
     //Test Authentication
-    const auth = true;
+
     const hasImageAvatar = false;
 
     const NAVBAR_lIST = [
@@ -686,7 +688,7 @@ function Header() {
         {
             icon: images.userIcon,
             title: 'Profile',
-            to: '',
+            to: '/profile',
         },
         {
             icon: images.reorderIcon,
@@ -696,13 +698,13 @@ function Header() {
         {
             icon: images.questionIcon,
             title: 'Feedback & Helps',
-            to: '/contactus',
+            to: '',
         },
 
         {
             icon: images.logoutIcon,
             title: 'Logout',
-            to: '/account-setting',
+            to: '/',
             separate: true,
         },
     ];
@@ -1304,14 +1306,14 @@ function Header() {
                     {/* Actions */}
 
                     <div className={cx('top-action')}>
-                        {auth === true && (
+                        {auth?.access_token && (
                             <div className={cx('top-action-group', 'd-md-none')}>
                                 <button className={cx('btn', 'd-md-none')}>
                                     <img src={images.searchIcon} alt="" className={cx('action-icon', 'icon')} />
                                 </button>
                             </div>
                         )}
-                        {auth === false && (
+                        {!auth?.access_token && (
                             <>
                                 <button
                                     className={cx('btn', 'btn-text', 'd-md-none')}
@@ -1325,7 +1327,7 @@ function Header() {
                             </>
                         )}
 
-                        {auth === false && (
+                        {!auth?.access_token && (
                             <>
                                 <div className={cx('theme')} onClick={handleDarkModeSwitch}>
                                     {theme === 'bright' && <img className={cx('icon')} alt="" src={images.darkIcon} />}
@@ -1334,7 +1336,7 @@ function Header() {
                             </>
                         )}
 
-                        {auth === true && (
+                        {auth?.access_token && (
                             <>
                                 <div className={cx('top-action-group', 'd-md-none')}>
                                     <button className={cx('btn')}>
