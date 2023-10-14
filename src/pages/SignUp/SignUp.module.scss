@@ -257,3 +257,108 @@ $grid-breakpoints: (
     padding: 8px 4px;
     font-style: italic;
 }
+
+.error {
+    text-align: left;
+    font-size: 1.5rem;
+    color: red;
+    padding: 8px 4px;
+    font-style: italic;
+    width: 100%;
+    margin-bottom: -20px;
+    margin-top: 16px;
+}
+
+//Modal common
+
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.modal,
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49, 49, 49, 0.8);
+}
+
+//modal
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.07);
+    padding: 16px 24px;
+    border-radius: 6px;
+    min-height: 300px;
+    max-width: 500px;
+}
+
+.wrap-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content-inner {
+    position: relative;
+
+    &::before {
+        position: absolute;
+        content: url('/assets/images/bg-deco.svg');
+        top: -30%;
+        left: 50%;
+        transform: translate(-50%);
+        filter: var(--primary-color);
+        z-index: -1;
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 12px;
+        margin-bottom: 24px;
+
+        span {
+            font-size: 2.4rem;
+            color: #0000008a;
+            cursor: pointer;
+        }
+    }
+
+    .modal-heading {
+        font-weight: 500;
+        font-size: 3rem;
+    }
+}
+
+.modal-desc {
+    font-size: 1.7rem;
+    line-height: 1.5;
+}
+
+.modal-btn {
+    margin-top: 40px;
+    padding: 10px 60px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.43;
+    cursor: pointer;
+    height: 50px;
+    background-color: #ffb700;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -65,6 +65,7 @@ const images = {
     avatarDefault: require('~/assets/images/avatar-default.jpg'),
 
     forgotPasswordThumb: require('~/assets/images/forgot-password.png'),
+    bgDeco: require('~/assets/images/bg-deco.svg').default,
 };
 
 export default images;

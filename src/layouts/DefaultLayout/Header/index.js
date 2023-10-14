@@ -16,7 +16,7 @@ function Header() {
     const [theme, setTheme] = useState('bright');
 
     //Test Authentication
-    const auth = false;
+    const auth = true;
     const hasImageAvatar = false;
 
     const NAVBAR_lIST = [
