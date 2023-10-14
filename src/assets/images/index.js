@@ -66,6 +66,18 @@ const images = {
 
     forgotPasswordThumb: require('~/assets/images/forgot-password.png'),
     bgDeco: require('~/assets/images/bg-deco.svg').default,
+    bgAvatarDefault: require('~/assets/images/bg-avatar-default.svg').default,
+    addressIcon: require('~/assets/images/adress-icon.svg').default,
+    giftIcon: require('~/assets/images/gift-icon.svg').default,
+    protectionIcon: require('~/assets/images/protection-icon.svg').default,
+
+    helpIcon: require('~/assets/images/help-icon.svg').default,
+    termOfUserIcon: require('~/assets/images/term-of-use-icon.svg').default,
+
+    card1: require('~/assets/images/card-1.svg').default,
+    card2: require('~/assets/images/card-2.svg').default,
+    plusIcon: require('~/assets/images/plus-icon.svg').default,
+    phoneIcon: require('~/assets/images/phone-icon.svg').default,
 };
 
 export default images;
