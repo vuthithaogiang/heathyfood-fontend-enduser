@@ -75,8 +75,14 @@ function MenuItem({ className, item, onClick }) {
                 </Button>
             )}
 
-            {!item.separate && item.title !== 'Switch Theme' && (
+            {!item.separate && item.title !== 'Switch Theme' && item.title !== 'English' && (
                 <Button className={classes} leftIcon={item.icon} to={item.to} onClick={() => navigate(item.to)}>
+                    {item.title}
+                </Button>
+            )}
+
+            {item.title === 'English' && (
+                <Button className={classes} leftIcon={item.icon} to={item.to} onClick={onClick}>
                     {item.title}
                 </Button>
             )}
