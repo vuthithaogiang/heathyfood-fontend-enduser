@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+    <style type="text/css">
+        .st0{fill:#b0bec5;}
+    </style>
+    <title>speedometer</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols">
+        <g id="m:-bmi-calc-header" transform="translate(-150.000000, -83.000000)">
+            <g id="icons-at-top" transform="translate(62.000000, 82.000000)">
+                <path id="speedometer" class="st0" d="M98,19.2c-4.4,0-8-3.6-8-8h4.4c0.1,1.9,1.6,3.4,3.6,3.4c1.9,0,3.5-1.5,3.6-3.4h4.4     C106,15.6,102.5,19.2,98,19.2 M96.6,10.3L96.6,10.3L97,9.7l4.5-5.3l-1.9,6.7l-0.2,0.6l0,0c-0.4,0.8-1.4,1.1-2.2,0.7     C96.5,12.1,96.2,11.1,96.6,10.3 M106,5l-2.2,2.2l-0.8-0.8l2.3-2.3c-1.7-1.9-4.1-3.1-6.8-3.2v3.6h-1.1V1c-2.7,0.1-5.1,1.4-6.8,3.2     l2.3,2.3l-0.8,0.8l-2.2-2.2C88.7,6.7,88,8.8,88,11c0,5.5,4.5,10,10,10c5.5,0,10-4.5,10-10C108,8.8,107.3,6.7,106,5"/>
+            </g>
+        </g>
+    </g>
+    </svg>

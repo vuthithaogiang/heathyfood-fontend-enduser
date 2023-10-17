@@ -4,6 +4,7 @@ import Login from '~/pages/Login';
 import Profile from '~/pages/Profile';
 import ResetPassword from '~/pages/ResetPassword';
 import CreateNewPassword from '~/pages/CreateNewPassword';
+import BMICalculator from '~/pages/BMICalculator';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -11,6 +12,7 @@ const publicRoutes = [
     { path: '/login', component: Login, layout: null },
     { path: '/forgot-password', component: ResetPassword, layout: null },
     { path: '/create-new-password', component: CreateNewPassword, layout: null },
+    { path: '/bmi', component: BMICalculator },
 ];
 
 const privateRoute = [{ path: '/profile', component: Profile }];

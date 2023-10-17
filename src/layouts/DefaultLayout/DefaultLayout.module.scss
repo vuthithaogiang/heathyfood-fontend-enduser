@@ -29,7 +29,6 @@ $grid-breakpoints: (
 }
 .inner {
     margin-top: var(--height-header);
-    min-height: 1000px;
     background-color: var(--body-bg-color);
 
     // @include breakpoint(md) {

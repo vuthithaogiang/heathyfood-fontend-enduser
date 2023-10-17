@@ -26,6 +26,8 @@ const getDefaultAuth = () => {
 export const AuthProovider = ({ children }) => {
     const [auth, setAuth] = useState(getDefaultAuth);
 
+    console.log(auth);
+
     return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
 };
 

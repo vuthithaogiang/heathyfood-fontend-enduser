@@ -47,6 +47,12 @@ function MenuItem({ className, item, onClick }) {
                 navigate('/');
             }
         } catch (error) {
+            if (error?.response?.data && error.response.data.message === 'Token has expired') {
+                // refresh token
+                console.log(error.response.data.message);
+                setAuth({});
+                localStorage.removeItem('access_token');
+            }
             console.log(error);
         }
     };

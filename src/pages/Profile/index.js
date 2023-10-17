@@ -371,7 +371,7 @@ function Profile() {
                                 </div>
                                 <div className={cx('btn-group')}>
                                     <button>Cancel</button>
-                                    <button type="submit">Save Card</button>
+                                    <button type="submit">Save info</button>
                                 </div>
                             </form>
                         </div>

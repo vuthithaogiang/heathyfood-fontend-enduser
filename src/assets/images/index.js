@@ -78,6 +78,12 @@ const images = {
     card2: require('~/assets/images/card-2.svg').default,
     plusIcon: require('~/assets/images/plus-icon.svg').default,
     phoneIcon: require('~/assets/images/phone-icon.svg').default,
+
+    bmiIcon1: require('~/assets/images/bmi-icon1.svg').default,
+    bmiIcon2: require('~/assets/images/bmi-icon2.svg').default,
+    bmiIcon3: require('~/assets/images/bmi-icon3.svg').default,
+    bmiIcon4: require('~/assets/images/bmi-icon4.svg').default,
+    bmiIcon5: require('~/assets/images/bmi-icon5.svg').default,
 };
 
 export default images;
