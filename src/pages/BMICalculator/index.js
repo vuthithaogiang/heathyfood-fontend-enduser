@@ -307,6 +307,116 @@ function BMICalculator() {
                                     </div>
                                 </div>
                             )}
+
+                            {typeCalculate === 'RECOMMEND' && (
+                                <div>
+                                    <p className={cx('title-desc')}>How To Reduce Calorie Intake</p>
+                                    <p className={cx('content-desc')}>
+                                        Although decreasing the number of calories you consume can be effective for
+                                        weight loss, cutting calories without considering which foods you eat isn’t a
+                                        sustainable way to lose weight.
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        Here a five strategies that may help you lose weight.
+                                    </p>
+                                    <p className={cx('sub-title')}>1. Eat more protein</p>
+                                    <p className={cx('content-desc')}>
+                                        Protein may also help fight cravings. According to some research, high protein
+                                        snacks help enhance feelings of fullness while decreasing hunger and appetite.
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        In addition to promoting weight loss, some research suggests that maintaining a
+                                        high protein diet may prevent or reduce weight regain and help maintain muscle
+                                        mass
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        Therefore, if you want to achieve long lasting, sustainable weight loss,
+                                        consider increasing your protein intake by eating more eggs, meat, poultry,
+                                        tofu, nuts, seeds, or legumes
+                                    </p>
+                                    <p className={cx('sub-title')}>2. Limit sugary drinks</p>
+                                    <p className={cx('content-desc')}>
+                                        The harmful effects of sugar also go far beyond weight gain. In fact, added
+                                        sugar may contribute to other health issues, including heart disease, liver
+                                        problems, and type 2 diabetes
+                                    </p>
+                                    <p className={cx('sub-title')}>3. Drink more water</p>
+                                    <p className={cx('content-desc')}>
+                                        One thing you can do for your health is to drink more water.
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        Adequate hydration is associated with improved brain health and weight
+                                        management, as well as a reduced kidney stone risk
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        When combined with a healthy diet, drinking more water — especially before meals
+                                        — appears helpful if you need to lose weight.
+                                    </p>
+                                    <p className={cx('sub-title')}>5. Exercise</p>
+                                    <p className={cx('content-desc')}>
+                                        Cardio exercises, such as walking, swimming, or jogging, are also important —
+                                        both for increasing weight loss and supporting overall health
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        Additionally, exercise has a variety of other benefits that go beyond weight
+                                        loss, such as increased longevity, enhanced energy levels, improved mental
+                                        health, and a decreased risk of chronic disease
+                                    </p>
+                                    <p className={cx('sub-title')}>
+                                        5. Reduce your intake of refined carbs and ultra-processed foods
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        The term “refined carbs” refers to grains that have lost their bran and germ,
+                                        including white bread, pasta, crackers, and white rice. It also includes sugar
+                                        and other sweeteners.
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        Refined grains typically lack fiber, which supports weight loss by decreasing
+                                        your appetite and increasing feelings of fullness
+                                    </p>
+                                    <p className={cx('content-desc')}>
+                                        Eating fewer refined carbs may promote weight loss by altering levels of
+                                        specific hormones that regulate your appetite, such as peptide YY (30Trusted
+                                        Source). It’s also best to avoid ultra-processed foods.
+                                    </p>
+                                    <div className={cx('summary')}>
+                                        <h4>Summary</h4>
+                                        <p>
+                                            Eating more protein, exercising, staying hydrated, and limiting your intake
+                                            of refined carbs and sugary beverages are a few simple ways to decrease your
+                                            daily calorie intake.
+                                        </p>
+                                    </div>
+
+                                    <p className={cx('title-desc')}>A few basic weight loss tips</p>
+                                    <p className={cx('content-desc')}>
+                                        In addition to cutting calories, there are several steps you can take to lose
+                                        weight in a sustainable, long lasting manner:
+                                    </p>
+                                    <p className={cx('sub-title')}>Practice mindful eating: </p>
+                                    <p className={cx('content-desc')}>
+                                        Mindful eating can help reduce food cravings and promote long-term weight loss
+                                    </p>
+                                    <p className={cx('sub-title')}>Eat more fruits and vegetables: </p>
+                                    <p className={cx('content-desc')}>
+                                        Fruits and veggies are low in calories but high in fiber, which makes them ideal
+                                        for weight loss
+                                    </p>
+                                    <p className={cx('sub-title')}>Stock up on healthy foods:</p>
+                                    <p className={cx('content-desc')}>
+                                        Following a healthy diet is much more challenging when you have a kitchen full
+                                        of processed foods. Make sure you have healthy snacks and foods on hand.
+                                    </p>
+
+                                    <div className={cx('summary')}>
+                                        <h4>Summary</h4>
+                                        <p>
+                                            In addition to decreasing your daily calorie intake, the tips outlined above
+                                            may support long-term weight loss.
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
                         </>
 
                         <div className={cx('glossary')}>
