@@ -97,6 +97,10 @@
     display: flex;
     flex-wrap: nowrap;
     gap: 14px;
+
+    + .row {
+        margin-top: 20px;
+    }
 }
 
 .form-group {
@@ -116,14 +120,91 @@
     width: 100%;
     border-radius: 10px;
     border: 2px solid var(--border-input-color);
-    padding: 18px 12px;
+    padding: 14px 12px;
     font-size: 1.6rem;
 
     &::placeholder {
         font-size: 1.6rem;
-
         font-weight: 500;
         line-height: 1.5;
+    }
+}
+
+.select-wrap-activity,
+.select-wrap-gender {
+    border-radius: 6px;
+    border: 2px solid var(--border-input-color);
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    position: relative;
+
+    .select-icon {
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+    }
+}
+
+.select-wrap-gender {
+    .select-items {
+        display: none;
+        border-radius: 8px;
+        border: 1px solid var(--boder-bmi-color);
+        // display: flex;
+        row-gap: 12px;
+        flex-direction: column;
+        position: absolute;
+        left: 0;
+        bottom: -115px;
+        width: 100%;
+        background-color: var(--select-bg-color);
+        z-index: 2;
+
+        span {
+            padding: 16px 12px;
+            border-radius: inherit;
+
+            &:hover {
+                background-color: var(--select-hover-bg-color);
+            }
+        }
+    }
+
+    .select-items.active {
+        display: flex;
+    }
+}
+
+.select-wrap-activity {
+    .select-items {
+        display: none;
+        border-radius: 8px;
+        border: 1px solid var(--boder-bmi-color);
+        // display: flex;
+        row-gap: 12px;
+        flex-direction: column;
+        position: absolute;
+        left: 0;
+        bottom: -301px;
+        width: 100%;
+        background-color: var(--select-bg-color);
+        z-index: 2;
+
+        span {
+            padding: 16px 12px;
+            border-radius: inherit;
+
+            &:hover {
+                background-color: var(--select-hover-bg-color);
+            }
+        }
+    }
+
+    .select-items.active {
+        display: flex;
     }
 }
 
@@ -131,7 +212,7 @@
     margin-top: 30px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     button {
         font-size: 1.6rem;
         font-weight: 500;
@@ -143,10 +224,56 @@
     }
 
     button:nth-child(2) {
+        width: 180px;
         margin-left: 50px;
         padding: 10px 30px;
         border-radius: 30px;
         background: var(--primary-color);
+    }
+}
+
+.table {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 300px);
+    row-gap: 16px;
+
+    .table-heading {
+        color: #9e9da8;
+        padding: 8px 0;
+        border-bottom: 1px solid #d2d1d6;
+        font-size: 1.5rem;
+    }
+
+    .range {
+        color: #f94545;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), #590505;
+
+        width: fit-content;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+    .range-normal {
+        width: fit-content;
+        border-radius: 8px;
+        padding: 10px 24px;
+
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 1.4;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%), #67b044;
+        color: #67b044;
+    }
+
+    .number {
+        border-radius: 8px;
+        padding: 10px 40px;
+        font-size: 1.4rem;
+        // background-color: #fff;
+        width: fit-content;
     }
 }
 .glossary {
@@ -201,6 +328,36 @@
         }
     }
 }
+
+.summary {
+    margin-top: 30px;
+    background-color: var(--sumary-bg-color);
+    border-left: 3px solid var(--logo-color);
+    padding: 20px 0;
+
+    h4,
+    p {
+        padding-left: 18px;
+    }
+
+    h4 {
+        text-align: left;
+        font-size: 2.2rem;
+        font-weight: 500;
+        line-height: 1.5;
+        margin-bottom: 8px;
+    }
+
+    p {
+        color: #9e9da8;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1.4;
+        text-align: left;
+        padding-right: 30px;
+    }
+}
+
 //Right
 
 .right {

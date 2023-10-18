@@ -303,11 +303,11 @@ function Header() {
                     subMenu: [
                         {
                             title: 'BMI (Body Mass Index)',
-                            to: '',
+                            to: '/bmi',
                         },
                         {
                             title: 'How Many Calories Should You Eat?',
-                            to: '',
+                            to: '/bmi',
                         },
                     ],
                 },
@@ -1275,14 +1275,19 @@ function Header() {
                                                                                                     'menu-column-item',
                                                                                                 )}
                                                                                             >
-                                                                                                <a
+                                                                                                <span
                                                                                                     href="#!"
                                                                                                     className={cx(
                                                                                                         'menu-column-link',
                                                                                                     )}
+                                                                                                    onClick={() =>
+                                                                                                        navigate(
+                                                                                                            item.to,
+                                                                                                        )
+                                                                                                    }
                                                                                                 >
                                                                                                     {item.title}
-                                                                                                </a>
+                                                                                                </span>
                                                                                             </li>
                                                                                         ),
                                                                                     )}
