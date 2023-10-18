@@ -84,6 +84,20 @@ const images = {
     bmiIcon3: require('~/assets/images/bmi-icon3.svg').default,
     bmiIcon4: require('~/assets/images/bmi-icon4.svg').default,
     bmiIcon5: require('~/assets/images/bmi-icon5.svg').default,
+
+    cartGiftIcon: require('~/assets/images/cart-gift.svg').default,
+    arrowRight: require('~/assets/images/arrowRight.svg').default,
+
+    increaseIcon: require('~/assets/images/increase-icon..svg').default,
+    decreaseIcon: require('~/assets/images/decrease-icon.svg').default,
+    trashIcon: require('~/assets/images/trash-icon.svg').default,
+    saveIcon: require('~/assets/images/save-icon.svg').default,
+
+    product1: require('~/assets/images/product-1.png'),
+    product2: require('~/assets/images/product-2.png'),
+    arrowLeft: require('~/assets/images/arrowLeft.svg').default,
+
+    heartColor: require('~/assets/images/heart-color.svg').default,
 };
 
 export default images;

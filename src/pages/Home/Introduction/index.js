@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Introdction.module.scss';
 import images from '~/assets/images';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -10,22 +11,29 @@ function Introdction() {
             title: 'Tool Calulators',
             description:
                 "No matter what you weight or health goals are, we've got the solution to help you reach them.",
+            to: '/bmi',
         },
         {
             title: 'Nutrition',
             description: 'You are what you eat! Tell us what you eat and we will tel you what you are.',
+            to: '',
         },
         {
             title: 'Events',
             description:
                 'Join us we make information nutritions meals everyday for people suffering from food insecurity.',
+            to: '',
         },
         {
             title: 'Products',
             description:
                 'Join us we make information nutritions meals everyday for people suffering from food insecurity.',
+            to: '',
         },
     ];
+
+    const navigate = useNavigate();
+
     return (
         <div className={cx('container')}>
             <div className={cx('introduction')}>
@@ -36,7 +44,7 @@ function Introdction() {
                                 <div key={index} className={cx('feature-component')}>
                                     <div className={cx('group')}>
                                         <p className={cx('feature-title')}>{item.title}</p>
-                                        <button className={cx('explore-now')}>
+                                        <button className={cx('explore-now')} onClick={() => navigate(item.to)}>
                                             Go to
                                             <img src={images.arrowIconRight} alt="" className={cx('icon')} />
                                         </button>
