@@ -6,12 +6,20 @@ import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 function Cart() {
-    const [idProductSave, setIdProductSave] = useState(null);
+    const [idProductSave, setIdProductSave] = useState([]);
     const [save, setSave] = useState(false);
 
     const toggleSaveItem = (id) => {
-        setIdProductSave(id);
-        setSave((pre) => !pre);
+        if (!idProductSave.includes(id)) {
+            setSave(true);
+            setIdProductSave((pre) => [id, ...pre]);
+            return;
+        } else {
+            //remove id from array -> set state
+            const newArray = idProductSave.filter((item) => item !== id);
+            setIdProductSave(newArray);
+            setSave(true);
+        }
     };
 
     return (
@@ -49,7 +57,7 @@ function Cart() {
                                     </div>
                                     <div className={cx('actions')}>
                                         <button onClick={() => toggleSaveItem(1)}>
-                                            {idProductSave === 1 && save === true ? (
+                                            {idProductSave.includes(1) && save === true ? (
                                                 <>
                                                     <img className={cx('saved')} alt="" src={images.saveIcon} />
                                                 </>
@@ -93,7 +101,7 @@ function Cart() {
                                     </div>
                                     <div className={cx('actions')}>
                                         <button onClick={() => toggleSaveItem(2)}>
-                                            {idProductSave === 2 && save === true ? (
+                                            {idProductSave.includes(2) && save === true ? (
                                                 <>
                                                     <img className={cx('saved')} alt="" src={images.saveIcon} />
                                                 </>
@@ -137,7 +145,7 @@ function Cart() {
                                     </div>
                                     <div className={cx('actions')}>
                                         <button onClick={() => toggleSaveItem(3)}>
-                                            {idProductSave === 3 && save === true ? (
+                                            {idProductSave.includes(3) && save === true ? (
                                                 <>
                                                     <img className={cx('saved')} alt="" src={images.saveIcon} />
                                                 </>
