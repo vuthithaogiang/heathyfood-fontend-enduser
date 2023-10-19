@@ -3,8 +3,8 @@ import classNames from 'classnames/bind';
 import styles from './Menu.module.scss';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import instance from '~/hooks/useAxios';
 import useAuth from '~/hooks/useAuth';
+import useAxios from '~/hooks/useAxios';
 
 const cx = classNames.bind(styles);
 
@@ -12,6 +12,8 @@ function MenuItem({ className, item, onClick }) {
     const [theme, setTheme] = useState('bright');
     const navigate = useNavigate();
     const { setAuth } = useAuth();
+
+    const axios = useAxios();
 
     useEffect(() => {
         if (localStorage.getItem('theme') === null) {
@@ -37,7 +39,7 @@ function MenuItem({ className, item, onClick }) {
 
     const handleLogout = async () => {
         try {
-            const response = await instance.post('/api/auth/logout');
+            const response = await axios.post('/api/auth/logout');
             console.log(response.data);
 
             if (response.data) {
@@ -50,8 +52,8 @@ function MenuItem({ className, item, onClick }) {
             if (error?.response?.data && error.response.data.message === 'Token has expired') {
                 // refresh token
                 console.log(error.response.data.message);
-                setAuth({});
-                localStorage.removeItem('access_token');
+                // setAuth({});
+                // localStorage.removeItem('access_token');
             }
             console.log(error);
         }

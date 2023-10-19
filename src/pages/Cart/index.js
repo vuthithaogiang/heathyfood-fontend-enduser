@@ -9,6 +9,8 @@ function Cart() {
     const [idProductSave, setIdProductSave] = useState([]);
     const [save, setSave] = useState(false);
 
+    // const [subMenu, setSubMenu] = useState('checkout'); // checkout->shipping
+
     const toggleSaveItem = (id) => {
         if (!idProductSave.includes(id)) {
             setSave(true);
