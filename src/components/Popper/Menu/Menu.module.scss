@@ -3,6 +3,18 @@
 .menu-items {
     width: 224px;
 
+    margin-top: 9px;
+    position: relative;
+
+    &::before {
+        position: absolute;
+        content: url('/assets/images/dropdown-arrow.svg');
+        top: -13px;
+        right: 0px;
+        translate: -50%;
+        filter: var(--drop-down-arrow-color);
+    }
+
     .menu-item {
         margin-left: 0;
     }
@@ -22,7 +34,7 @@
         background-color: var(--menu-item-hover-color);
     }
     &.separate {
-        border-top: 1px solid var(--menu-separate);
+        border-top: 1px solid var(--cart-popper-border-color);
     }
 }
 

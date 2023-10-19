@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import Menu from '~/components/Popper/Menu';
 import useAuth from '~/hooks/useAuth';
+import Tippy from '@tippyjs/react/headless';
+import Popper from '~/components/Popper';
 
 const cx = classNames.bind(styles);
 
@@ -1349,10 +1351,83 @@ function Header() {
                                         <span className={cx('action-title')}>03</span>
                                     </button>
                                     <div className={cx('separate')}></div>
-                                    <button className={cx('btn')}>
-                                        <img src={images.cartIcon} alt="" className={cx('action-icon', 'icon')} />
-                                        <span className={cx('action-title')}>$65.42</span>
-                                    </button>
+
+                                    <>
+                                        <Tippy
+                                            interactive
+                                            delay={[0, 300]}
+                                            render={(attrs) => (
+                                                <div className={cx('menu-cart')} tabIndex={-1} {...attrs}>
+                                                    <Popper className={cx('wrapper-menu-cart')}>
+                                                        <header>
+                                                            <span className={cx('heading')}>You have 3 items</span>
+                                                            <span
+                                                                className={cx('link')}
+                                                                onClick={() => navigate('/cart')}
+                                                            >
+                                                                See All
+                                                            </span>
+                                                        </header>
+                                                        <div className={cx('items-cart')}>
+                                                            {/* Item 1 */}
+                                                            <div className={cx('cart-item')}>
+                                                                <figure>
+                                                                    <img alt="" src={images.product1} />
+                                                                </figure>
+                                                                <p className={cx('name')}>Lavazza Coffee Blends </p>
+                                                                <p className={cx('price')}>$67.00</p>
+                                                            </div>
+                                                            {/* Item 2 */}
+                                                            <div className={cx('cart-item')}>
+                                                                <figure>
+                                                                    <img alt="" src={images.product1} />
+                                                                </figure>
+                                                                <p className={cx('name')}>Coffee Beans Espresso</p>
+                                                                <p className={cx('price')}>$20.00</p>
+                                                            </div>
+                                                            {/* Item 3 */}
+                                                            <div className={cx('cart-item')}>
+                                                                <figure>
+                                                                    <img alt="" src={images.product1} />
+                                                                </figure>
+                                                                <p className={cx('name')}>Qualità Oro Mountain</p>
+                                                                <p className={cx('price')}>$40.23</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className={cx('total')}>
+                                                            <div className={cx('row')}>
+                                                                <span>Sub Total: </span>
+                                                                <span>$415.45</span>
+                                                            </div>
+                                                            <div className={cx('row')}>
+                                                                <span>Taxs: </span>
+                                                                <span>Free</span>
+                                                            </div>
+                                                            <div className={cx('row')}>
+                                                                <span>Shipping: </span>
+                                                                <span>$10.00</span>
+                                                            </div>
+                                                            <div className={cx('row')}>
+                                                                <span>Total Pice: </span>
+                                                                <span>$455.45</span>
+                                                            </div>
+                                                        </div>
+                                                        <button onClick={() => navigate('/cart')}>Check Out All</button>
+                                                    </Popper>
+                                                </div>
+                                            )}
+                                            placement="bottom-end"
+                                        >
+                                            <button className={cx('btn')}>
+                                                <img
+                                                    src={images.cartIcon}
+                                                    alt=""
+                                                    className={cx('action-icon', 'icon')}
+                                                />
+                                                <span className={cx('action-title')}>$65.42</span>
+                                            </button>
+                                        </Tippy>
+                                    </>
                                 </div>
                                 <div className={cx('top-action-user')}>
                                     <Menu items={MENU_ITEMS}>
