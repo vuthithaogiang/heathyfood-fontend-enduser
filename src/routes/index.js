@@ -6,6 +6,7 @@ import ResetPassword from '~/pages/ResetPassword';
 import CreateNewPassword from '~/pages/CreateNewPassword';
 import BMICalculator from '~/pages/BMICalculator';
 import Cart from '~/pages/Cart';
+import FavouriteList from '~/pages/FavouriteList';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -19,6 +20,7 @@ const publicRoutes = [
 const privateRoute = [
     { path: '/profile', component: Profile },
     { path: '/cart', component: Cart },
+    { path: '/favourite-list', component: FavouriteList },
 ];
 
 export { publicRoutes, privateRoute };

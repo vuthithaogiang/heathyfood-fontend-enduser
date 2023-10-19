@@ -15,14 +15,21 @@ const useRefreshToken = () => {
     });
 
     const refresh = async () => {
-        const response = await http.post('/api/auth/refresh', { withCredentials: true });
+        try {
+            const response = await http.post('/api/auth/refresh');
 
-        console.log(response.data.message);
+            console.log('REFRESH TOKEN: ', response.data);
+            setAuth({
+                access_token: response.data.access_token,
+                role: 'USER',
+            });
+        } catch (error) {
+            console.log(error);
 
-        setAuth({
-            access_token: response.data.access_token,
-            role: 'USER',
-        });
+            if (error?.response?.data?.message === 'The token has been blacklisted') {
+                setAuth({});
+            }
+        }
     };
 
     return refresh;

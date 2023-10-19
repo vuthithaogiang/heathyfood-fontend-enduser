@@ -72,6 +72,12 @@ function Login() {
             };
             setAuth(data);
 
+            const existToken = localStorage.getItem('access_token') !== null;
+
+            if (existToken) {
+                localStorage.removeItem('access_token');
+            }
+
             localStorage.setItem('access_token', access_token);
 
             setError('');

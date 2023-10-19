@@ -39,7 +39,9 @@ function MenuItem({ className, item, onClick }) {
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post('/api/auth/logout');
+            const response = await axios.post('/api/auth/logout', {
+                withCredentials: true,
+            });
             console.log(response.data);
 
             if (response.data) {

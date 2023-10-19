@@ -13,7 +13,6 @@ const cx = classNames.bind(styles);
 function Header() {
     const navigate = useNavigate();
     const { auth } = useAuth();
-
     const [size, setSize] = useState(null);
     const [subCategoryActive, setSubCategoryActive] = useState(null);
     const scrollRef = useRef();
@@ -842,7 +841,7 @@ function Header() {
                         <h2 className={cx('logo-title')}>healthyfood</h2>
                     </div>
 
-                    {/* Navbar */}
+                    {/* Navbar in MOBILE */}
                     <nav id="navbar" className={cx('navbar', 'hide')}>
                         <button
                             className={cx('nav-bar-close-btn', 'js-toggle', 'icon', 'd-none', 'd-lg-block')}
@@ -851,20 +850,20 @@ function Header() {
                             <img src={images.arrowLeftIcon} alt="" />
                         </button>
 
-                        <a href="#!" className={cx('nav-btn', 'd-none', 'd-md-flex')}>
+                        <span className={cx('nav-btn', 'd-none', 'd-md-flex')}>
                             <img src={images.cartIcon} alt="" className={cx('icon', 'nav-btn-icon')} />
                             <span className={cx('nav-btn-title')}>Cart</span>
                             <span className={cx('nav-btn-qnt')}>3</span>
-                        </a>
-                        <a href="#!" className={cx('nav-btn', 'd-none', 'd-md-flex')}>
+                        </span>
+                        <span className={cx('nav-btn', 'd-none', 'd-md-flex')}>
                             <img src={images.heartIcon} alt="" className={cx('icon', 'nav-btn-icon')} />
                             <span className={cx('nav-btn-title')}>Favourire</span>
                             <span className={cx('nav-btn-qnt')}>6</span>
-                        </a>
+                        </span>
 
                         <ul className={cx('list', 'js-dropdown-list')}>
                             {NAVBAR_lIST.map((item, index) => (
-                                <li key={index} className={cx('navbar-item')}>
+                                <li key={item.title} className={cx('navbar-item')}>
                                     <a href="#!" className={cx('navbar-link')}>
                                         <span>{item.title}</span>
                                         <img className={cx('arrow-icon', 'icon')} alt="" src={images.arrowIcon} />
@@ -904,7 +903,7 @@ function Header() {
                                                                         >
                                                                             {item.subMenu.map((sub, index) => (
                                                                                 <li
-                                                                                    key={index}
+                                                                                    key={sub.cate}
                                                                                     className={
                                                                                         subCategoryActive ===
                                                                                         convertToUppercaseAndReplaceSpaces(
@@ -945,7 +944,7 @@ function Header() {
                                                                                                         className={cx(
                                                                                                             'sub-menu-column',
                                                                                                         )}
-                                                                                                        key={index}
+                                                                                                        key={`a${index}`}
                                                                                                     >
                                                                                                         <div
                                                                                                             className={cx(
@@ -1006,9 +1005,7 @@ function Header() {
                                                                                                                                     className={cx(
                                                                                                                                         'menu-column-item',
                                                                                                                                     )}
-                                                                                                                                    key={
-                                                                                                                                        index
-                                                                                                                                    }
+                                                                                                                                    key={`b${index}`}
                                                                                                                                 >
                                                                                                                                     <a
                                                                                                                                         href="#!"
@@ -1044,7 +1041,7 @@ function Header() {
                                                                                                         className={cx(
                                                                                                             'sub-menu-column',
                                                                                                         )}
-                                                                                                        key={index}
+                                                                                                        key={`c${index}`}
                                                                                                     >
                                                                                                         <div
                                                                                                             className={cx(
@@ -1105,9 +1102,7 @@ function Header() {
                                                                                                                                     className={cx(
                                                                                                                                         'menu-column-item',
                                                                                                                                     )}
-                                                                                                                                    key={
-                                                                                                                                        index
-                                                                                                                                    }
+                                                                                                                                    key={`e${index}`}
                                                                                                                                 >
                                                                                                                                     <a
                                                                                                                                         href="#!"
@@ -1144,7 +1139,7 @@ function Header() {
                                                                                                         className={cx(
                                                                                                             'sub-menu-column',
                                                                                                         )}
-                                                                                                        key={index}
+                                                                                                        key={`f${index}`}
                                                                                                     >
                                                                                                         <div
                                                                                                             className={cx(
@@ -1205,9 +1200,7 @@ function Header() {
                                                                                                                                     className={cx(
                                                                                                                                         'menu-column-item',
                                                                                                                                     )}
-                                                                                                                                    key={
-                                                                                                                                        index
-                                                                                                                                    }
+                                                                                                                                    key={`g${index}`}
                                                                                                                                 >
                                                                                                                                     <a
                                                                                                                                         href="#!"
@@ -1247,7 +1240,10 @@ function Header() {
                                                             {item.children &&
                                                                 item.children.map((subItem, index) => (
                                                                     <>
-                                                                        <div className={cx('menu-column')} key={index}>
+                                                                        <div
+                                                                            className={cx('menu-column')}
+                                                                            key={`h${index}`}
+                                                                        >
                                                                             <div className={cx('menu-column-icon')}>
                                                                                 <img
                                                                                     src={subItem.icon1}
@@ -1272,7 +1268,7 @@ function Header() {
                                                                                     {subItem.subMenu.map(
                                                                                         (item, index) => (
                                                                                             <li
-                                                                                                key={index}
+                                                                                                key={`k${index}`}
                                                                                                 className={cx(
                                                                                                     'menu-column-item',
                                                                                                 )}
@@ -1308,10 +1304,11 @@ function Header() {
                             ))}
                         </ul>
                     </nav>
+                    {/* end Navbar in MOBILE */}
+
                     <div className={cx('nav-bar-overlay', 'js-toggle')} toggle-target="#navbar"></div>
 
                     {/* Actions */}
-
                     <div className={cx('top-action')}>
                         {auth?.access_token && (
                             <div className={cx('top-action-group', 'd-md-none')}>
@@ -1346,12 +1343,12 @@ function Header() {
                         {auth?.access_token && (
                             <>
                                 <div className={cx('top-action-group', 'd-md-none')}>
-                                    <button className={cx('btn')}>
+                                    <button className={cx('btn')} onClick={() => navigate('/favourite-list')}>
                                         <img src={images.heartIcon} alt="" className={cx('action-icon', 'icon')} />
                                         <span className={cx('action-title')}>03</span>
                                     </button>
                                     <div className={cx('separate')}></div>
-
+                                    {/* Popper Cart */}
                                     <>
                                         <Tippy
                                             interactive
@@ -1428,6 +1425,7 @@ function Header() {
                                             </button>
                                         </Tippy>
                                     </>
+                                    {/* End Popper Cart */}
                                 </div>
                                 <div className={cx('top-action-user')}>
                                     <Menu items={MENU_ITEMS}>
