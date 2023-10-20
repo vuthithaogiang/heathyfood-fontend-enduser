@@ -94,3 +94,11 @@ li {
 .icon {
     filter: var(--icon-color);
 }
+
+.react-multiple-carousel__arrow::before {
+    font-size: 15px !important;
+}
+.react-multiple-carousel__arrow {
+    min-width: 34px !important;
+    min-height: 34px !important;
+}

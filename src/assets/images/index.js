@@ -104,6 +104,9 @@ const images = {
 
     delivery2: require('~/assets/images/delivery-2.jpg'),
     delivery1: require('~/assets/images/delivery-1.jpg'),
+
+    filterIcon: require('~/assets/images/filter-icon.svg').default,
+    starIcon: require('~/assets/images/star-icon.svg').default,
 };
 
 export default images;

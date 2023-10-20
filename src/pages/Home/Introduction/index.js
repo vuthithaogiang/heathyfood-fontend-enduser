@@ -28,7 +28,7 @@ function Introdction() {
             title: 'Products',
             description:
                 'Join us we make information nutritions meals everyday for people suffering from food insecurity.',
-            to: '',
+            to: '/products',
         },
     ];
 

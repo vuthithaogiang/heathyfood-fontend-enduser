@@ -1,10 +1,14 @@
 import classNames from 'classnames/bind';
 import styles from './FavouriteList.module.scss';
 import images from '~/assets/images';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
 function FavouriteList() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>

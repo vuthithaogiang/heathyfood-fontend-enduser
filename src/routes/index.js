@@ -7,6 +7,7 @@ import CreateNewPassword from '~/pages/CreateNewPassword';
 import BMICalculator from '~/pages/BMICalculator';
 import Cart from '~/pages/Cart';
 import FavouriteList from '~/pages/FavouriteList';
+import Products from '~/pages/Products';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -15,6 +16,7 @@ const publicRoutes = [
     { path: '/forgot-password', component: ResetPassword, layout: null },
     { path: '/create-new-password', component: CreateNewPassword, layout: null },
     { path: '/bmi', component: BMICalculator },
+    { path: '/products', component: Products },
 ];
 
 const privateRoute = [

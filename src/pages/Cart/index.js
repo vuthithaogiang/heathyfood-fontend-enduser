@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Cart.module.scss';
 import images from '~/assets/images';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +25,9 @@ function Cart() {
             setSave(true);
         }
     };
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className={cx('wrapper')}>

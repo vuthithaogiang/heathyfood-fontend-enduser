@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './BMICalculator.module.scss';
 import images from '~/assets/images';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,9 @@ function BMICalculator() {
     const toggeleSelecGender = () => {
         setShowSelectGender((pre) => !pre);
     };
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>

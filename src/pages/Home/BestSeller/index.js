@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './BestSeller.module.scss';
 import { useState, useRef } from 'react';
 import images from '~/assets/images';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -97,6 +98,8 @@ function BestSeller() {
     const [prePageX, setPrePageX] = useState(0);
     const [preScrollLeft, setPreScrollLeft] = useState(0);
 
+    const navigate = useNavigate();
+
     const dragStart = (e) => {
         setIsDragStart(true);
         setPrePageX(e.pageX);
@@ -176,7 +179,7 @@ function BestSeller() {
                         )}
                     </div>
                 </div>
-                <div className={cx('btn')}>
+                <div className={cx('btn')} onClick={() => navigate('/products')}>
                     <span>Go to Glocery</span>
                     <img alt="" src={images.arrowIconRight} className={cx('icon')} />
                 </div>
