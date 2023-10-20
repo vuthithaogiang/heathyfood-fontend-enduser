@@ -8,6 +8,7 @@ import BMICalculator from '~/pages/BMICalculator';
 import Cart from '~/pages/Cart';
 import FavouriteList from '~/pages/FavouriteList';
 import Products from '~/pages/Products';
+import ProductDetails from '~/pages/ProductDetails';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -17,6 +18,7 @@ const publicRoutes = [
     { path: '/create-new-password', component: CreateNewPassword, layout: null },
     { path: '/bmi', component: BMICalculator },
     { path: '/products', component: Products },
+    { path: '/product-detail/:slug', component: ProductDetails },
 ];
 
 const privateRoute = [

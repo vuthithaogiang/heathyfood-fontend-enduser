@@ -7,6 +7,7 @@ import images from '~/assets/images';
 import { useEffect, useRef, useState } from 'react';
 import useOnClickOutside from '~/hooks/useOnclickOutside';
 import ReactSlider from 'react-slider';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -232,6 +233,8 @@ function Products() {
     const [showFlter, setShowFilter] = useState(false);
     const refFilter = useRef();
 
+    const navigate = useNavigate();
+
     const [values, setValues] = useState([MIN, MAX]);
 
     const toggleShowFilter = () => {
@@ -335,7 +338,9 @@ function Products() {
                                             </div>
                                         </div>
                                     </div>
+
                                     <div className={cx('filter-separate')}></div>
+
                                     {/* Column 3 */}
                                     <div className={cx('filter-col')}>
                                         <label className={cx('filter-form-label')}>Brand</label>
@@ -370,7 +375,12 @@ function Products() {
                     {PRODUCTS.map((product) => (
                         <div className={cx('wrap-product')} key={product.id}>
                             <figure className={cx('thumb')}>
-                                <img className={cx('thumb-img')} alt="" src={product.thumbnail} />
+                                <img
+                                    onClick={() => navigate(`/product-detail/${product.name}`)}
+                                    className={cx('thumb-img')}
+                                    alt=""
+                                    src={product.thumbnail}
+                                />
                                 <div>
                                     {product.saved === false ? (
                                         <img className={cx('icon')} alt="" src={images.heartIcon} />
@@ -379,7 +389,12 @@ function Products() {
                                     )}
                                 </div>
                             </figure>
-                            <h3 className={cx('name-product')}>{[product.name]}</h3>
+                            <h3
+                                className={cx('name-product')}
+                                onClick={() => navigate(`/product-detail/${product.name}`)}
+                            >
+                                {[product.name]}
+                            </h3>
                             <p className={cx('brand')}>{product.brand}</p>
                             <div className={cx('row')}>
                                 <span>${product.price}</span>
