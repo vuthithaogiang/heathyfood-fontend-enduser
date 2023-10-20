@@ -102,3 +102,26 @@ li {
     min-width: 34px !important;
     min-height: 34px !important;
 }
+
+// SPINNER FILTER PRICE MIN - MAX
+
+.slider-filter-price {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background-color: #d2d1d6;
+    margin-bottom: 24px;
+
+    .thumb {
+        top: 50%;
+        translate: 0 -50%;
+        position: absolute;
+        content: '';
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 6px solid var(--primary-color);
+
+        background-color: var(--filter-separate-bg-color);
+    }
+}

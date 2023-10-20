@@ -4,7 +4,9 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Category from '~/components/Category';
 import images from '~/assets/images';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import useOnClickOutside from '~/hooks/useOnclickOutside';
+import ReactSlider from 'react-slider';
 
 const cx = classNames.bind(styles);
 
@@ -224,12 +226,23 @@ function Products() {
             saved: false,
         },
     ];
+    const MIN = 0;
+    const MAX = 150;
 
     const [showFlter, setShowFilter] = useState(false);
+    const refFilter = useRef();
+
+    const [values, setValues] = useState([MIN, MAX]);
 
     const toggleShowFilter = () => {
         setShowFilter((pre) => !pre);
     };
+
+    const hiddenFilter = () => {
+        setShowFilter(false);
+    };
+
+    useOnClickOutside(refFilter, hiddenFilter);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -255,7 +268,7 @@ function Products() {
                             <img className={cx('icon')} alt="" src={images.filterIcon} />
                         </button>
 
-                        <div className={showFlter === true ? cx('filter') : cx('filter', 'none')}>
+                        <div ref={refFilter} className={showFlter === true ? cx('filter') : cx('filter', 'none')}>
                             <img className={cx('filter-arrow')} alt="" src={images.arrowUpIcon} />
                             <h3 className={cx('filter-heading')}>Filter</h3>
                             <form method="post" onSubmit={(e) => e.preventDefault()} className={cx('filter-form')}>
@@ -264,22 +277,34 @@ function Products() {
                                     <div className={cx('filter-col')}>
                                         <label className={cx('filter-form-label')}>Price</label>
                                         <div className={cx('filter-form-group')}>
-                                            <div
+                                            {/* <div
                                                 style={{ '--min-value': 10 + '%', '--max-value': 60 + '%' }}
                                                 className={cx('filter-form-slider')}
-                                            ></div>
+                                            ></div> */}
+
+                                            <ReactSlider
+                                                min={MIN}
+                                                max={MAX}
+                                                value={values}
+                                                onChange={setValues}
+                                                className={'slider-filter-price'}
+                                            ></ReactSlider>
                                         </div>
                                         <div className={cx('filter-form-group', 'hornizonal')}>
                                             <div>
                                                 <label className={cx('filter-form-label', 'small')}>Minimun</label>
-                                                <input type="text" className={cx('filter-form-input')} value="$30.00" />
+                                                <input
+                                                    type="text"
+                                                    className={cx('filter-form-input')}
+                                                    value={values[0]}
+                                                />
                                             </div>
                                             <div>
                                                 <label className={cx('filter-form-label', 'small')}>Maximum</label>
                                                 <input
                                                     type="text"
                                                     className={cx('filter-form-input')}
-                                                    value="$100.00"
+                                                    value={values[1]}
                                                 />
                                             </div>
                                         </div>
