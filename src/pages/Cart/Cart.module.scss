@@ -776,3 +776,74 @@
         }
     }
 }
+
+// CHECK-BOX
+.check-box {
+    .lable {
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            display: inline-block;
+        }
+
+        &::before {
+            width: 12px;
+            height: 12px;
+            border: 2px solid #9e9da8;
+            border-radius: 4px;
+        }
+    }
+}
+
+.check-box [type='checkbox']:checked ~ .lable::before {
+    background-color: #67b044;
+    border-color: #67b044;
+}
+
+.check-box [type='checkbox']:checked ~ .lable::after {
+    position: absolute;
+    top: 5px;
+    left: 2px;
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    rotate: -45deg;
+}
+
+.shipping-method {
+    .check-box {
+        .lable {
+            display: flex;
+            align-items: center;
+
+            &::before {
+                display: block;
+                width: 12px;
+                height: 12px;
+                border: 2px solid #9e9da8;
+                border-radius: 3px;
+                margin-right: 8px;
+                flex-shrink: 0;
+            }
+        }
+    }
+
+    .check-box [type='checkbox']:checked ~ .lable::before {
+        background-color: #67b044;
+        border-color: #67b044;
+    }
+
+    .check-box [type='checkbox']:checked ~ .lable::after {
+        position: absolute;
+        top: 7px;
+        left: 3px;
+        width: 7px;
+        height: 3px;
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        rotate: -45deg;
+    }
+}

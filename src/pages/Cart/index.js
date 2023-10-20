@@ -100,7 +100,8 @@ function Cart() {
                                                 {/* Item address */}
                                                 <div className={cx('item-address')}>
                                                     <div className={cx('check-box')}>
-                                                        <input type="checkbox" id="address-1" />
+                                                        <input type="checkbox" id="address-1" hidden />
+                                                        <label htmlFor="address-1" className={cx('lable')}></label>
                                                     </div>
                                                     <div className={cx('adress-details')}>
                                                         <label htmlFor="address-1">
@@ -125,7 +126,8 @@ function Cart() {
                                                 {/* Item address */}
                                                 <div className={cx('item-address')}>
                                                     <div className={cx('check-box')}>
-                                                        <input type="checkbox" id="address-2" />
+                                                        <input type="checkbox" id="address-2" hidden />
+                                                        <label htmlFor="address-2" className={cx('lable')}></label>
                                                     </div>
                                                     <div className={cx('adress-details')}>
                                                         <label htmlFor="address-2">
@@ -422,8 +424,10 @@ function Cart() {
                                         </div>
 
                                         <div className={cx('check-box')}>
-                                            <label>Free</label>
-                                            <input type="checkbox" />
+                                            <input type="checkbox" id="free-ship" hidden />
+                                            <label htmlFor="free-ship" className={cx('lable')}>
+                                                Free
+                                            </label>
                                         </div>
                                     </div>
 
@@ -437,8 +441,10 @@ function Cart() {
                                         </div>
 
                                         <div className={cx('check-box')}>
-                                            <label>$10.00</label>
-                                            <input type="checkbox" />
+                                            <input type="checkbox" id="cost-ship" hidden />
+                                            <label htmlFor="cost-ship" className={cx('lable')}>
+                                                $10.00
+                                            </label>
                                         </div>
                                     </div>
                                 </div>

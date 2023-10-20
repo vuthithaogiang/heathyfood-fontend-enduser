@@ -20,7 +20,7 @@ function FavouriteList() {
                         <p>3 items</p>
                     </div>
                     <div className={cx('check-all')}>
-                        <input type="checkbox" id="check-all" />
+                        <input type="checkbox" id="check-all" hidden />
                         <label htmlFor="check-all" className={cx('lable')}>
                             Check all
                         </label>
@@ -29,7 +29,8 @@ function FavouriteList() {
                         {/* Item 1 */}
                         <div className={cx('item')}>
                             <div className={cx('check-box')}>
-                                <input type="checkbox" id="item-1" />
+                                <input type="checkbox" id="item-1" hidden />
+                                <label htmlFor="item-1" className={cx('lable')}></label>
                             </div>
                             <figure>
                                 <img className={cx('thumbnail')} alt="" src={images.product1} />
@@ -79,7 +80,8 @@ function FavouriteList() {
                         {/* Item 2 */}
                         <div className={cx('item')}>
                             <div className={cx('check-box')}>
-                                <input type="checkbox" id="item-2" />
+                                <input type="checkbox" id="item-2" hidden />
+                                <label htmlFor="item-2" className={cx('lable')}></label>
                             </div>
                             <figure>
                                 <img className={cx('thumbnail')} alt="" src={images.product1} />
@@ -129,7 +131,8 @@ function FavouriteList() {
                         {/* Item 3 */}
                         <div className={cx('item')}>
                             <div className={cx('check-box')}>
-                                <input type="checkbox" id="item-3" />
+                                <input type="checkbox" id="item-3" hidden />
+                                <label htmlFor="item-3" className={cx('lable')}></label>
                             </div>
                             <figure>
                                 <img className={cx('thumbnail')} alt="" src={images.product1} />
