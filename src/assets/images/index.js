@@ -98,6 +98,12 @@ const images = {
     arrowLeft: require('~/assets/images/arrowLeft.svg').default,
 
     heartColor: require('~/assets/images/heart-color.svg').default,
+
+    editIcon: require('~/assets/images/edit-icon.svg').default,
+    checkboxIcon: require('~/assets/images/checkbox-icon.svg').default,
+
+    delivery2: require('~/assets/images/delivery-2.jpg'),
+    delivery1: require('~/assets/images/delivery-1.jpg'),
 };
 
 export default images;
