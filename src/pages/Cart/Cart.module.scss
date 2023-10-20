@@ -400,9 +400,6 @@
     align-items: baseline;
     gap: 16px;
 
-    .check-box {
-    }
-
     .adress-details {
         flex: 1;
 
@@ -550,7 +547,7 @@
 
         .wrap-2 {
             img {
-                width: 26px;
+                width: 20px;
             }
         }
 
@@ -805,7 +802,7 @@
 .check-box [type='checkbox']:checked ~ .lable::after {
     position: absolute;
     top: 5px;
-    left: 2px;
+    left: 3px;
     width: 8px;
     height: 4px;
     border-left: 2px solid #fff;
@@ -839,7 +836,7 @@
     .check-box [type='checkbox']:checked ~ .lable::after {
         position: absolute;
         top: 7px;
-        left: 3px;
+        left: 4px;
         width: 7px;
         height: 3px;
         border-left: 2px solid #fff;
