@@ -32,14 +32,20 @@ function Cart() {
                 <div className={cx('navbar')}>
                     <span className={cx('link')}>Home</span>
                     <img className={cx('')} alt="" src={images.arrowRight} />
-                    <span className={cx('link')} onClick={() => setType('CHECKOUT')}>
+                    <span
+                        className={type === 'CHECKOUT' ? cx('link', 'active') : cx('link')}
+                        onClick={() => setType('CHECKOUT')}
+                    >
                         Check out
                     </span>
 
                     {type === 'SHIPPING' && (
                         <>
                             <img className={cx('')} alt="" src={images.arrowRight} />
-                            <span className={cx('link')} onClick={() => setType('SHIPPING')}>
+                            <span
+                                className={type === 'SHIPPING' ? cx('link', 'active') : cx('link')}
+                                onClick={() => setType('SHIPPING')}
+                            >
                                 Shipping
                             </span>
                         </>
@@ -48,7 +54,10 @@ function Cart() {
                     {type === 'PAYMENTMETHOD' && (
                         <>
                             <img className={cx('')} alt="" src={images.arrowRight} />
-                            <span className={cx('link')} onClick={() => setType('SHIPPING')}>
+                            <span
+                                className={type === 'SHIPPING' ? cx('link', 'active') : cx('link')}
+                                onClick={() => setType('SHIPPING')}
+                            >
                                 Shipping
                             </span>
                         </>
@@ -56,7 +65,10 @@ function Cart() {
                     {type === 'PAYMENTMETHOD' && (
                         <>
                             <img className={cx('')} alt="" src={images.arrowRight} />
-                            <span className={cx('link')} onClick={() => setType('PAYMENTMETHOD')}>
+                            <span
+                                className={type === 'PAYMENTMETHOD' ? cx('link', 'active') : cx('link')}
+                                onClick={() => setType('PAYMENTMETHOD')}
+                            >
                                 Payment Method
                             </span>
                         </>
@@ -374,7 +386,7 @@ function Cart() {
                                         <h4 className={cx('heading')}>
                                             1. Shipping, arrives between Mon, May 16—Tue, May 24
                                         </h4>
-                                        <button>
+                                        <button onClick={() => setType('SHIPPING')}>
                                             <img className={cx('icon')} alt="" src={images.editIcon} />
                                             Edit
                                         </button>
@@ -392,7 +404,7 @@ function Cart() {
                                             <p>Items details</p>
                                             <p>3 items</p>
                                         </div>
-                                        <button>View Details</button>
+                                        <button onClick={() => setType('SHIPPING')}>View Details</button>
                                     </div>
                                 </div>
 

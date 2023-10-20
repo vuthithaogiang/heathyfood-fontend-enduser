@@ -18,6 +18,10 @@
         line-height: 1.5;
         cursor: pointer;
         color: #9e9da8;
+
+        &.active {
+            color: #0071dc;
+        }
     }
 }
 .cart-inner {
@@ -545,6 +549,9 @@
         }
 
         .wrap-2 {
+            img {
+                width: 26px;
+            }
         }
 
         .wrap-3 {
