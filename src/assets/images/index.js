@@ -107,6 +107,8 @@ const images = {
 
     filterIcon: require('~/assets/images/filter-icon.svg').default,
     starIcon: require('~/assets/images/star-icon.svg').default,
+
+    arrowUpIcon: require('~/assets/images/arrow-up.png'),
 };
 
 export default images;

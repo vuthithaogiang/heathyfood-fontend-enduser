@@ -4,7 +4,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Category from '~/components/Category';
 import images from '~/assets/images';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -225,6 +225,12 @@ function Products() {
         },
     ];
 
+    const [showFlter, setShowFilter] = useState(false);
+
+    const toggleShowFilter = () => {
+        setShowFilter((pre) => !pre);
+    };
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -243,10 +249,96 @@ function Products() {
 
                 <div className={cx('filter-products')}>
                     <h3>List Products</h3>
-                    <button>
-                        Filter
-                        <img className={cx('icon')} alt="" src={images.filterIcon} />
-                    </button>
+                    <div className={cx('filter-wrap')}>
+                        <button onClick={toggleShowFilter}>
+                            Filter
+                            <img className={cx('icon')} alt="" src={images.filterIcon} />
+                        </button>
+
+                        <div className={showFlter === true ? cx('filter') : cx('filter', 'none')}>
+                            <img className={cx('filter-arrow')} alt="" src={images.arrowUpIcon} />
+                            <h3 className={cx('filter-heading')}>Filter</h3>
+                            <form method="post" onSubmit={(e) => e.preventDefault()} className={cx('filter-form')}>
+                                <div className={cx('filter-row')}>
+                                    {/* Column 1 */}
+                                    <div className={cx('filter-col')}>
+                                        <label className={cx('filter-form-label')}>Price</label>
+                                        <div className={cx('filter-form-group')}>
+                                            <div
+                                                style={{ '--min-value': 10 + '%', '--max-value': 60 + '%' }}
+                                                className={cx('filter-form-slider')}
+                                            ></div>
+                                        </div>
+                                        <div className={cx('filter-form-group', 'hornizonal')}>
+                                            <div>
+                                                <label className={cx('filter-form-label', 'small')}>Minimun</label>
+                                                <input type="text" className={cx('filter-form-input')} value="$30.00" />
+                                            </div>
+                                            <div>
+                                                <label className={cx('filter-form-label', 'small')}>Maximum</label>
+                                                <input
+                                                    type="text"
+                                                    className={cx('filter-form-input')}
+                                                    value="$100.00"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={cx('filter-separate')}></div>
+
+                                    {/* Column 2 */}
+                                    <div className={cx('filter-col')}>
+                                        <label className={cx('filter-form-label')}>Size/Weight</label>
+                                        <div className={cx('filter-form-group')}>
+                                            <div className={cx('filter-select-wrap')}>
+                                                <div className={cx('filter-select')}>
+                                                    500g
+                                                    <img className={cx('icon')} alt="" src={images.arrowIcon} />
+                                                </div>
+                                                <div className={cx('filter-select')}>
+                                                    Gram
+                                                    <img className={cx('icon')} alt="" src={images.arrowIcon} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={cx('filter-form-group')}>
+                                            <div className={cx('filter-form-tags')}>
+                                                <button className={cx('filter-form-tag')}>Small</button>
+                                                <button className={cx('filter-form-tag')}>Medium</button>
+                                                <button className={cx('filter-form-tag')}>Large</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={cx('filter-separate')}></div>
+                                    {/* Column 3 */}
+                                    <div className={cx('filter-col')}>
+                                        <label className={cx('filter-form-label')}>Brand</label>
+                                        <div className={cx('filter-form-group')}>
+                                            <div className={cx('filter-form-text')}>
+                                                <input type="text" placeholder="Search brand name" />
+                                                <img className={cx('icon')} alt="" src={images.searchIcon} />
+                                            </div>
+                                        </div>
+                                        <div className={cx('filter-form-group')}>
+                                            <div className={cx('filter-form-tags')}>
+                                                <button className={cx('filter-form-tag')}>Lavazza</button>
+                                                <button className={cx('filter-form-tag')}>Nescafe</button>
+                                                <button className={cx('filter-form-tag')}>Starbcks</button>
+                                            </div>
+                                        </div>
+
+                                        <div className={cx('filter-form-group')}>
+                                            <div className={cx('btn-group')}>
+                                                <button>Cancel</button>
+                                                <button type="submit">Show Result</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
 
                 <div className={cx('list-products')}>

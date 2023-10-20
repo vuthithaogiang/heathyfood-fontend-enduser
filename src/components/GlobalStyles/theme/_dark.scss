@@ -92,4 +92,14 @@ html.dark {
     --product-save-bg-color: #292e39;
     --product-save-box-shadpw: rgba(124, 124, 124, 0.2);
     --product-text-color: #fff;
+
+    --filter-bg-color: #292e39;
+    --filter-arrow-up: brightness(0) saturate(100%) invert(15%) sepia(9%) saturate(1319%) hue-rotate(183deg)
+        brightness(95%) contrast(90%);
+
+    --filter-box-shadow: rgba(0, 0, 0, 0.4);
+    --filter-tag-bg-color: #171c28;
+
+    --filter-separate-bg-color: #292e39;
+    --filter-heading-color: #fff;
 }
