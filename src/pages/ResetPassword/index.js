@@ -168,7 +168,7 @@ function ResetPassword() {
 
                         {error !== '' && <div className={cx('auth-message', 'error')}>{error}</div>}
 
-                        {success && type === 'fill-email' && (
+                        {success && type === 'fill-otp' && (
                             <div className={cx('auth-message', 'success')}>
                                 We have e-mailed your password reset link!
                             </div>

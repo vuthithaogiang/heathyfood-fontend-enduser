@@ -29,6 +29,8 @@ const useRefreshToken = () => {
             if (error?.response?.data?.message === 'The token has been blacklisted') {
                 setAuth({});
             }
+
+            setAuth({});
         }
     };
 

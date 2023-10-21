@@ -15,7 +15,6 @@ const useAxios = () => {
     useEffect(() => {
         const requestIntercecept = instance.interceptors.request.use(
             (config) => {
-                // Retrieve the JWT token from where it's stored (e.g., local storage, cookies, Vuex)
                 const token = auth?.access_token;
 
                 // If a token is available, set it in the Authorization header

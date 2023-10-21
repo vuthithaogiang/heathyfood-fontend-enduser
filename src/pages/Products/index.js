@@ -231,22 +231,67 @@ function Products() {
     const MIN = 0;
     const MAX = 150;
 
+    const QUANTITIES = [
+        {
+            type: 'Gram',
+            list: [100, 200, 400, 500],
+        },
+        {
+            type: 'Kilogram',
+            list: [1, 2, 3],
+        },
+        {
+            type: 'Mililit',
+            list: [100, 200, 300, 500],
+        },
+        {
+            type: 'Lit',
+            list: [1, 2, 3, 5, 6],
+        },
+    ];
+
+    const UNITS = ['Gram', 'Kilogram', 'Mililit', 'Lit'];
+
     const [showFlter, setShowFilter] = useState(false);
     const refFilter = useRef();
-
+    const refOptionQuantty = useRef();
+    const refOptionUnit = useRef();
     const navigate = useNavigate();
-
     const [values, setValues] = useState([MIN, MAX]);
+    const [unit, setUnit] = useState(UNITS[0]);
+    const [quantity, setQuantity] = useState('100 gram');
+    const [showOptionQuantity, setshowOptionQuantity] = useState(false);
+    const [showOptionUnit, setshowOptionUnit] = useState(false);
 
     const toggleShowFilter = () => {
         setShowFilter((pre) => !pre);
+    };
+
+    const toggleShowOptionQuantity = () => {
+        setshowOptionQuantity((prev) => !prev);
+    };
+
+    const toggleShowOptionUnit = () => {
+        setshowOptionUnit((prev) => !prev);
     };
 
     const hiddenFilter = () => {
         setShowFilter(false);
     };
 
+    const hiddenOptionQuantity = () => {
+        setshowOptionQuantity(false);
+    };
+
+    const hiddenOptionUnit = () => {
+        setshowOptionUnit(false);
+    };
+
     useOnClickOutside(refFilter, hiddenFilter);
+
+    useOnClickOutside(refOptionQuantty, hiddenOptionQuantity);
+
+    useOnClickOutside(refOptionUnit, hiddenOptionUnit);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -323,13 +368,71 @@ function Products() {
                                         <label className={cx('filter-form-label')}>Size/Weight</label>
                                         <div className={cx('filter-form-group')}>
                                             <div className={cx('filter-select-wrap')}>
-                                                <div className={cx('filter-select')}>
-                                                    500g
+                                                <div
+                                                    onClick={toggleShowOptionQuantity}
+                                                    className={cx('filter-select', 'select-quantities')}
+                                                >
+                                                    {quantity}
                                                     <img className={cx('icon')} alt="" src={images.arrowIcon} />
+                                                    <div
+                                                        className={
+                                                            showOptionQuantity === true
+                                                                ? cx('wrap-options')
+                                                                : cx('wrap-options', 'none')
+                                                        }
+                                                        ref={refOptionQuantty}
+                                                    >
+                                                        {QUANTITIES.map((item, index) => {
+                                                            if (item.type === unit) {
+                                                                return (
+                                                                    <div key={index} className={cx('list-options')}>
+                                                                        {item.list.map((option) => (
+                                                                            <div
+                                                                                onClick={() =>
+                                                                                    setQuantity(
+                                                                                        `${option} ${unit.toLowerCase()}`,
+                                                                                    )
+                                                                                }
+                                                                                className={cx('option')}
+                                                                                key={option}
+                                                                            >
+                                                                                <span>
+                                                                                    {option} {unit.toLowerCase()}
+                                                                                </span>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                );
+                                                            } else {
+                                                                return <></>;
+                                                            }
+                                                        })}
+                                                    </div>
                                                 </div>
-                                                <div className={cx('filter-select')}>
-                                                    Gram
+                                                <div
+                                                    onClick={toggleShowOptionUnit}
+                                                    className={cx('filter-select', 'select-units')}
+                                                >
+                                                    {unit}
                                                     <img className={cx('icon')} alt="" src={images.arrowIcon} />
+                                                    <div
+                                                        ref={refOptionUnit}
+                                                        className={
+                                                            showOptionUnit === true
+                                                                ? cx('wrap-options')
+                                                                : cx('wrap-options', 'none')
+                                                        }
+                                                    >
+                                                        {UNITS.map((item) => (
+                                                            <div
+                                                                onClick={() => setUnit(item)}
+                                                                key={item}
+                                                                className={cx('option')}
+                                                            >
+                                                                <span>{item}</span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
