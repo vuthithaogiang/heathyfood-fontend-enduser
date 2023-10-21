@@ -113,6 +113,8 @@ const images = {
 
     compareIcon: require('~/assets/images/compare-icon.svg').default,
     pickupIcon: require('~/assets/images/pickup-icon.svg').default,
+    starHalfIocn: require('~/assets/images/star-half-icon.svg').default,
+    starEmptyIcon: require('~/assets/images/star-empty-icon.svg').default,
 };
 
 export default images;

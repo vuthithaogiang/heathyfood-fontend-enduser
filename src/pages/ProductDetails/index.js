@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './ProductDetails.module.scss';
 import images from '~/assets/images';
 import BackToTop from '~/components/BackToTop';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +28,8 @@ function ProductDetails() {
             },
         ],
     };
+
+    const [productTab, setProductTab] = useState('Similar');
 
     return (
         <div className={cx('wrapper')}>
@@ -167,7 +170,210 @@ function ProductDetails() {
                         </div>
                     </div>
                 </div>
-                <div className={cx('more-info')}></div>
+                <div className={cx('more-info')}>
+                    <div className={cx('prod-tab')}>
+                        <ul className={cx('prod-tab-list')}>
+                            <li
+                                onClick={() => setProductTab('Description')}
+                                className={
+                                    productTab === 'Description' ? cx('prod-tab-item', 'current') : cx('prod-tab-item')
+                                }
+                            >
+                                Description
+                            </li>
+                            <li
+                                onClick={() => setProductTab('Features')}
+                                className={
+                                    productTab === 'Features' ? cx('prod-tab-item', 'current') : cx('prod-tab-item')
+                                }
+                            >
+                                Features
+                            </li>
+                            <li
+                                onClick={() => setProductTab('Review')}
+                                className={
+                                    productTab === 'Review' ? cx('prod-tab-item', 'current') : cx('prod-tab-item')
+                                }
+                            >
+                                Review (1100)
+                            </li>
+                            <li
+                                onClick={() => setProductTab('Similar')}
+                                className={
+                                    productTab === 'Similar' ? cx('prod-tab-item', 'current') : cx('prod-tab-item')
+                                }
+                            >
+                                Similar
+                            </li>
+                        </ul>
+                        <div className={cx('prod-tab-contents')}>
+                            {productTab === 'Description' && (
+                                <div className={cx('product-tab-content')}>Content Description</div>
+                            )}
+                            {productTab === 'Features' && (
+                                <div className={cx('product-tab-content')}>Content Features</div>
+                            )}
+                            {productTab === 'Review' && (
+                                <>
+                                    <div className={cx('product-tab-content')}>
+                                        <h2 className={cx('product-content-heading')}>What our customers are saying</h2>
+                                        <div className={cx('row', 'row-cols-3')}>
+                                            {/* column 1 */}
+                                            <div className={cx('col')}>
+                                                <div className={cx('review-card')}>
+                                                    <div className={cx('review-card-content')}>
+                                                        <img
+                                                            alt=""
+                                                            src={images.avatar}
+                                                            className={cx('review-card-avatar')}
+                                                        />
+                                                        <div className={cx('review-card-info')}>
+                                                            <h4 className={cx('review-card-title')}>Jakir Hussen</h4>
+                                                            <p className={cx('review-card-desc')}>
+                                                                Great product, I love this Coffee Beans{' '}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className={cx('review-card-rating')}>
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starHalfIocn}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starEmptyIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <span className={cx('review-card-rating-title')}>
+                                                            (3.5) Review
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* column 2 */}
+                                            <div className={cx('col')}>
+                                                <div className={cx('review-card')}>
+                                                    <div className={cx('review-card-content')}>
+                                                        <img
+                                                            alt=""
+                                                            src={images.avatarDefault}
+                                                            className={cx('review-card-avatar')}
+                                                        />
+                                                        <div className={cx('review-card-info')}>
+                                                            <h4 className={cx('review-card-title')}>Jakir Hussen</h4>
+                                                            <p className={cx('review-card-desc')}>
+                                                                Great product, I love this Coffee Beans{' '}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className={cx('review-card-rating')}>
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starEmptyIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starEmptyIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <span className={cx('review-card-rating-title')}>
+                                                            (3.5) Review
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* column 3 */}
+                                            <div className={cx('col')}>
+                                                <div className={cx('review-card')}>
+                                                    <div className={cx('review-card-content')}>
+                                                        <img
+                                                            alt=""
+                                                            src={images.avatarDefault}
+                                                            className={cx('review-card-avatar')}
+                                                        />
+                                                        <div className={cx('review-card-info')}>
+                                                            <h4 className={cx('review-card-title')}>Jakir Hussen</h4>
+                                                            <p className={cx('review-card-desc')}>
+                                                                Great product, I love this Coffee Beans{' '}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className={cx('review-card-rating')}>
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starHalfIocn}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <img
+                                                            alt=""
+                                                            src={images.starEmptyIcon}
+                                                            className={cx('review-card-star')}
+                                                        />
+                                                        <span className={cx('review-card-rating-title')}>
+                                                            (3.5) Review
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                            {productTab === 'Similar' && (
+                                <div className={cx('product-tab-content')}>Content Similar</div>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
             <BackToTop />
         </div>
