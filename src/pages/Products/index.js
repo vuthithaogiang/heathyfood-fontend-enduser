@@ -299,6 +299,7 @@ function Products() {
                                                 <label className={cx('filter-form-label', 'small')}>Minimun</label>
                                                 <input
                                                     type="text"
+                                                    readOnly
                                                     className={cx('filter-form-input')}
                                                     value={values[0]}
                                                 />
@@ -307,6 +308,7 @@ function Products() {
                                                 <label className={cx('filter-form-label', 'small')}>Maximum</label>
                                                 <input
                                                     type="text"
+                                                    readOnly
                                                     className={cx('filter-form-input')}
                                                     value={values[1]}
                                                 />

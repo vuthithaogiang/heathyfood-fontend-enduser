@@ -110,6 +110,9 @@ const images = {
 
     arrowUpIcon: require('~/assets/images/arrow-up.png'),
     backtoTopIcon: require('~/assets/images/bach-to-top-icon.svg').default,
+
+    compareIcon: require('~/assets/images/compare-icon.svg').default,
+    pickupIcon: require('~/assets/images/pickup-icon.svg').default,
 };
 
 export default images;
