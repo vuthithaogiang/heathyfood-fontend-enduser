@@ -102,4 +102,13 @@ html.dark {
 
     --filter-separate-bg-color: #292e39;
     --filter-heading-color: #fff;
+
+    --product-details-bg-color: var(--body-bg-color);
+    --product-detail-header-bg-color: #171c28;
+    --product-detsils-header-box-shadow: rgba(23, 28, 40, 0.2);
+    --product-details-text-color: #eee;
+    --product-details-price-text-color: #eee;
+    --product-details-tag-bg-color: #292e39;
+
+    --review-card-bg-color: #171c28;
 }
