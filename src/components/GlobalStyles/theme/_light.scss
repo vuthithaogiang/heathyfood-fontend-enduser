@@ -111,7 +111,7 @@ html {
     --cart-input-color: #403c51;
     --cart-payment-bg-color: #f6f6f6;
 
-    --category-bg-color: #ededed;
+    --category-bg-color: #fff;
 
     --button-filter-bg-color: #fff;
     --button-filter-text-color: #6c6c72;
@@ -143,4 +143,12 @@ html {
 
     --bg-select-option-color: #fff;
     --select-option-box-shadow: #cbc0c08c;
+
+    --filer-icon-color: brightness(0) saturate(100%) invert(8%) sepia(41%) saturate(900%) hue-rotate(210deg)
+        brightness(94%) contrast(97%);
+    --filter-suggest-bg-color: #fff;
+    --filter-suggest--border-color: #ededf6;
+    --filter-suggest-item-bg-color: #f8f8fb;
+    --filter-suggest-item-text-color: #1a162e;
+    --filter-suggest-box-shadow: rgba(237, 237, 246, 0.2);
 }

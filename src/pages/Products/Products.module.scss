@@ -398,3 +398,97 @@
         }
     }
 }
+
+.filter-suggest {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--filter-suggest-bg-color);
+    box-shadow: 0px 20px 60px 10px var(--filter-suggest-box-shadow);
+
+    header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--filter-suggest--border-color);
+
+        h3 {
+            color: #9e9da8;
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 0.5;
+        }
+
+        img {
+            width: 8px;
+        }
+
+        h3.active {
+            color: var(--text-color);
+        }
+    }
+}
+
+.suggest-list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--filter-suggest--border-color);
+    img {
+        filter: var(--filer-icon-color);
+    }
+
+    .suggest-item {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: var(--filter-suggest-item-bg-color);
+
+        span {
+            color: var(--filter-suggest-item-text-color);
+            font-size: 1.4rem;
+            font-weight: 400;
+            line-height: 1.43;
+        }
+    }
+}
+
+.recomend-item {
+    padding-top: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    img {
+        filter: var(--filer-icon-color);
+    }
+
+    .suggest-item {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 10px;
+        border-radius: 4px;
+        border: 2px solid var(--filter-suggest-item-bg-color);
+
+        span {
+            color: var(--filter-suggest-item-text-color);
+            font-size: 1.4rem;
+            font-weight: 400;
+            line-height: 1.43;
+        }
+    }
+
+    button {
+        margin-left: auto;
+        color: var(--filter-suggest-item-text-color);
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.43;
+    }
+}

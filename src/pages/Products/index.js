@@ -300,6 +300,74 @@ function Products() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
+                <div className={cx('filter-suggest')}>
+                    <header>
+                        <h3>Glocery</h3>
+                        <img src={images.arrowRight} alt="" />
+                        <h3>Electronics</h3>
+                        <img alt="" src={images.arrowRight} />
+                        <h3>Wearable Technology </h3>
+                        <img alt="" src={images.arrowRight} />
+                        <h3 className={cx('active')}>Apple Watch</h3>
+                    </header>
+
+                    <div className={cx('suggest-list')}>
+                        <div className={cx('suggest-item')}>
+                            <img className={cx('')} alt="" src={images.filterIcon} />
+                            <span>All filters</span>
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <img className={cx('')} alt="" src={images.filterIcon} />
+                            <span>In-store</span>
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <span>Pickup & Shipping</span>
+                            <img className={cx('')} alt="" src={images.arrowIcon} />
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <img className={cx('')} alt="" src={images.moneyIcon} />
+                            <span>Price</span>
+                            <img className={cx('')} alt="" src={images.arrowIcon} />
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <span>Brand</span>
+                            <img className={cx('')} alt="" src={images.arrowIcon} />
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <img className={cx('')} alt="" src={images.speedIocn} />
+                            <span>Speed</span>
+                            <img className={cx('')} alt="" src={images.arrowIcon} />
+                        </div>
+                    </div>
+                    <div className={cx('recomend-item')}>
+                        <div className={cx('suggest-item')}>
+                            <span>Bread Handmake</span>
+                            <img className={cx('')} alt="" src={images.xDeleteIcon} />
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <span>$29 - $80</span>
+                            <img className={cx('')} alt="" src={images.xDeleteIcon} />
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <span>Bread Handmake</span>
+                            <img className={cx('')} alt="" src={images.xDeleteIcon} />
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <span>$29 - $80</span>
+                            <img className={cx('')} alt="" src={images.xDeleteIcon} />
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <span>Bread Handmake</span>
+                            <img className={cx('')} alt="" src={images.xDeleteIcon} />
+                        </div>
+                        <div className={cx('suggest-item')}>
+                            <span>$29 - $80</span>
+                            <img className={cx('')} alt="" src={images.xDeleteIcon} />
+                        </div>
+                        <button className={cx('suggest-item')}>Reset filter</button>
+                    </div>
+                </div>
+
                 <div className={cx('carousel-categories')}>
                     <h3>Category Browser</h3>
                     <Carousel responsive={responsive} showDots={false} containerClass={cx('carousel-container')}>
@@ -308,7 +376,6 @@ function Products() {
                         ))}
                     </Carousel>
                 </div>
-
                 <div className={cx('filter-products')}>
                     <h3>List Products</h3>
                     <div className={cx('filter-wrap')}>

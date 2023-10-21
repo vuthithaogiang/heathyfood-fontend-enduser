@@ -187,7 +187,7 @@ function ProductDetails() {
             <div className={cx('container')}>
                 <header className={cx('header')}>
                     <div className={cx('inner-header')}>
-                        <h4>Glocery</h4>
+                        <h4 onClick={() => navigate('/products')}>Glocery</h4>
                         <img className={cx('')} alt="" src={images.arrowRight} />
                         <h4>Category</h4>
                         <img className={cx('')} alt="" src={images.arrowRight} />

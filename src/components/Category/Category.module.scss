@@ -1,12 +1,13 @@
 .item {
-    border-radius: 4px;
+    border-radius: 10px;
 
     background-color: var(--category-bg-color);
-    max-width: 260px;
+    max-width: 254px;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 12px 20px;
-    gap: 22px;
+    gap: 16px;
     user-select: none;
     cursor: all-scroll;
 

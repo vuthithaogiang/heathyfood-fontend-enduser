@@ -117,6 +117,14 @@ html.dark {
         brightness(91%) contrast(95%);
 
     --bg-select-option-color: #22252d;
-
     --select-option-box-shadow: #2d29298c;
+
+    --filer-icon-color: brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(2232%) hue-rotate(272deg)
+        brightness(102%) contrast(80%);
+
+    --filter-suggest-bg-color: #171c28;
+    --filter-suggest--border-color: #292e39;
+    --filter-suggest-item-bg-color: #292e39;
+    --filter-suggest-item-text-color: #b9babe;
+    --filter-suggest-box-shadow: rgba(23, 28, 40, 0.2);
 }

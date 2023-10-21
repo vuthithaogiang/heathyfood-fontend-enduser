@@ -118,6 +118,10 @@ const images = {
 
     notFound: require('~/assets/images/not-found.png'),
     bgNotFounddecor: require('~/assets/images/bg-decoration.svg').default,
+
+    moneyIcon: require('~/assets/images/money-icon.svg').default,
+    speedIocn: require('~/assets/images/speed-icon.svg').default,
+    xDeleteIcon: require('~/assets/images/x-delete-icon.svg').default,
 };
 
 export default images;
