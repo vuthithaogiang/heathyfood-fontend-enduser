@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import useOnClickOutside from '~/hooks/useOnclickOutside';
 import ReactSlider from 'react-slider';
 import { useNavigate } from 'react-router-dom';
+import BackToTop from '~/components/BackToTop';
 
 const cx = classNames.bind(styles);
 
@@ -407,6 +408,8 @@ function Products() {
                     ))}
                 </div>
             </div>
+
+            <BackToTop />
         </div>
     );
 }

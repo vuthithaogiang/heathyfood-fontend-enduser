@@ -109,6 +109,7 @@ const images = {
     starIcon: require('~/assets/images/star-icon.svg').default,
 
     arrowUpIcon: require('~/assets/images/arrow-up.png'),
+    backtoTopIcon: require('~/assets/images/bach-to-top-icon.svg').default,
 };
 
 export default images;
