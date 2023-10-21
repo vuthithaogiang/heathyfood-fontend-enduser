@@ -10,14 +10,16 @@ const cx = classNames.bind(styles);
 function ProductDetails() {
     const PRODUC_DATA = {
         id: 1,
-        thumbnail:
-            'https://images.squarespace-cdn.com/content/v1/5cb9ef147eb88c5caefa30b3/1690734197920-S8F15GMCB7J0SN5ZWYXB/_7IV0224.jpg?format=1500w',
+
         name: 'Qualità Oro Mountain Grown - Espresso Coffee Beans',
         price: 70.0,
         brand: 'Lavazza',
         rating: 4.3,
         saved: false,
         moreImages: [
+            {
+                url: 'https://images.squarespace-cdn.com/content/v1/5cb9ef147eb88c5caefa30b3/1690734197920-S8F15GMCB7J0SN5ZWYXB/_7IV0224.jpg?format=1500w',
+            },
             {
                 url: 'https://images.squarespace-cdn.com/content/v1/5cb9ef147eb88c5caefa30b3/1669723579293-JYNY9OE6ZE6FATJX51V5/_R3O4127.jpg?format=1500w',
             },
@@ -128,8 +130,8 @@ function ProductDetails() {
     ];
 
     const [productTab, setProductTab] = useState('Similar');
-
     const navigate = useNavigate();
+    const [imageIndex, setImageIndex] = useState(1);
 
     return (
         <div className={cx('wrapper')}>
@@ -151,27 +153,33 @@ function ProductDetails() {
                         <div className={cx('col-5', 'left')}>
                             <div className={cx('product-preview')}>
                                 <div className={cx('product-preview-list')}>
-                                    {/* item */}
-                                    <div className={cx('product-preview-item')}>
-                                        <img alt="" className={cx('product-preview-img')} src={PRODUC_DATA.thumbnail} />
-                                    </div>
-                                    {/* other items */}
-                                    {PRODUC_DATA.moreImages.map((item, index) => (
-                                        <div key={index} className={cx('product-preview-item')}>
-                                            <img alt="" className={cx('product-preview-img')} src={item.url} />
-                                        </div>
-                                    ))}
+                                    {PRODUC_DATA.moreImages.map((item, index) => {
+                                        if (index + 1 === imageIndex) {
+                                            return (
+                                                <div key={index} className={cx('product-preview-item')}>
+                                                    <img alt="" className={cx('product-preview-img')} src={item.url} />
+                                                </div>
+                                            );
+                                        } else {
+                                            return <></>;
+                                        }
+                                    })}
                                 </div>
 
                                 {/* sub image */}
                                 <div className={cx('product-preview-thumbs')}>
-                                    <img
-                                        alt=""
-                                        className={cx('product-thumb-img', 'current')}
-                                        src={PRODUC_DATA.thumbnail}
-                                    />
                                     {PRODUC_DATA.moreImages.map((item, index) => (
-                                        <img key={index} alt="" className={cx('product-thumb-img')} src={item.url} />
+                                        <img
+                                            onClick={() => setImageIndex(index + 1)}
+                                            key={index}
+                                            alt=""
+                                            className={
+                                                index + 1 === imageIndex
+                                                    ? cx('product-thumb-img', 'current')
+                                                    : cx('product-thumb-img')
+                                            }
+                                            src={item.url}
+                                        />
                                     ))}
                                 </div>
                             </div>

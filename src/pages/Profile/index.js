@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import useAxios from '~/hooks/useAxios';
 import useAuth from '~/hooks/useAuth';
 import { InfinitySpin } from 'react-loader-spinner';
+import BackToTop from '~/components/BackToTop';
 
 const cx = classNames.bind(styles);
 
@@ -443,6 +444,8 @@ function Profile() {
                             )}
                         </>
                     </div>
+
+                    <BackToTop />
                 </div>
             )}
 

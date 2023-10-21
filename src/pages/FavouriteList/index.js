@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './FavouriteList.module.scss';
 import images from '~/assets/images';
 import { useEffect } from 'react';
+import BackToTop from '~/components/BackToTop';
 
 const cx = classNames.bind(styles);
 
@@ -194,6 +195,8 @@ function FavouriteList() {
                     </div>
                 </div>
             </div>
+
+            <BackToTop />
         </div>
     );
 }

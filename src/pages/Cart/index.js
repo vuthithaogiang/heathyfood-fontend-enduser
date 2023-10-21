@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Cart.module.scss';
 import images from '~/assets/images';
 import { useState, useEffect } from 'react';
+import BackToTop from '~/components/BackToTop';
 
 const cx = classNames.bind(styles);
 
@@ -539,6 +540,8 @@ function Cart() {
                     </>
                 )}
             </div>
+
+            <BackToTop />
         </div>
     );
 }

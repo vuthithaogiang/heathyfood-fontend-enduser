@@ -3,6 +3,7 @@ import styles from './BMICalculator.module.scss';
 import images from '~/assets/images';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import BackToTop from '~/components/BackToTop';
 
 const cx = classNames.bind(styles);
 
@@ -532,6 +533,8 @@ function BMICalculator() {
                     </div>
                 </div>
             </div>
+
+            <BackToTop />
         </div>
     );
 }

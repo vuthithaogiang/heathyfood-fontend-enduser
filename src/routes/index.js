@@ -9,6 +9,7 @@ import Cart from '~/pages/Cart';
 import FavouriteList from '~/pages/FavouriteList';
 import Products from '~/pages/Products';
 import ProductDetails from '~/pages/ProductDetails';
+import NotFound from '~/pages/404NotFound';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -19,6 +20,7 @@ const publicRoutes = [
     { path: '/bmi', component: BMICalculator },
     { path: '/products', component: Products },
     { path: '/product-detail/:slug', component: ProductDetails },
+    { path: '/*', component: NotFound, layout: null },
 ];
 
 const privateRoute = [

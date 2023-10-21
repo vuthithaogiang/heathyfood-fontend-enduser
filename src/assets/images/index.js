@@ -115,6 +115,9 @@ const images = {
     pickupIcon: require('~/assets/images/pickup-icon.svg').default,
     starHalfIocn: require('~/assets/images/star-half-icon.svg').default,
     starEmptyIcon: require('~/assets/images/star-empty-icon.svg').default,
+
+    notFound: require('~/assets/images/not-found.png'),
+    bgNotFounddecor: require('~/assets/images/bg-decoration.svg').default,
 };
 
 export default images;
