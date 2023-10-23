@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './ProductDetails.module.scss';
 import images from '~/assets/images';
 import BackToTop from '~/components/BackToTop';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import useOnClickOutside from '~/hooks/useOnclickOutside';
@@ -158,7 +158,7 @@ function ProductDetails() {
     const refOptionQuantty = useRef();
     const refOptionUnit = useRef();
     const [unit, setUnit] = useState(UNITS[0]);
-    const [quantity, setQuantity] = useState('100 gram');
+    const [quantity, setQuantity] = useState(null);
     const [showOptionQuantity, setshowOptionQuantity] = useState(false);
     const [showOptionUnit, setshowOptionUnit] = useState(false);
 
@@ -181,6 +181,10 @@ function ProductDetails() {
     useOnClickOutside(refOptionQuantty, hiddenOptionQuantity);
 
     useOnClickOutside(refOptionUnit, hiddenOptionUnit);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className={cx('wrapper')}>
@@ -255,18 +259,28 @@ function ProductDetails() {
                                                 <div className={cx('filter-form-group')}>
                                                     <div className={cx('filter-select-wrap')}>
                                                         <div
+                                                            ref={refOptionQuantty}
                                                             onClick={toggleShowOptionQuantity}
                                                             className={cx('filter-select', 'select-quantities')}
                                                         >
-                                                            {quantity}
-                                                            <img className={cx('icon')} alt="" src={images.arrowIcon} />
+                                                            {quantity === null ? 'Select' : quantity}
+
+                                                            <img
+                                                                className={
+                                                                    showOptionQuantity === true
+                                                                        ? cx('icon', 'icon-rotate')
+                                                                        : cx('icon')
+                                                                }
+                                                                alt=""
+                                                                src={images.arrowIcon}
+                                                            />
+
                                                             <div
                                                                 className={
                                                                     showOptionQuantity === true
                                                                         ? cx('wrap-options')
                                                                         : cx('wrap-options', 'none')
                                                                 }
-                                                                ref={refOptionQuantty}
                                                             >
                                                                 {QUANTITIES.map((item, index) => {
                                                                     if (item.type === unit) {
@@ -300,13 +314,21 @@ function ProductDetails() {
                                                             </div>
                                                         </div>
                                                         <div
+                                                            ref={refOptionUnit}
                                                             onClick={toggleShowOptionUnit}
                                                             className={cx('filter-select', 'select-units')}
                                                         >
                                                             {unit}
-                                                            <img className={cx('icon')} alt="" src={images.arrowIcon} />
+                                                            <img
+                                                                className={
+                                                                    showOptionUnit === true
+                                                                        ? cx('icon', 'icon-rotate')
+                                                                        : cx('icon')
+                                                                }
+                                                                alt=""
+                                                                src={images.arrowIcon}
+                                                            />
                                                             <div
-                                                                ref={refOptionUnit}
                                                                 className={
                                                                     showOptionUnit === true
                                                                         ? cx('wrap-options')

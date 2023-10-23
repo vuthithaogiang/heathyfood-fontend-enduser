@@ -470,6 +470,13 @@
 
 .filter-select.select-quantities {
     position: relative;
+    cursor: pointer;
+
+    img {
+        cursor: pointer;
+        user-select: none;
+        transition: rotate 0.5s;
+    }
 
     .wrap-options {
         position: absolute;
@@ -499,6 +506,13 @@
 
 .filter-select.select-units {
     position: relative;
+    cursor: pointer;
+
+    img {
+        cursor: pointer;
+        user-select: none;
+        transition: rotate 0.5s;
+    }
 
     .wrap-options {
         border-radius: 4px;
@@ -523,4 +537,8 @@
             background-color: #d2d2d269;
         }
     }
+}
+
+.icon-rotate {
+    rotate: 180deg;
 }

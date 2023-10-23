@@ -229,7 +229,7 @@ function Products() {
         },
     ];
     const MIN = 0;
-    const MAX = 150;
+    const MAX = 300;
 
     const QUANTITIES = [
         {
@@ -259,20 +259,20 @@ function Products() {
     const navigate = useNavigate();
     const [values, setValues] = useState([MIN, MAX]);
     const [unit, setUnit] = useState(UNITS[0]);
-    const [quantity, setQuantity] = useState('100 gram');
+    const [quantity, setQuantity] = useState(null);
     const [showOptionQuantity, setshowOptionQuantity] = useState(false);
     const [showOptionUnit, setshowOptionUnit] = useState(false);
 
     const toggleShowFilter = () => {
-        setShowFilter((pre) => !pre);
+        setShowFilter(!showFlter);
     };
 
     const toggleShowOptionQuantity = () => {
-        setshowOptionQuantity((prev) => !prev);
+        setshowOptionQuantity(!showOptionQuantity);
     };
 
     const toggleShowOptionUnit = () => {
-        setshowOptionUnit((prev) => !prev);
+        setshowOptionUnit(!showOptionUnit);
     };
 
     const hiddenFilter = () => {
@@ -378,13 +378,13 @@ function Products() {
                 </div>
                 <div className={cx('filter-products')}>
                     <h3>List Products</h3>
-                    <div className={cx('filter-wrap')}>
+                    <div ref={refFilter} className={cx('filter-wrap')}>
                         <button onClick={toggleShowFilter}>
                             Filter
                             <img className={cx('icon')} alt="" src={images.filterIcon} />
                         </button>
 
-                        <div ref={refFilter} className={showFlter === true ? cx('filter') : cx('filter', 'none')}>
+                        <div className={showFlter === true ? cx('filter') : cx('filter', 'none')}>
                             <img className={cx('filter-arrow')} alt="" src={images.arrowUpIcon} />
                             <h3 className={cx('filter-heading')}>Filter</h3>
                             <form method="post" onSubmit={(e) => e.preventDefault()} className={cx('filter-form')}>
@@ -437,17 +437,25 @@ function Products() {
                                             <div className={cx('filter-select-wrap')}>
                                                 <div
                                                     onClick={toggleShowOptionQuantity}
+                                                    ref={refOptionQuantty}
                                                     className={cx('filter-select', 'select-quantities')}
                                                 >
-                                                    {quantity}
-                                                    <img className={cx('icon')} alt="" src={images.arrowIcon} />
+                                                    {quantity === null ? 'Select' : quantity}
+                                                    <img
+                                                        className={
+                                                            showOptionQuantity === true
+                                                                ? cx('icon', 'icon-rotate')
+                                                                : cx('icon')
+                                                        }
+                                                        alt=""
+                                                        src={images.arrowIcon}
+                                                    />
                                                     <div
                                                         className={
                                                             showOptionQuantity === true
                                                                 ? cx('wrap-options')
                                                                 : cx('wrap-options', 'none')
                                                         }
-                                                        ref={refOptionQuantty}
                                                     >
                                                         {QUANTITIES.map((item, index) => {
                                                             if (item.type === unit) {
@@ -477,13 +485,21 @@ function Products() {
                                                     </div>
                                                 </div>
                                                 <div
+                                                    ref={refOptionUnit}
                                                     onClick={toggleShowOptionUnit}
                                                     className={cx('filter-select', 'select-units')}
                                                 >
                                                     {unit}
-                                                    <img className={cx('icon')} alt="" src={images.arrowIcon} />
+                                                    <img
+                                                        className={
+                                                            showOptionUnit === true
+                                                                ? cx('icon', 'icon-rotate')
+                                                                : cx('icon')
+                                                        }
+                                                        alt=""
+                                                        src={images.arrowIcon}
+                                                    />
                                                     <div
-                                                        ref={refOptionUnit}
                                                         className={
                                                             showOptionUnit === true
                                                                 ? cx('wrap-options')
@@ -566,7 +582,7 @@ function Products() {
                                 className={cx('name-product')}
                                 onClick={() => navigate(`/product-detail/${product.name}`)}
                             >
-                                {[product.name]}
+                                {product.name}
                             </h3>
                             <p className={cx('brand')}>{product.brand}</p>
                             <div className={cx('row')}>

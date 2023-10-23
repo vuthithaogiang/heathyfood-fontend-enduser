@@ -261,10 +261,7 @@ function Login() {
                                     x
                                 </span>
                             </header>
-                            <p className={cx('modal-desc')}>
-                                You're welcome for registering with our system. We have sent a confirmation email to
-                                your account.
-                            </p>
+                            <p className={cx('modal-desc')}>You're welcome for Login with our system.</p>
                             <p className={cx('modal-desc')}>Please activate your account through the email.</p>
                             <button className={cx('modal-btn')} onClick={() => navigate(from, { replace: true })}>
                                 Go To Home Page
