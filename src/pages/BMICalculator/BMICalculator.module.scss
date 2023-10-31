@@ -218,17 +218,18 @@
         font-weight: 500;
         line-height: 1.5;
         cursor: pointer;
-    }
-    button:nth-child(1) {
-        color: var(--text-btn-color);
-    }
-
-    button:nth-child(2) {
         width: 180px;
         margin-left: 50px;
         padding: 10px 30px;
         border-radius: 30px;
         background: var(--primary-color);
+    }
+    span {
+        font-size: 1.6rem;
+        font-weight: 500;
+        line-height: 1.5;
+        cursor: pointer;
+        color: var(--text-btn-color);
     }
 }
 

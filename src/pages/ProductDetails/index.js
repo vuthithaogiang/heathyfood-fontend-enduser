@@ -449,7 +449,72 @@ function ProductDetails() {
                         </ul>
                         <div className={cx('prod-tab-contents')}>
                             {productTab === 'Description' && (
-                                <div className={cx('product-tab-content')}>Content Description</div>
+                                <div className={cx('product-tab-content')}>
+                                    <div className="row">
+                                        <div className="col-8">
+                                            <div className={cx('text-content')}>
+                                                <h2>Lorem ipsum sit amet.</h2>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet consectetur <a href="!#">adipisicing</a>{' '}
+                                                    elit. Aliquid, cupiditate. Modi, quidem, ullam sint dolorum
+                                                    recusandae voluptates dignissimos similique animi assumenda
+                                                    praesentium et! Illum dolorem est rem voluptas nam! Voluptatem.
+                                                </p>
+                                                <h3>Lorem ipsim sit amet.</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
+                                                    cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates
+                                                    dignissimos similique animi assumenda praesentium et! Illum dolorem
+                                                    est rem voluptas nam! Voluptatem.
+                                                </p>
+                                                <p>
+                                                    <img
+                                                        alt=""
+                                                        src="https://images.squarespace-cdn.com/content/v1/5cb9ef147eb88c5caefa30b3/1658910220043-YPFMH9RGY6YXQMG5XIU1/75+In+Summer%2C+I+Cook+What+My+Garden+Gives+Me+20.jpg?format=1500w"
+                                                    />
+                                                    <em>Description image Lorem ipsim sit amet.</em>
+                                                </p>
+                                                <blockquote>
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet consectetur{' '}
+                                                        <a href="!#">adipisicing</a> elit. Aliquid, cupiditate. Modi,
+                                                        quidem, ullam sint dolorum recusandae voluptates dignissimos
+                                                        similique animi assumenda praesentium et! Illum dolorem est rem
+                                                        voluptas nam! Voluptatem.
+                                                    </p>
+                                                </blockquote>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
+                                                    cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates
+                                                    dignissimos similique animi assumenda praesentium et! Illum dolorem
+                                                    est rem voluptas nam! Voluptatem.
+                                                </p>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
+                                                    cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates
+                                                    dignissimos similique animi assumenda praesentium et! Illum dolorem
+                                                    est rem voluptas nam! Voluptatem.
+                                                </p>
+                                                <hr></hr>
+                                                <h3>Lorem ipsim sit amet.</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
+                                                    cupiditate. Modi, quidem, ullam sint dolorum recusandae voluptates
+                                                    dignissimos similique animi assumenda praesentium et! Illum dolorem
+                                                    est rem voluptas nam! Voluptatem.
+                                                </p>
+                                                <h2>Lorem ipsum sit amet.</h2>
+                                                <p>
+                                                    <img
+                                                        alt=""
+                                                        src="https://images.squarespace-cdn.com/content/v1/5cb9ef147eb88c5caefa30b3/1658910220043-YPFMH9RGY6YXQMG5XIU1/75+In+Summer%2C+I+Cook+What+My+Garden+Gives+Me+20.jpg?format=1500w"
+                                                    />
+                                                    <em>Description image Lorem ipsim sit amet.</em>
+                                                </p>
+                                            </div>{' '}
+                                        </div>
+                                    </div>
+                                </div>
                             )}
                             {productTab === 'Features' && (
                                 <div className={cx('product-tab-content')}>Content Features</div>

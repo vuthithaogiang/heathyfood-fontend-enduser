@@ -217,7 +217,7 @@ function BMICalculator() {
                                                     </div>
                                                 </div>
                                                 <div className={cx('btn-group')}>
-                                                    <button>Clear</button>
+                                                    <span>Clear</span>
                                                     <button type="submit">Calculate</button>
                                                 </div>
                                             </form>
@@ -400,7 +400,7 @@ function BMICalculator() {
                                                     </div>
                                                 </div>
                                                 <div className={cx('btn-group')}>
-                                                    <button>Clear</button>
+                                                    <span>Clear</span>
                                                     <button type="submit">Calculate</button>
                                                 </div>
                                             </form>

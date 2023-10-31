@@ -291,6 +291,7 @@
 }
 
 .prod-tab-item {
+    user-select: none;
     cursor: pointer;
     color: #9e9da8;
     font-size: 2rem;

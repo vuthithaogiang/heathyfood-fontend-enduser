@@ -30,6 +30,33 @@ function Cart() {
         window.scrollTo(0, 0);
     }, []);
 
+    useEffect(() => {
+        const $ = document.querySelector.bind(document);
+        const $$ = document.querySelectorAll.bind(document);
+
+        function initJsToggle() {
+            $$('.js-toggle').forEach((button) => {
+                const target = button.getAttribute('toggle-target');
+                if (!target) {
+                    document.body.innerText = `Cần thêm toggle-target cho: ${button.outerHTML}`;
+                }
+                button.onclick = () => {
+                    if (!$(target)) {
+                        return (document.body.innerText = `Không tìm thấy phần tử "${target}"`);
+                    }
+                    const isHidden = $(target).classList.contains('hide');
+
+                    requestAnimationFrame(() => {
+                        $(target).classList.toggle('hide', !isHidden);
+                        $(target).classList.toggle('show', isHidden);
+                    });
+                };
+            });
+        }
+
+        initJsToggle();
+    }, []);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -202,7 +229,7 @@ function Cart() {
                                                         )}
                                                         Save
                                                     </button>
-                                                    <button>
+                                                    <button className="js-toggle" toggle-target="#delete-confirm">
                                                         <img className={cx('')} alt="" src={images.trashIcon} />
                                                         Delete
                                                     </button>
@@ -252,7 +279,7 @@ function Cart() {
                                                         )}
                                                         Save
                                                     </button>
-                                                    <button>
+                                                    <button className="js-toggle" toggle-target="#delete-confirm">
                                                         <img className={cx('')} alt="" src={images.trashIcon} />
                                                         Delete
                                                     </button>
@@ -302,7 +329,7 @@ function Cart() {
                                                         )}
                                                         Save
                                                     </button>
-                                                    <button>
+                                                    <button className="js-toggle" toggle-target="#delete-confirm">
                                                         <img className={cx('')} alt="" src={images.trashIcon} />
                                                         Delete
                                                     </button>
@@ -542,6 +569,24 @@ function Cart() {
             </div>
 
             <BackToTop />
+
+            <div id="delete-confirm" className={cx('dialog', 'hide')}>
+                <div className={cx('dialog-content')}>
+                    <div className={cx('dialog-text')}>Do you sure wanna to delete this item in cart?</div>
+                    <div className={cx('dialog-bottom')}>
+                        <button className={cx('dialog-btn', 'btn-text', 'js-toggle')} toggle-target="#delete-confirm">
+                            Cancel
+                        </button>
+                        <button
+                            className={cx('dialog-btn', 'btn-primary', 'js-toggle')}
+                            toggle-target="#delete-confirm"
+                        >
+                            Confirm
+                        </button>
+                    </div>
+                </div>
+                <div className={cx('dialog-overlay')}></div>
+            </div>
         </div>
     );
 }
