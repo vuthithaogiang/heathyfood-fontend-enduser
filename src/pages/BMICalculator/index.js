@@ -1,20 +1,39 @@
 import classNames from 'classnames/bind';
 import styles from './BMICalculator.module.scss';
 import images from '~/assets/images';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 import BackToTop from '~/components/BackToTop';
+import { InfinitySpin } from 'react-loader-spinner';
+import Notification from '~/components/Notification';
+import useAxios from '~/hooks/useAxios';
 
 const cx = classNames.bind(styles);
 
 function BMICalculator() {
+    const axios = useAxios();
     const [typeCalculate, settypeCalculate] = useState('BMI');
-
     const [showSelectGender, setShowSelectGender] = useState(false);
     const [gender, setGender] = useState(null);
-
     const [showSelectActivity, setShowSelectActivity] = useState(false);
     const [activity, setActivity] = useState(null);
+
+    const [bmi, setBmi] = useState(null);
+    const [calories, setCalories] = useState(null);
+
+    const [weightBmi, setWeightBmi] = useState('');
+    const [heightBmi, setHeightBmi] = useState('');
+
+    const [loading, setLoading] = useState(false);
+    const [notificationBmi, setNotificationBmi] = useState(false);
+    const [fetBmiSuccess, setFetBmiSuccess] = useState(false);
+
+    const [weightCalories, setWeightCalories] = useState('');
+    const [heightCalories, setHeightCalories] = useState('');
+    const [age, setAge] = useState('');
+
+    const [notificationCalories, setNotificationCalories] = useState(false);
+    const [fetCaloriesSuccess, setFetCaloriesSuccess] = useState(false);
 
     const toggeSelectActivity = () => {
         setShowSelectActivity((pre) => !pre);
@@ -23,9 +42,104 @@ function BMICalculator() {
     const toggeleSelecGender = () => {
         setShowSelectGender((pre) => !pre);
     };
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    const handleFetchBmi = async (e) => {
+        e.preventDefault();
+
+        console.log('Weight: ', weightBmi);
+        console.log('Height: ', heightBmi);
+
+        if ((weightBmi.trim() === '') | (heightBmi.trim() === '')) {
+            setFetBmiSuccess(false);
+            setNotificationBmi(true);
+
+            return;
+        }
+        setLoading(true);
+
+        try {
+            const response = await axios.post(
+                '/api/tool/bmi',
+                {
+                    weight: weightBmi,
+                    height: heightBmi,
+                },
+                {
+                    withCredentials: true,
+                },
+            );
+
+            console.log(response.data);
+            if (response.data.success === 'true') {
+                setBmi(response.data.data);
+                setLoading(false);
+                setNotificationBmi(true);
+                setFetBmiSuccess(true);
+            }
+
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+            setFetBmiSuccess(false);
+            setNotificationBmi(true);
+        }
+    };
+
+    const handleFetchCalories = async (e) => {
+        e.preventDefault();
+
+        if (
+            (weightCalories.trim() === '') |
+            (heightCalories.trim() === '') |
+            (age.trim() === '') |
+            (gender === null) |
+            (activity === null)
+        ) {
+            setFetCaloriesSuccess(false);
+            setNotificationCalories(true);
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const response = await axios.post(
+                '/api/tool/calories-in-day',
+                {
+                    weight: weightCalories,
+                    height: heightCalories,
+                    age: age,
+                    activity: activity,
+                    gender: gender,
+                },
+                {
+                    withCredentials: true,
+                },
+            );
+
+            console.log(response.data);
+
+            if (response.data.success === 'true') {
+                setCalories(response.data.data);
+
+                setFetCaloriesSuccess(true);
+                setLoading(false);
+                setNotificationCalories(true);
+            }
+
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+            setFetCaloriesSuccess(false);
+            setNotificationCalories(true);
+        }
+    };
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -69,38 +183,55 @@ function BMICalculator() {
                                         clue to your risk for weight-related health problems.
                                     </p>
 
-                                    <form onSubmit={(e) => e.preventDefault()} className={cx('form')}>
-                                        <div className={cx('row')}>
-                                            <div className={cx('form-group')}>
-                                                <label className={cx('form-label')} htmlFor="height">
-                                                    Height (cm)
-                                                </label>
-                                                <input
-                                                    className={cx('form-input')}
-                                                    type="text"
-                                                    name="height"
-                                                    id="height"
-                                                    placeholder="163"
-                                                />
+                                    {bmi === null ? (
+                                        <>
+                                            <form onSubmit={handleFetchBmi} className={cx('form')}>
+                                                <div className={cx('row')}>
+                                                    <div className={cx('form-group')}>
+                                                        <label className={cx('form-label')} htmlFor="height">
+                                                            Height (cm)
+                                                        </label>
+                                                        <input
+                                                            className={cx('form-input')}
+                                                            type="number"
+                                                            value={heightBmi}
+                                                            onChange={(e) => setHeightBmi(e.target.value)}
+                                                            name="height"
+                                                            id="height"
+                                                            placeholder="163"
+                                                        />
+                                                    </div>
+                                                    <div className={cx('form-group')}>
+                                                        <label className={cx('form-label')} htmlFor="weight">
+                                                            Weight (kg)
+                                                        </label>
+                                                        <input
+                                                            className={cx('form-input')}
+                                                            type="number"
+                                                            name="weight"
+                                                            id="weight"
+                                                            placeholder="50"
+                                                            value={weightBmi}
+                                                            onChange={(e) => setWeightBmi(e.target.value)}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className={cx('btn-group')}>
+                                                    <button>Clear</button>
+                                                    <button type="submit">Calculate</button>
+                                                </div>
+                                            </form>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className={cx('summary')}>
+                                                <h4>Your result BMI</h4>
+                                                <h5>Body Mass Index: {bmi.bmi}</h5>
+                                                <h5>Body Mass Index Category: {bmi.bmiCategory}</h5>
                                             </div>
-                                            <div className={cx('form-group')}>
-                                                <label className={cx('form-label')} htmlFor="weight">
-                                                    Weight (kg)
-                                                </label>
-                                                <input
-                                                    className={cx('form-input')}
-                                                    type="text"
-                                                    name="weight"
-                                                    id="weight"
-                                                    placeholder="50"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className={cx('btn-group')}>
-                                            <button>Clear</button>
-                                            <button type="submit">Calculate</button>
-                                        </div>
-                                    </form>
+                                        </>
+                                    )}
+
                                     <p className={cx('title-desc')}>BMI Introduction</p>
                                     <p className={cx('content-desc')}>
                                         The Body Mass Index (BMI) Calculator can be used to calculate BMI value and
@@ -152,116 +283,144 @@ function BMICalculator() {
                                         will likely provide a number that’s close to your calorie needs, but it’s not a
                                         perfect tool.
                                     </p>
-                                    <form onSubmit={(e) => e.preventDefault()} className={cx('form')}>
-                                        <div className={cx('row')}>
-                                            <div className={cx('form-group')}>
-                                                <label className={cx('form-label')} htmlFor="height">
-                                                    Height (cm)
-                                                </label>
-                                                <input
-                                                    className={cx('form-input')}
-                                                    type="text"
-                                                    name="height"
-                                                    id="height"
-                                                    placeholder="163"
-                                                />
-                                            </div>
-                                            <div className={cx('form-group')}>
-                                                <label className={cx('form-label')} htmlFor="weight">
-                                                    Weight (kg)
-                                                </label>
-                                                <input
-                                                    className={cx('form-input')}
-                                                    type="text"
-                                                    name="weight"
-                                                    id="weight"
-                                                    placeholder="50"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className={cx('row')}>
-                                            <div className={cx('form-group')}>
-                                                <label className={cx('form-label')} htmlFor="age">
-                                                    Age
-                                                </label>
-                                                <input
-                                                    className={cx('form-input')}
-                                                    type="text"
-                                                    name="age"
-                                                    id="age"
-                                                    placeholder="20"
-                                                />
-                                            </div>
-                                            <div className={cx('form-group')}>
-                                                <label className={cx('form-label')} htmlFor="gender">
-                                                    Gender
-                                                </label>
-                                                <div className={cx('select-wrap-gender')} onClick={toggeleSelecGender}>
-                                                    {gender ? gender : 'Select Gender'}
-                                                    <img
-                                                        className={cx('icon', 'select-icon')}
-                                                        alt=""
-                                                        src={images.arrowIcon}
-                                                    />
-                                                    <div
-                                                        className={
-                                                            showSelectGender === true
-                                                                ? cx('select-items', 'active')
-                                                                : cx('select-items')
-                                                        }
-                                                    >
-                                                        <span onClick={() => setGender('Male')}>Male</span>
-                                                        <span onClick={() => setGender('Female')}>Female</span>
+                                    {calories === null ? (
+                                        <>
+                                            <form onSubmit={handleFetchCalories} className={cx('form')}>
+                                                <div className={cx('row')}>
+                                                    <div className={cx('form-group')}>
+                                                        <label className={cx('form-label')} htmlFor="height">
+                                                            Height (cm)
+                                                        </label>
+                                                        <input
+                                                            className={cx('form-input')}
+                                                            type="number"
+                                                            name="height"
+                                                            id="height"
+                                                            placeholder="163"
+                                                            value={heightCalories}
+                                                            onChange={(e) => setHeightCalories(e.target.value)}
+                                                        />
+                                                    </div>
+                                                    <div className={cx('form-group')}>
+                                                        <label className={cx('form-label')} htmlFor="weight">
+                                                            Weight (kg)
+                                                        </label>
+                                                        <input
+                                                            className={cx('form-input')}
+                                                            type="number"
+                                                            name="weight"
+                                                            id="weight"
+                                                            placeholder="50"
+                                                            value={weightCalories}
+                                                            onChange={(e) => setWeightCalories(e.target.value)}
+                                                        />
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div className={cx('row')}>
-                                            <div className={cx('form-group')}>
-                                                <label className={cx('form-label')} htmlFor="activity">
-                                                    Activity
-                                                </label>
-                                                <div
-                                                    className={cx('select-wrap-activity')}
-                                                    onClick={toggeSelectActivity}
-                                                >
-                                                    {activity ? activity : 'Select Activity'}
-                                                    <img
-                                                        className={cx('icon', 'select-icon')}
-                                                        alt=""
-                                                        src={images.arrowIcon}
-                                                    />
-                                                    <div
-                                                        className={
-                                                            showSelectActivity === true
-                                                                ? cx('select-items', 'active')
-                                                                : cx('select-items')
-                                                        }
-                                                    >
-                                                        <span onClick={() => setActivity('Sedentary lifestyle')}>
-                                                            Sedentary lifestyle
-                                                        </span>
-                                                        <span onClick={() => setActivity('Slightly active')}>
-                                                            Slightly active
-                                                        </span>
-                                                        <span onClick={() => setActivity('Moderately active')}>
-                                                            Moderately active
-                                                        </span>
-                                                        <span onClick={() => setActivity('Active lifestyle')}>
-                                                            Active lifestyle
-                                                        </span>
-                                                        <span onClick={() => setActivity('Very active lifestyle')}>
-                                                            Very active lifestyle
-                                                        </span>
+                                                <div className={cx('row')}>
+                                                    <div className={cx('form-group')}>
+                                                        <label className={cx('form-label')} htmlFor="age">
+                                                            Age
+                                                        </label>
+                                                        <input
+                                                            className={cx('form-input')}
+                                                            type="number"
+                                                            name="age"
+                                                            id="age"
+                                                            placeholder="20"
+                                                            value={age}
+                                                            onChange={(e) => setAge(e.target.value)}
+                                                        />
+                                                    </div>
+                                                    <div className={cx('form-group')}>
+                                                        <label className={cx('form-label')} htmlFor="gender">
+                                                            Gender
+                                                        </label>
+                                                        <div
+                                                            className={cx('select-wrap-gender')}
+                                                            onClick={toggeleSelecGender}
+                                                        >
+                                                            {gender ? gender : 'Select Gender'}
+                                                            <img
+                                                                className={cx('icon', 'select-icon')}
+                                                                alt=""
+                                                                src={images.arrowIcon}
+                                                            />
+                                                            <div
+                                                                className={
+                                                                    showSelectGender === true
+                                                                        ? cx('select-items', 'active')
+                                                                        : cx('select-items')
+                                                                }
+                                                            >
+                                                                <span onClick={() => setGender('male')}>Male</span>
+                                                                <span onClick={() => setGender('female')}>Female</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <div className={cx('row')}>
+                                                    <div className={cx('form-group')}>
+                                                        <label className={cx('form-label')} htmlFor="activity">
+                                                            Activity
+                                                        </label>
+                                                        <div
+                                                            className={cx('select-wrap-activity')}
+                                                            onClick={toggeSelectActivity}
+                                                        >
+                                                            {activity ? activity : 'Select Activity'}
+                                                            <img
+                                                                className={cx('icon', 'select-icon')}
+                                                                alt=""
+                                                                src={images.arrowIcon}
+                                                            />
+                                                            <div
+                                                                className={
+                                                                    showSelectActivity === true
+                                                                        ? cx('select-items', 'active')
+                                                                        : cx('select-items')
+                                                                }
+                                                            >
+                                                                <span onClick={() => setActivity('sedentary')}>
+                                                                    Sedentary lifestyle
+                                                                </span>
+                                                                <span onClick={() => setActivity('light')}>
+                                                                    Slightly active
+                                                                </span>
+                                                                <span onClick={() => setActivity('moderate')}>
+                                                                    Moderately active
+                                                                </span>
+                                                                <span onClick={() => setActivity('active')}>
+                                                                    Active lifestyle
+                                                                </span>
+                                                                <span onClick={() => setActivity('veryActive')}>
+                                                                    Very active lifestyle
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className={cx('btn-group')}>
+                                                    <button>Clear</button>
+                                                    <button type="submit">Calculate</button>
+                                                </div>
+                                            </form>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className={cx('summary')}>
+                                                <h4>Your result Calories in day </h4>
+                                                <h5>Calories in day: {calories.caloInDay} (calo/day)</h5>
+                                                <h5>
+                                                    Calories in day to increase (increase 0.5kg/week):{' '}
+                                                    {calories.goalIncrease} (calo/day)
+                                                </h5>
+                                                <h5>
+                                                    Calories in day to decrease (decrease 0.5kg/week):{' '}
+                                                    {calories.goalDecrease} (calo/day)
+                                                </h5>
                                             </div>
-                                        </div>
-                                        <div className={cx('btn-group')}>
-                                            <button>Clear</button>
-                                            <button type="submit">Calculate</button>
-                                        </div>
-                                    </form>
+                                        </>
+                                    )}
 
                                     <p className={cx('title-desc')}>How many calories should you eat on average?</p>
                                     <p className={cx('content-desc')}>
@@ -533,6 +692,43 @@ function BMICalculator() {
                     </div>
                 </div>
             </div>
+
+            {loading && (
+                <div className={cx('modal')}>
+                    <div className={cx('overlay')}></div>
+                    <div className={cx('wrap-loading')}>
+                        <InfinitySpin width="160" color="#fff" />
+                    </div>
+                </div>
+            )}
+
+            {notificationBmi && (
+                <Notification
+                    message={
+                        fetBmiSuccess === true
+                            ? 'Calculate BMI successfully.'
+                            : 'Calculate BMI failure. Please check you request.'
+                    }
+                    show={notificationBmi}
+                    setShow={setNotificationBmi}
+                    className={'js-toggle'}
+                    toggleTarget={'#edit-product-form'}
+                />
+            )}
+
+            {notificationCalories && (
+                <Notification
+                    message={
+                        fetCaloriesSuccess === true
+                            ? 'Calculate Calories in day successfully.'
+                            : 'Calculate Calories in day failure. Please check you request.'
+                    }
+                    show={notificationCalories}
+                    setShow={setNotificationCalories}
+                    className={'js-toggle'}
+                    toggleTarget={'#edit-product-form'}
+                />
+            )}
 
             <BackToTop />
         </div>

@@ -492,7 +492,7 @@ function Products() {
                                                     {unit}
                                                     <img
                                                         className={
-                                                            showOptionUnit === true
+                                                             showOptionUnit === true
                                                                 ? cx('icon', 'icon-rotate')
                                                                 : cx('icon')
                                                         }

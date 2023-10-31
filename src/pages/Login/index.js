@@ -224,8 +224,10 @@ function Login() {
                                 </span>
                             </div>
                             <div className={cx('form-group', 'auth-btn-group')}>
-                                <button className={cx('btn', 'btn-primary')}>Sign Up</button>
-                                <button type="submit" className={cx('btn', 'btn-outline')}>
+                                <button type="submit" className={cx('btn', 'btn-primary')}>
+                                    Log In
+                                </button>
+                                <button className={cx('btn', 'btn-outline')}>
                                     <img alt="" src={images.gmailIcon} className={cx('btn-icon', 'icon')} />
                                     Sign in with Gmail
                                 </button>
@@ -262,7 +264,6 @@ function Login() {
                                 </span>
                             </header>
                             <p className={cx('modal-desc')}>You're welcome for Login with our system.</p>
-                            <p className={cx('modal-desc')}>Please activate your account through the email.</p>
                             <button className={cx('modal-btn')} onClick={() => navigate(from, { replace: true })}>
                                 Go To Home Page
                             </button>

@@ -15,7 +15,7 @@
     flex-direction: column;
 
     padding: 30px;
-    background-color: var(--header-bg-color);
+    background-color: var(--bmi-bg-color);
     min-height: 100vh;
 
     h2 {
@@ -246,8 +246,8 @@
     }
 
     .range {
-        color: #f94545;
-        background: linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), #590505;
+        color: var(--bmi-range-text-color);
+        background: var(--bmi-range-bg-color);
 
         width: fit-content;
         border-radius: 8px;
@@ -264,7 +264,8 @@
         font-size: 1.4rem;
         font-weight: 500;
         line-height: 1.4;
-        background: linear-gradient(0deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%), #67b044;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%),
+            var(--bmi-range-normal-bg-color);
         color: #67b044;
     }
 
@@ -336,7 +337,8 @@
     padding: 20px 0;
 
     h4,
-    p {
+    p,
+    h5 {
         padding-left: 18px;
     }
 
@@ -346,6 +348,14 @@
         font-weight: 500;
         line-height: 1.5;
         margin-bottom: 8px;
+    }
+
+    h5 {
+        font-size: 1.5rem;
+        font-family: 'Inter', sans-serif;
+        line-height: 1, 5;
+        margin-bottom: 6px;
+        font-weight: 400;
     }
 
     p {
@@ -417,3 +427,29 @@
     margin-top: 18px;
     font-size: 1.5rem;
 }
+
+// Modal
+
+.modal,
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49, 49, 49, 0.8);
+}
+
+.wrap-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Ebd modal
