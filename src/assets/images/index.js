@@ -122,6 +122,12 @@ const images = {
     moneyIcon: require('~/assets/images/money-icon.svg').default,
     speedIocn: require('~/assets/images/speed-icon.svg').default,
     xDeleteIcon: require('~/assets/images/x-delete-icon.svg').default,
+
+    closeIcon: require('~/assets/images/close-icon.svg').default,
+    spinnerIcon: require('~/assets/images/spinner-icon.svg').default,
+
+    arrowDownIcon: require('~/assets/images/arrow-down-icon.svg').default,
+    followingIcon: require('~/assets/images/following-icon.svg').default,
 };
 
 export default images;

@@ -8,6 +8,7 @@ function Home() {
     return (
         <div className="">
             <Introdction />
+
             <NutritionByCategory />
             <BestSeller />
             <UpcomingEvent />
