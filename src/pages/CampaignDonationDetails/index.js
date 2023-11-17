@@ -6,6 +6,7 @@ import useAxios from '~/hooks/useAxios';
 import { InfinitySpin } from 'react-loader-spinner';
 import BackToTop from '~/components/BackToTop';
 import images from '~/assets/images';
+import HTMLRendered from '~/components/HTMLRendered';
 
 const cx = classNames.bind(styles);
 
@@ -13,8 +14,6 @@ const BASE_URL_IMAGE = 'http://127.0.0.1:8000/uploads/';
 function CampaignDonationDetails() {
     const params = useParams();
     const axios = useAxios();
-    const [loading, setLoading] = useState(false);
-    const [campaignInfo, setCampaignInfo] = useState(null);
 
     const width = 55;
 
@@ -52,6 +51,28 @@ function CampaignDonationDetails() {
             donateAt: '1 month ago',
         },
     ];
+
+    const LIST_BREAD = [
+        {
+            id: 1,
+            title: 'Overview',
+        },
+        {
+            id: 2,
+            title: 'Timeline of Budget',
+        },
+        {
+            id: 3,
+            title: 'Community',
+        },
+        {
+            id: 4,
+            title: 'Update',
+        },
+    ];
+    const [loading, setLoading] = useState(false);
+    const [campaignInfo, setCampaignInfo] = useState(null);
+    const [breadItemActive, setBreadItemActive] = useState(LIST_BREAD[0]);
 
     useEffect(() => {
         fetInfoCampaign(); // eslint-disable-next-line
@@ -110,7 +131,58 @@ function CampaignDonationDetails() {
                             <div className={cx('inner-container')}>
                                 {/* CONTENT IN LEFT */}
                                 <div className={cx('larger')}>
-                                    <div className={cx('content-camp')}>dfdg</div>
+                                    <div className={cx('content-camp')}>
+                                        <div className={cx('camp-thumbnail')}>
+                                            <img
+                                                className={cx('thumb')}
+                                                alt=""
+                                                src={`${BASE_URL_IMAGE}${campaignInfo.thumbnails[0].path}`}
+                                            />
+                                        </div>
+
+                                        <div className={cx('bread')}>
+                                            <div className={cx('list-bread')}>
+                                                {LIST_BREAD.map((item) => (
+                                                    <div
+                                                        onClick={() => setBreadItemActive(item)}
+                                                        key={item.id}
+                                                        className={
+                                                            breadItemActive.id === item.id
+                                                                ? cx('bread-item', 'active')
+                                                                : cx('bread-item')
+                                                        }
+                                                    >
+                                                        <span>{item.title}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className={cx('content')}>
+                                            {/* Overview */}
+                                            {breadItemActive.title === 'Overview' && (
+                                                <div className={cx('inner-content')}>
+                                                    <HTMLRendered htmlString={campaignInfo.description} />
+                                                </div>
+                                            )}
+
+                                            {/* Timeline */}
+
+                                            {breadItemActive.title === 'Timeline of Budget' && (
+                                                <div className={cx('inner-content')}>
+                                                    Description Timeline of Budget
+                                                </div>
+                                            )}
+
+                                            {breadItemActive.title === 'Community' && (
+                                                <div className={cx('inner-content')}>Description Community</div>
+                                            )}
+
+                                            {breadItemActive.title === 'Update' && (
+                                                <div className={cx('inner-content')}>Description Update</div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {/* DONATE IN RIGHT */}
@@ -191,7 +263,8 @@ function CampaignDonationDetails() {
                                                                     ) : (
                                                                         <span className={cx('name')}>Anonymous</span>
                                                                     )}{' '}
-                                                                    / {item.donateAt}
+                                                                    <span className={cx('group-separate')}></span>
+                                                                    {item.donateAt}
                                                                 </p>
                                                                 {item.message !== null && item.message !== '' ? (
                                                                     <p className={cx('message')}>{item.message}</p>
