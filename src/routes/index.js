@@ -12,6 +12,7 @@ import ProductDetails from '~/pages/ProductDetails';
 import NotFound from '~/pages/404NotFound';
 import Campaigns from '~/pages/Campaigns';
 import CampaignsDetails from '~/pages/CampaignDetails';
+import CampaignDonationDetails from '~/pages/CampaignDonationDetails';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -23,6 +24,7 @@ const publicRoutes = [
     { path: '/products', component: Products },
     { path: '/product-detail/:slug', component: ProductDetails },
     { path: '/campaigns', component: Campaigns },
+    { path: '/details-campaign-donation/:slugCampaignDonation', component: CampaignDonationDetails },
     { path: '/details-campaign/:slugCampaign', component: CampaignsDetails },
     { path: '/*', component: NotFound, layout: null },
 ];

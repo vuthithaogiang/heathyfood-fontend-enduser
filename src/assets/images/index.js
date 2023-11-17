@@ -128,6 +128,9 @@ const images = {
 
     arrowDownIcon: require('~/assets/images/arrow-down-icon.svg').default,
     followingIcon: require('~/assets/images/following-icon.svg').default,
+
+    fakeAvatar1: require('~/assets/images/fake-avatar-1.png'),
+    fakeAvatar2: require('~/assets/images/fake-avatar-2.png'),
 };
 
 export default images;

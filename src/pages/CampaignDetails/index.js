@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const BASE_URL_IMAGE = 'http://127.0.0.1:8000/uploads/';
 function CampaignsDetails() {
     const params = useParams();
 

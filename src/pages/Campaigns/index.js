@@ -356,9 +356,17 @@ function Campaigns() {
                                                                 </div>
                                                                 <div className={cx('camp-desc')}>
                                                                     <p
-                                                                        onClick={() =>
-                                                                            navigate(`/details-campaign/${cam.slug}`)
-                                                                        }
+                                                                        onClick={() => {
+                                                                            if (cam.type_of_campaign.id === 8) {
+                                                                                navigate(
+                                                                                    `/details-campaign-donation/${cam.slug}`,
+                                                                                );
+                                                                            } else {
+                                                                                navigate(
+                                                                                    `/details-campaign/${cam.slug}`,
+                                                                                );
+                                                                            }
+                                                                        }}
                                                                         className={cx('camp-name')}
                                                                     >
                                                                         {cam.name}
