@@ -5,12 +5,16 @@ import { useState, useEffect, useRef } from 'react';
 import useAxios from '~/hooks/useAxios';
 import { InfinitySpin } from 'react-loader-spinner';
 import useOnClickOutside from '~/hooks/useOnclickOutside';
+import BackToTop from '~/components/BackToTop';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const BASE_URL_IMAGE = 'http://127.0.0.1:8000/uploads/';
 function Campaigns() {
     const axios = useAxios();
+    const navigate = useNavigate();
+
     const TYPE_OF_FILTERS = [
         {
             id: 1,
@@ -351,7 +355,14 @@ function Campaigns() {
                                                                     </figure>
                                                                 </div>
                                                                 <div className={cx('camp-desc')}>
-                                                                    <p className={cx('camp-name')}>{cam.name}</p>
+                                                                    <p
+                                                                        onClick={() =>
+                                                                            navigate(`/details-campaign/${cam.slug}`)
+                                                                        }
+                                                                        className={cx('camp-name')}
+                                                                    >
+                                                                        {cam.name}
+                                                                    </p>
                                                                     <div className={cx('camp-schedule')}>
                                                                         <span className={cx('from')}>
                                                                             {formatDateFromBackend(cam.start_date)}
@@ -360,7 +371,16 @@ function Campaigns() {
                                                                         <span className={cx('to')}>
                                                                             {formatDateFromBackend(cam.end_date)}
                                                                         </span>
+
+                                                                        {cam.status === 0 && (
+                                                                            <span className={cx('status-new')}>
+                                                                                New
+                                                                            </span>
+                                                                        )}
                                                                     </div>
+                                                                    <p className={cx('camp-objective')}>
+                                                                        {cam.objective}
+                                                                    </p>
                                                                     <button className={cx('camp-read-more')}>
                                                                         Read more
                                                                         <img
@@ -386,6 +406,8 @@ function Campaigns() {
                     <></>
                 )}
             </div>
+
+            <BackToTop />
 
             {loading && (
                 <div className={cx('modal-infinity')}>
