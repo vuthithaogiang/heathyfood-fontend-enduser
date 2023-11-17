@@ -131,6 +131,10 @@ const images = {
 
     fakeAvatar1: require('~/assets/images/fake-avatar-1.png'),
     fakeAvatar2: require('~/assets/images/fake-avatar-2.png'),
+    heartDecoIcon: require('~/assets/images/heart-deco-icon.svg').default,
+
+    decorationIcon: require('~/assets/images/decoration-icon.svg').default,
+    automationIcon: require('~/assets/images/automation-icon.svg').default,
 };
 
 export default images;

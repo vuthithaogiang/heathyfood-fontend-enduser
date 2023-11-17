@@ -346,3 +346,250 @@
         padding: 12px;
     }
 }
+
+.inner-content.timeline-budget {
+    font-family: 'Inter', sans-serif;
+
+    .head {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .title {
+            font-size: 1.7rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #333;
+        }
+        .icon-small {
+            width: 20px;
+        }
+    }
+
+    .description {
+        p.desc {
+            width: 500px;
+            font-size: 1.5rem;
+            font-weight: 500;
+
+            + p.desc {
+                margin-top: 12px;
+            }
+        }
+    }
+
+    .wrap-timeline {
+        margin-top: 24px;
+
+        .group-activity {
+            display: flex;
+            gap: 24px;
+            .decoration {
+                display: flex;
+                flex-direction: column;
+
+                align-items: center;
+                .line-column {
+                    width: 2px;
+                    height: 100%;
+                    background-color: #d8dee4;
+                }
+
+                img {
+                    filter: brightness(0) saturate(100%) invert(58%) sepia(51%) saturate(322%) hue-rotate(221deg)
+                        brightness(95%) contrast(86%);
+                }
+            }
+
+            .activities {
+                margin-bottom: 20px;
+                flex: 1;
+
+                position: relative;
+            }
+
+            .schedule {
+                margin-bottom: 8px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                // justify-content: space-between;
+
+                span {
+                    color: #010101;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 1.7rem;
+
+                    font-weight: 600;
+                    line-height: 22px;
+                    letter-spacing: -0.15px;
+                }
+
+                .inline {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+            }
+
+            .activity-item {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .activity-item div:nth-child(1) {
+                p {
+                    width: 80%;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 1.4rem;
+
+                    font-size: 1.4rem;
+                    font-weight: 500;
+                    color: #898a99;
+                }
+            }
+
+            + .group-activity {
+                margin-top: 3px;
+            }
+        }
+    }
+}
+
+.inner-content.update {
+    padding-top: 12px;
+    .wrap-updates {
+        .update-item {
+            .update-sequense {
+                margin-bottom: 6px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                color: #717171;
+                font-family: 'Inter', sans-serif;
+                font-size: 1.4rem;
+
+                font-weight: 400;
+                line-height: 1.45;
+                letter-spacing: -0.15px;
+
+                .tag {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 22px;
+                    padding: 0 10px;
+                    color: #0166ff;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 1.3rem;
+                    font-weight: 500;
+                    line-height: 1.4;
+                    border-radius: 20px;
+                    background: rgba(1, 102, 255, 0.1);
+                }
+            }
+
+            .title-update {
+                font-family: 'Inter', sans-serif;
+                color: #010101;
+                font-size: 2rem;
+                font-weight: 600;
+                line-height: 1.5;
+            }
+
+            .update-creator {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: #6c6c6c;
+                font-family: 'Inter', sans-serif;
+                font-size: 1.4rem;
+
+                font-weight: 500;
+                line-height: 1.7;
+                .update-separate {
+                    width: 6px;
+                    height: 6px;
+                    background-color: #6c6c6c;
+                    border-radius: 50%;
+                }
+            }
+
+            .update-label {
+                justify-content: center;
+                height: 60px;
+                display: flex;
+                flex-direction: column;
+
+                .div-1 {
+                    width: 75%;
+                    height: 6px;
+                    border-radius: 10px;
+                    opacity: 0.08;
+                    background: #000958;
+                    margin-bottom: 12px;
+                }
+
+                .div-2 {
+                    width: 30%;
+                    height: 6px;
+                    border-radius: 10px;
+                    opacity: 0.08;
+                    background: #000958;
+                }
+            }
+
+            + .update-item {
+                padding-top: 12px;
+                margin-top: 24px;
+            }
+
+            .message {
+                border: 1px solid #ddd;
+                padding: 4px 6px;
+                border-radius: 6px;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                color: #000;
+                font-family: 'Inter', sans-serif;
+                font-size: 1.4rem;
+
+                font-weight: 400;
+                line-height: 1.5;
+
+                img {
+                    width: 9px;
+                    filter: brightness(0) saturate(100%) invert(28%) sepia(99%) saturate(3400%) hue-rotate(210deg)
+                        brightness(99%) contrast(111%);
+                }
+            }
+        }
+    }
+}
+
+.inner-content.community {
+    .message {
+        border: 1px solid #ddd;
+        padding: 4px 6px;
+        border-radius: 6px;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #000;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.4rem;
+
+        font-weight: 400;
+        line-height: 1.5;
+
+        img {
+            width: 9px;
+            filter: brightness(0) saturate(100%) invert(28%) sepia(99%) saturate(3400%) hue-rotate(210deg)
+                brightness(99%) contrast(111%);
+        }
+    }
+}

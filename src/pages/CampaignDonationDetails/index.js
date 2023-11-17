@@ -70,6 +70,87 @@ function CampaignDonationDetails() {
             title: 'Update',
         },
     ];
+
+    const FAKE_TIMELINE_BUDGET = [
+        {
+            id: 1,
+            amount: 10,
+            description: 'Will Provide a Pack of Sanitary towwels to The girls',
+        },
+        {
+            id: 2,
+            amount: 20,
+            description: 'This will be purchase tow package towel to these grils for use during their menses',
+        },
+        {
+            id: 3,
+            amount: 50,
+            description:
+                'Can provide Learning materials for one girl for a month enough to help her acquine enough skill at the safe house',
+        },
+        {
+            id: 4,
+            amount: 100,
+            description: 'Will be able to provide Learning materials for one girl at the safe house center',
+        },
+        {
+            id: 5,
+            amount: 500,
+            description:
+                'Will be able to pay for the trainers for a whole month to train the girls on the any of the income generating avtivities to make the them self sufficient in futere',
+        },
+        {
+            id: 6,
+            amount: 1200,
+            description: 'Will provide for the provision of meals for all the girls at thr safe house center',
+        },
+        {
+            id: 7,
+            amount: 3000,
+            description:
+                'Will catter for the training and nutrition for the whole month at the girls safe house center',
+        },
+        {
+            id: 8,
+            amount: 5000,
+            description:
+                'Will be able to Equip the Girls Safe House center with the much needed equipments fir the Training of these girls to be self reliant',
+        },
+    ];
+
+    const FAKE_UPDATE = [
+        {
+            id: 1,
+            title: 'How to building a career in data science',
+            creator: 'thaogiang',
+            createdAt: 'November 17, 2023',
+        },
+        {
+            id: 2,
+            title: 'How to building a career in data science',
+            creator: 'thaogiang',
+            createdAt: 'November 17, 2023',
+        },
+        {
+            id: 3,
+            title: 'How to building a career in data science',
+            creator: 'thaogiang',
+            createdAt: 'November 17, 2023',
+        },
+        {
+            id: 4,
+            title: 'How to building a career in data science',
+            creator: 'thaogiang',
+            createdAt: 'November 17, 2023',
+        },
+        {
+            id: 5,
+            title: 'How to building a career in data science',
+            creator: 'thaogiang',
+            createdAt: 'November 17, 2023',
+        },
+    ];
+
     const [loading, setLoading] = useState(false);
     const [campaignInfo, setCampaignInfo] = useState(null);
     const [breadItemActive, setBreadItemActive] = useState(LIST_BREAD[0]);
@@ -169,17 +250,139 @@ function CampaignDonationDetails() {
                                             {/* Timeline */}
 
                                             {breadItemActive.title === 'Timeline of Budget' && (
-                                                <div className={cx('inner-content')}>
-                                                    Description Timeline of Budget
-                                                </div>
+                                                <>
+                                                    <div className={cx('inner-content', 'timeline-budget')}>
+                                                        <div className={cx('head')}>
+                                                            <img
+                                                                className={cx('icon-small')}
+                                                                alt=""
+                                                                src={images.heartDecoIcon}
+                                                            />
+                                                            <p className={cx('title')}>Timelie Budget Daily</p>
+                                                        </div>
+                                                        <div className={cx('description')}>
+                                                            <p className={cx('desc')}>
+                                                                Use this template to track the status of day-to-day
+                                                                design tasks. Tasks are assigned to one or more people
+                                                                and can include priority and due date.
+                                                            </p>
+                                                            <p className={cx('desc')}>
+                                                                Looking for a way to track tasks in context of a larger
+                                                                product roadmap? Check out the Roadmap template.{' '}
+                                                            </p>
+                                                        </div>
+
+                                                        {/* Timeline */}
+                                                        <div className={cx('wrap-timeline')}>
+                                                            {FAKE_TIMELINE_BUDGET !== null &&
+                                                            FAKE_TIMELINE_BUDGET.length > 0 ? (
+                                                                <>
+                                                                    {FAKE_TIMELINE_BUDGET.map((item) => (
+                                                                        <div
+                                                                            key={item.id}
+                                                                            className={cx('group-activity')}
+                                                                        >
+                                                                            <div className={cx('decoration')}>
+                                                                                <div>
+                                                                                    <img
+                                                                                        className={cx('icon')}
+                                                                                        alt=""
+                                                                                        src={images.decorationIcon}
+                                                                                    />
+                                                                                </div>
+                                                                                <div
+                                                                                    className={cx('line-column')}
+                                                                                ></div>
+                                                                            </div>
+                                                                            <div className={cx('activities')}>
+                                                                                <div className={cx('schedule')}>
+                                                                                    <button>
+                                                                                        <span>${item.amount}</span>
+                                                                                    </button>
+                                                                                </div>
+
+                                                                                <div className={cx('multi-activity')}>
+                                                                                    <div
+                                                                                        className={cx('activity-item')}
+                                                                                    >
+                                                                                        <div>
+                                                                                            <p>{item.description}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    ))}
+                                                                </>
+                                                            ) : (
+                                                                <></>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </>
                                             )}
 
                                             {breadItemActive.title === 'Community' && (
-                                                <div className={cx('inner-content')}>Description Community</div>
+                                                <div className={cx('inner-content', 'community')}>
+                                                    <div className={cx('message')}>
+                                                        <img
+                                                            className={cx('icon', 'icon-small')}
+                                                            alt=""
+                                                            src={images.automationIcon}
+                                                        />
+                                                        This post is for backers only If you’re a backer of this
+                                                        project, please log in to read this post
+                                                    </div>
+                                                </div>
                                             )}
 
                                             {breadItemActive.title === 'Update' && (
-                                                <div className={cx('inner-content')}>Description Update</div>
+                                                <div className={cx('inner-content', 'update')}>
+                                                    <div className={cx('wrap-updates')}>
+                                                        {FAKE_UPDATE !== null && FAKE_UPDATE.length > 0 ? (
+                                                            <>
+                                                                {FAKE_UPDATE.map((item) => (
+                                                                    <div key={item.id} className={cx('update-item')}>
+                                                                        <div className={cx('update-sequense')}>
+                                                                            <span>#UPDATE {item.id}</span>
+                                                                            <span className={cx('tag')}>
+                                                                                Backers only
+                                                                            </span>
+                                                                        </div>
+                                                                        <p className={cx('title-update')}>
+                                                                            {item.title}
+                                                                        </p>
+                                                                        <div className={cx('update-creator')}>
+                                                                            <span>{item.creator}</span>
+                                                                            <span
+                                                                                className={cx('update-separate')}
+                                                                            ></span>
+                                                                            <span>{item.createdAt}</span>
+                                                                        </div>
+
+                                                                        <div className={cx('update-label')}>
+                                                                            <div className={cx('div-1')}></div>
+                                                                            <div className={cx('div-2')}></div>
+                                                                        </div>
+
+                                                                        <div className={cx('message')}>
+                                                                            <img
+                                                                                className={cx('icon', 'icon-small')}
+                                                                                alt=""
+                                                                                src={images.automationIcon}
+                                                                            />
+                                                                            This post is for backers only If you’re a
+                                                                            backer of this project, please log in to
+                                                                            read this post
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                            </>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                </div>
                                             )}
                                         </div>
                                     </div>
