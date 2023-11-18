@@ -623,24 +623,30 @@ function CampaignDonationDetails() {
             {/* Form Donation */}
             <div id="popper-donation" className={cx('popper-donation', 'hide')}>
                 <div className={cx('wrap-content')}>
-                    <div className={cx('head-content')}>
-                        <div className={cx('name')}>
-                            <div className={cx('form-edit')}>
-                                <p className={cx('value')}>{campaignInfo !== null && campaignInfo.name}</p>
+                    {stepDonate !== 3 ? (
+                        <>
+                            <div className={cx('head-content')}>
+                                <div className={cx('name')}>
+                                    <div className={cx('form-edit')}>
+                                        <p className={cx('value')}>{campaignInfo !== null && campaignInfo.name}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className={cx('form-row')}>
-                        <div className={cx('form-label', 'label-schedule')}>
-                            <div className={cx('label')}>Make a Donation:</div>
-                        </div>
-                    </div>
-                    <div className={cx('separate')}>
-                        <span className={cx('first')}></span>
-                        <span className={cx('')}></span>
-                        <span className={cx('')}></span>
-                        <span className={cx('small')}></span>
-                    </div>
+                            <div className={cx('form-row')}>
+                                <div className={cx('form-label', 'label-schedule')}>
+                                    <div className={cx('label')}>Make a Donation:</div>
+                                </div>
+                            </div>
+                            <div className={cx('separate')}>
+                                <span className={cx('first')}></span>
+                                <span className={stepDonate === 2 || stepDonate === 3 ? cx('active') : cx('')}></span>
+                                <span className={stepDonate === 3 ? cx('active') : cx('')}></span>
+                                <span className={cx('small')}></span>
+                            </div>
+                        </>
+                    ) : (
+                        <></>
+                    )}
 
                     <div className={cx('process-donate')}>
                         {/* Step 1: Amount */}
@@ -835,9 +841,15 @@ function CampaignDonationDetails() {
                             <></>
                         )}
 
-                        {stepDonate === 3 && donateDetails !== null ? (
+                        {stepDonate === 3 ? (
                             <>
-                                <div className={cx('notification-success')}>Sucess {donateDetails.amount.value}</div>
+                                <div className={cx('notification-success')}>
+                                    <figure>
+                                        <img className={cx('thumb-success')} alt="" src={images.donateImg} />
+                                    </figure>
+
+                                    <div className={cx('message')}>Donate success. Thank for supporting!</div>
+                                </div>
                             </>
                         ) : (
                             <></>
