@@ -9,7 +9,9 @@ function CampaignsDetails() {
 
     return (
         <div className={cx('wrapper')}>
-            <div>Details Campaign {params.slugCampaign}</div>
+            <div className={cx('container')}>
+                <div>Details Campaign {params.slugCampaign}</div>
+            </div>
         </div>
     );
 }

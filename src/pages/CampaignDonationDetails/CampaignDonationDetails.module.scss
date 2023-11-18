@@ -185,6 +185,12 @@
 
 .list-supporters {
     margin-top: 12px;
+
+    .head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
     .title {
         color: #000;
         font-family: 'Inter', sans-serif;
@@ -195,21 +201,35 @@
         letter-spacing: -0.34px;
     }
 
+    .count {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(55, 53, 47, 0.65);
+        font-size: 1.3rem;
+
+        .count-value {
+            color: rgb(55, 53, 47);
+            fill: currentcolor;
+            line-height: 1.5;
+        }
+    }
+
     .item-donate {
         padding: 20px 0;
         display: flex;
         gap: 16px;
 
         .wrap-avatar {
-            width: 48px;
-            height: 48px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid #f1f0ef;
 
-            background-color: #d4e6fa;
+            // background-color: #d4e6fa;
             img {
                 width: 100%;
                 height: 100%;
@@ -218,7 +238,8 @@
             }
 
             span.anonymous {
-                font-weight: 600;
+                font-weight: 500;
+                color: #a5a5a3;
             }
         }
 
@@ -593,3 +614,450 @@
         }
     }
 }
+
+// FORM
+.form-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+
+    visibility: visible;
+    opacity: 1;
+
+    transition: visibility, opacity, height, margin;
+    transition-duration: 0.3s;
+
+    .form-group {
+        flex: 1;
+    }
+
+    .form-label {
+        margin-bottom: 8px;
+        label {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+    }
+
+    .form-control {
+        height: 36px;
+        width: 100%;
+        border: 1px solid #d0d7de;
+        border-radius: 10px;
+    }
+
+    .form-control.no-border {
+        border: initial;
+        border-radius: 0;
+    }
+
+    .form-control.inline {
+        margin-top: -8px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .form-input {
+        height: 100%;
+        width: 100%;
+        padding: 0 12px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: #7d7c85;
+        font-family: 'Inter', sans-serif;
+
+        &::placeholder {
+            font-size: 1.4rem;
+        }
+    }
+    .form-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.3rem;
+        color: #626466;
+        line-height: 1.4;
+    }
+
+    .form-desc.small {
+        margin-top: 6px;
+        font-size: 1.1rem;
+        font-style: italic;
+        color: #0969da;
+    }
+
+    .form-label.small label {
+        font-size: 1.3rem;
+        color: #776f6f;
+    }
+
+    + .form-row {
+        margin-top: 8px;
+    }
+}
+
+.form-row.pay {
+    margin-top: 32px;
+}
+.form-row.margin-inital {
+    margin: 0;
+}
+.form-row.none {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    margin-top: 0;
+
+    + .form-row.none {
+        margin-top: 0;
+    }
+}
+
+.filter-select-wrap {
+    position: relative;
+
+    .wrap-list {
+        min-width: 100px;
+        position: absolute;
+        top: 36px;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+        background-color: #fff;
+        border-radius: 6px;
+        box-shadow: 0 3px 5px #9d929280;
+
+        max-height: 200px;
+        overflow-y: scroll;
+
+        opacity: 1;
+        visibility: visible;
+
+        transition: opacity, visibility;
+        transition-duration: 0.5s;
+
+        .popper-list {
+            width: 100%;
+            padding: 6px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .popper-item {
+            width: 100%;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f1f1f1;
+
+                span {
+                    font-family: 'Inter', sans-serif;
+                    color: #17171a;
+                    font-weight: 500;
+                }
+            }
+
+            span {
+                font-family: 'Inter', sans-serif;
+                display: block;
+                padding: 8px 6px;
+                min-width: 96px;
+                font-size: 1.5rem;
+                font-weight: 500;
+                color: #7d7c85;
+            }
+
+            + .popper-item {
+                margin-top: 4px;
+            }
+        }
+        .popper-item.active {
+            background-color: #e6ebf1;
+            span {
+                color: #17171a;
+            }
+        }
+    }
+
+    .wrap-list.none {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .main {
+        min-width: 100px;
+        //  max-width: 320px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        justify-content: space-between;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        border: 1px solid #d0d7de;
+        padding: 8px 8px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: color 0.4s;
+
+        img {
+            width: 13px;
+            transition: rotate 0.4s;
+        }
+
+        img.icon-rotate {
+            rotate: 180deg;
+        }
+    }
+
+    .main.text {
+        padding: 0 14px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: break-all;
+        line-height: 35px;
+        color: #0d0c22;
+        border-radius: 22px;
+        font-weight: 600;
+
+        border: none;
+
+        transition: color, background-color;
+        transition-duration: 0.3s;
+        &.active {
+            background-color: #f8f7f4;
+            color: #0d0c22;
+            font-weight: 600;
+        }
+
+        &:hover {
+            color: #585353;
+        }
+    }
+    .main.timeframe {
+        width: 160px;
+    }
+
+    .main.action {
+        color: #0075ff;
+
+        img {
+            filter: brightness(0) saturate(100%) invert(47%) sepia(99%) saturate(6037%) hue-rotate(205deg)
+                brightness(106%) contrast(103%);
+        }
+    }
+}
+
+// POPPER DONATION
+
+.popper-donation {
+    position: fixed;
+    z-index: 91;
+    top: 50%;
+    right: 50%;
+    width: 596px;
+
+    background-color: #fff;
+    box-shadow: 0 3px 5px rgba(157, 146, 146, 0.5019607843);
+    transform: translate(50%, -50%);
+
+    border-radius: 3px;
+    display: none;
+
+    .wrap-content {
+        padding: 32px;
+        height: 100%;
+    }
+
+    .head-content {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .name {
+            flex: 1;
+            .form-edit {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .icon {
+                    width: 18px;
+                }
+
+                .value {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 2rem;
+                    font-weight: 500;
+                    color: #43433f;
+                    flex: 1;
+                }
+            }
+        }
+    }
+
+    .label-schedule {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+
+            span {
+                font-size: 1.8rem;
+                font-weight: 600;
+            }
+        }
+
+        &:hover {
+            .add-timetable {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        .add-timetable {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+
+            background-color: #f2f2f2;
+
+            height: 28px;
+            width: 220px;
+            padding: 0 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            visibility: hidden;
+            opacity: 0;
+
+            span {
+                position: relative;
+                color: #ddd;
+                transition: color 0.6s;
+
+                &::after {
+                    color: #a782c2;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: 'Continue Schedule';
+                    white-space: nowrap;
+                    //  width: 100%;
+                    overflow: hidden;
+                    animation: run 2s infinite;
+                }
+            }
+
+            transition: background-color, opacity, visibility;
+            transition-duration: 0.3s;
+            &:hover {
+                background-color: #e5e5e5;
+            }
+        }
+    }
+
+    .separate {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 24px;
+
+        span {
+            height: 3px;
+            width: 72px;
+            opacity: 0.08;
+            background-color: #000958;
+            border-radius: 7px;
+
+            transition: opacity, background-color;
+            transition-duration: 0.6s;
+        }
+        span:nth-child(3) {
+            width: 54px;
+        }
+
+        span.first {
+            width: 45px;
+            background-color: #6059e7;
+            opacity: 1;
+        }
+
+        span.active {
+            background-color: #6059e7;
+            opacity: 1;
+        }
+
+        span.small {
+            width: 34px;
+        }
+    }
+
+    .wrap-pay {
+        margin-top: 24px;
+        width: 50%;
+    }
+
+    .bottom-btns {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 32px;
+
+        button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 32px;
+            font-size: 1.4rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            line-height: 1.5;
+            padding: 0 24px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button.back-btn {
+            background-color: #333;
+            color: #fff;
+        }
+
+        button.next-btn {
+            border: 1px solid #bcbdbf;
+        }
+    }
+}
+.popper-overlay-donation {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 8;
+    background-color: #0f00009c;
+    transition: opacity, visibility;
+    transition-duration: 0.5s;
+}
+
+.popper-donation[class$='show'] {
+    display: block;
+}
+
+.popper-donation[class$='show'] ~ .popper-overlay-donation {
+    visibility: visible;
+    opacity: 1;
+}
+
+//END

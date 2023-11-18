@@ -135,6 +135,8 @@ const images = {
 
     decorationIcon: require('~/assets/images/decoration-icon.svg').default,
     automationIcon: require('~/assets/images/automation-icon.svg').default,
+
+    nextIcon: require('~/assets/images/next-icon.svg').default,
 };
 
 export default images;

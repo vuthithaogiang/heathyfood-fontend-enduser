@@ -1,12 +1,14 @@
 import classNames from 'classnames/bind';
 import styles from './CampaignDonationDetails.module.scss';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useAxios from '~/hooks/useAxios';
 import { InfinitySpin } from 'react-loader-spinner';
 import BackToTop from '~/components/BackToTop';
 import images from '~/assets/images';
 import HTMLRendered from '~/components/HTMLRendered';
+import useOnClickOutside from '~/hooks/useOnclickOutside';
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const cx = classNames.bind(styles);
 
@@ -151,13 +153,107 @@ function CampaignDonationDetails() {
         },
     ];
 
+    const LIAT_AMOUNT = [
+        {
+            id: 1,
+            amountValue: 10,
+        },
+        {
+            id: 2,
+            amountValue: 20,
+        },
+        {
+            id: 3,
+            amountValue: 30,
+        },
+        {
+            id: 4,
+            amountValue: 40,
+        },
+        {
+            id: 5,
+            amountValue: 50,
+        },
+        {
+            id: 6,
+            amountValue: 60,
+        },
+        {
+            id: 7,
+            amountValue: 70,
+        },
+        {
+            id: 8,
+            amountValue: 80,
+        },
+        {
+            id: 9,
+            amountValue: 90,
+        },
+        {
+            id: 10,
+            amountValue: 100,
+        },
+    ];
+
     const [loading, setLoading] = useState(false);
     const [campaignInfo, setCampaignInfo] = useState(null);
     const [breadItemActive, setBreadItemActive] = useState(LIST_BREAD[0]);
 
+    const [stepDonate, setStepDonate] = useState(1);
+    const [amountDonate, setAmountDonate] = useState(null);
+    const [nameDonor, setNameDonor] = useState('');
+    const [emailDobor, setEmailDonor] = useState('');
+    const [messageDonor, setMessageDonor] = useState('');
+
+    const refPopperAmount = useRef();
+    const [showPopperAmount, setshowPopperAmount] = useState(false);
+
+    const [donateDetails, setDonateDetails] = useState(null);
+
+    const toggleShowPopperAmount = () => {
+        setshowPopperAmount(!showPopperAmount);
+    };
+
+    const hiddenPopperAmount = () => {
+        setshowPopperAmount(false);
+    };
+
+    useOnClickOutside(refPopperAmount, hiddenPopperAmount);
+
     useEffect(() => {
         fetInfoCampaign(); // eslint-disable-next-line
     }, [params.slugCampaignDonation]);
+
+    useEffect(() => {
+        const $ = document.querySelector.bind(document);
+        const $$ = document.querySelectorAll.bind(document);
+
+        function initJsToggle() {
+            $$('.js-toggle').forEach((button) => {
+                const target = button.getAttribute('toggle-target');
+                if (!target) {
+                    document.body.innerText = `Cần thêm toggle-target cho: ${button.outerHTML}`;
+                }
+                button.onclick = () => {
+                    if (!$(target)) {
+                        return (document.body.innerText = `Không tìm thấy phần tử "${target}"`);
+                    }
+                    const isHidden = $(target).classList.contains('hide');
+
+                    requestAnimationFrame(() => {
+                        $(target).classList.toggle('hide', !isHidden);
+                        $(target).classList.toggle('show', isHidden);
+
+                        // $(target).classList.toggle('hide', setErrorMessageEdit(null));
+                        // $(target).classList.toggle('hide', setSuccessMessageEdit(null));
+                    });
+                };
+            });
+        }
+
+        initJsToggle();
+    }, [params.slugCampaignDonation, loading]);
 
     const fetInfoCampaign = async () => {
         setLoading(true);
@@ -201,6 +297,15 @@ function CampaignDonationDetails() {
 
         const formattedDate = ` ${month} ${day}, ${year} `; // Combine day, month, and year
         return formattedDate;
+    };
+
+    const checkValidFormInProcessStep1 = () => {
+        if (amountDonate === null) {
+            return;
+        }
+
+        console.log(amountDonate);
+        setStepDonate(2);
     };
 
     return (
@@ -435,7 +540,9 @@ function CampaignDonationDetails() {
                                             </div>
                                         </div>
                                         <div className={cx('group-btns')}>
-                                            <button>Donate Now</button>
+                                            <button className={cx('js-toggle')} toggle-target="#popper-donation">
+                                                Donate Now
+                                            </button>
                                             <button>
                                                 <img className={cx('icon')} alt="" src={images.followingIcon} />
                                                 Save for later
@@ -445,7 +552,12 @@ function CampaignDonationDetails() {
                                         <div className={cx('separate')}></div>
                                         {/* List Supporters */}
                                         <div className={cx('list-supporters')}>
-                                            <p className={cx('title')}>Supporters</p>
+                                            <div className={cx('head')}>
+                                                <p className={cx('title')}>Supporters</p>
+                                                <p className={cx('count')}>
+                                                    COUNT <span className={cx('count-value')}>25</span>
+                                                </p>
+                                            </div>
                                             {FAKE_DONATIONS !== null && FAKE_DONATIONS.length > 0 ? (
                                                 <>
                                                     {FAKE_DONATIONS.map((item) => (
@@ -492,6 +604,8 @@ function CampaignDonationDetails() {
                     ) : (
                         <></>
                     )}
+
+                    {/* Another Campaigns recommend */}
                 </div>
             </div>
 
@@ -505,6 +619,235 @@ function CampaignDonationDetails() {
                     </div>
                 </div>
             )}
+
+            {/* Form Donation */}
+            <div id="popper-donation" className={cx('popper-donation', 'hide')}>
+                <div className={cx('wrap-content')}>
+                    <div className={cx('head-content')}>
+                        <div className={cx('name')}>
+                            <div className={cx('form-edit')}>
+                                <p className={cx('value')}>{campaignInfo !== null && campaignInfo.name}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={cx('form-row')}>
+                        <div className={cx('form-label', 'label-schedule')}>
+                            <div className={cx('label')}>Make a Donation:</div>
+                        </div>
+                    </div>
+                    <div className={cx('separate')}>
+                        <span className={cx('first')}></span>
+                        <span className={cx('')}></span>
+                        <span className={cx('')}></span>
+                        <span className={cx('small')}></span>
+                    </div>
+
+                    <div className={cx('process-donate')}>
+                        {/* Step 1: Amount */}
+                        {stepDonate === 1 ? (
+                            <>
+                                <div className={cx('form-row')}>
+                                    <div className={cx('form-group')}>
+                                        <div className={cx('form-label')}>
+                                            <label>Amount*</label>
+                                        </div>
+
+                                        <div ref={refPopperAmount} className={cx('filter-select-wrap')}>
+                                            <div onClick={toggleShowPopperAmount} className={cx('main')}>
+                                                <span>
+                                                    {amountDonate !== null
+                                                        ? `$${amountDonate.amountValue}`
+                                                        : 'Choose value'}
+                                                </span>
+                                                <img className={cx('icon')} alt="" src={images.plusIcon} />
+                                            </div>
+                                            <div
+                                                className={
+                                                    showPopperAmount === true
+                                                        ? cx('wrap-list')
+                                                        : cx('wrap-list', 'none')
+                                                }
+                                            >
+                                                <div className={cx('popper-list')}>
+                                                    {LIAT_AMOUNT.map((item) => (
+                                                        <div
+                                                            onClick={() => setAmountDonate(item)}
+                                                            key={item.id}
+                                                            className={
+                                                                amountDonate !== null &&
+                                                                item.amountValue === amountDonate.amountValue
+                                                                    ? cx('popper-item', 'active')
+                                                                    : cx('popper-item')
+                                                            }
+                                                        >
+                                                            <span>$ {item.amountValue}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className={cx('form-row')}>
+                                    <div className={cx('form-group')}>
+                                        <div className={cx('form-label')}>
+                                            <label>Name</label>
+                                        </div>
+
+                                        <div className={cx('form-control')}>
+                                            <input
+                                                type="text"
+                                                className={cx('form-input')}
+                                                value={nameDonor}
+                                                onChange={(e) => setNameDonor(e.target.value)}
+                                                placeholder="user name"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={cx('form-row')}>
+                                    <div className={cx('form-group')}>
+                                        <div className={cx('form-label')}>
+                                            <label>Email</label>
+                                        </div>
+
+                                        <div className={cx('form-control')}>
+                                            <input
+                                                type="email"
+                                                className={cx('form-input')}
+                                                value={emailDobor}
+                                                onChange={(e) => setEmailDonor(e.target.value)}
+                                                placeholder="abc@gmail.com"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={cx('form-row')}>
+                                    <div className={cx('form-group')}>
+                                        <div className={cx('form-label')}>
+                                            <label>Message</label>
+                                        </div>
+
+                                        <div className={cx('form-control')}>
+                                            <input
+                                                type="text"
+                                                className={cx('form-input')}
+                                                placeholder="message..."
+                                                value={messageDonor}
+                                                onChange={(e) => setMessageDonor(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className={cx('bottom-btns')}>
+                                    <button className={cx('back-btn', 'js-toggle')} toggle-target="#popper-donation">
+                                        Back
+                                    </button>
+
+                                    <button onClick={checkValidFormInProcessStep1} className={cx('next-btn')}>
+                                        Next
+                                        <img className={cx('icon')} alt="" src={images.nextIcon} />
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <></>
+                        )}
+
+                        {stepDonate === 2 ? (
+                            <>
+                                <div className={cx('form-row', 'pay')}>
+                                    <div className={cx('form-group')}>
+                                        <div className={cx('form-label')}>
+                                            <label>Available Payment method</label>
+                                        </div>
+
+                                        <div className={cx('wrap-pay')}>
+                                            <PayPalScriptProvider
+                                                options={{
+                                                    'client-id':
+                                                        'ARO2YIjmmRbeeaIIjklrVE5Qdnoza3_UQhOp-DffG5tw3ulIRStZq2VpQ_hwVxMtIwLRdRd43L_d46TD',
+                                                }}
+                                            >
+                                                <PayPalButtons
+                                                    createOrder={(data, actions) => {
+                                                        return actions.order.create({
+                                                            purchase_units: [
+                                                                {
+                                                                    amount: {
+                                                                        value: amountDonate.amountValue,
+                                                                    },
+                                                                },
+                                                            ],
+                                                        });
+                                                    }}
+                                                    onApprove={async (data, actions) => {
+                                                        const order = await actions.order.capture();
+                                                        console.log(order);
+
+                                                        console.log(order.purchase_units[0]);
+
+                                                        const donateDetails = {
+                                                            id: order.id,
+                                                            order_date: order.create_time,
+
+                                                            customer_name:
+                                                                order.purchase_units[0].shipping.name.full_name,
+                                                            email_adress: order.payer.email_address,
+
+                                                            status: order.status,
+                                                            amount: order.purchase_units[0].amount,
+                                                        };
+
+                                                        console.log(donateDetails);
+
+                                                        setDonateDetails(donateDetails);
+                                                        setStepDonate(3);
+                                                    }}
+                                                    onCancel={() => {
+                                                        alert('Cancel');
+                                                    }}
+                                                    onError={(err) => {
+                                                        alert(err);
+                                                        console.error('Paypal checkout on Error!', err);
+                                                    }}
+                                                />
+                                            </PayPalScriptProvider>
+                                        </div>
+
+                                        <div className={cx('bottom-btns')}>
+                                            <button
+                                                onClick={() => {
+                                                    setAmountDonate(null);
+                                                    setStepDonate(1);
+                                                }}
+                                                className={cx('back-btn')}
+                                            >
+                                                Back
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            <></>
+                        )}
+
+                        {stepDonate === 3 && donateDetails !== null ? (
+                            <>
+                                <div className={cx('notification-success')}>Sucess {donateDetails.amount.value}</div>
+                            </>
+                        ) : (
+                            <></>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            <div className={cx('popper-overlay-donation', 'js-toggle')} toggle-target="#popper-donation"></div>
+            {/* End */}
         </>
     );
 }

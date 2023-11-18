@@ -45,6 +45,7 @@ function Campaigns() {
         },
     ];
 
+
     const [typeOfFilter, setTypeOfFilter] = useState('Popular');
     const [typeOfTimeFrame, setTypeOfTimeFrame] = useState(null);
 
