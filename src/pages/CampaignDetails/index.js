@@ -7,6 +7,7 @@ import { InfinitySpin } from 'react-loader-spinner';
 import BackToTop from '~/components/BackToTop';
 import images from '~/assets/images';
 import HTMLRendered from '~/components/HTMLRendered';
+import { useNavigate } from 'react-router-dom';
 
 const BASE_URL_IMAGE = 'http://127.0.0.1:8000/uploads/';
 const cx = classNames.bind(styles);
@@ -14,6 +15,7 @@ const cx = classNames.bind(styles);
 function CampaignsDetails() {
     const params = useParams();
     const axios = useAxios();
+    const navigate = useNavigate();
 
     const NAV_LINKS = [
         {
@@ -60,7 +62,34 @@ function CampaignsDetails() {
     const [campaignInfo, setCampaignInfo] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const [recommends, setRecommends] = useState(null);
+
     const [navbarActive, setNavbarActive] = useState(NAV_LINKS[0]);
+
+    const fetchItemRecommend = async (id) => {
+        if (!id) {
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const response = await axios.get(`/api/campaign/recommends/${id}`, {
+                withCredentials: true,
+            });
+
+            console.log(response.data);
+
+            if (response.data.data) {
+                setRecommends(response.data.data);
+            }
+
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+    };
 
     const fetchInfoCampaign = async () => {
         setLoading(true);
@@ -82,6 +111,13 @@ function CampaignsDetails() {
     useEffect(() => {
         fetchInfoCampaign(); // eslint-disable-next-line
     }, [params.slugCampaign]);
+
+    useEffect(() => {
+        if (campaignInfo === null) {
+            return;
+        }
+        fetchItemRecommend(campaignInfo.id); // eslint-disable-next-line
+    }, [campaignInfo]);
 
     const formatDateFromBackend = (dateString) => {
         const dateObject = new Date(dateString);
@@ -259,6 +295,49 @@ function CampaignsDetails() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Recommend */}
+
+                        {recommends !== null && recommends.length > 0 && (
+                            <>
+                                <div className={cx('container')}>
+                                    <div className={cx('list-recommends')}>
+                                        <h4>Recommend others Campaign for you</h4>
+                                        <div className={cx('grid-wrapper-masonry')}>
+                                            {recommends.map((item, index) => (
+                                                <div className={cx(`masonry-${index}`)} key={item.id}>
+                                                    <figure>
+                                                        <img
+                                                            className={cx('masonry-img')}
+                                                            alt=""
+                                                            src={`${BASE_URL_IMAGE}${item.thumbnails[0].path}`}
+                                                        />
+                                                    </figure>
+                                                    <p className={cx('name')}>{item.name}</p>
+                                                    <button
+                                                        onClick={() => {
+                                                            if (item.type_of_campaign.name === 'Humanitarian Relief') {
+                                                                navigate(`/details-campaign-donation/${item.slug}`);
+                                                            } else {
+                                                                navigate(`/details-campaign/${item.slug}`);
+                                                            }
+                                                        }}
+                                                        className={cx('button')}
+                                                    >
+                                                        Read more
+                                                        <img
+                                                            className={cx('icon')}
+                                                            alt=""
+                                                            src={images.arrowIconRight}
+                                                        />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </>
                 )}
             </div>

@@ -9,6 +9,7 @@ import images from '~/assets/images';
 import HTMLRendered from '~/components/HTMLRendered';
 import useOnClickOutside from '~/hooks/useOnclickOutside';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +17,7 @@ const BASE_URL_IMAGE = 'http://127.0.0.1:8000/uploads/';
 function CampaignDonationDetails() {
     const params = useParams();
     const axios = useAxios();
+    const navigate = useNavigate();
 
     const width = 55;
 
@@ -200,6 +202,8 @@ function CampaignDonationDetails() {
     const [campaignInfo, setCampaignInfo] = useState(null);
     const [breadItemActive, setBreadItemActive] = useState(LIST_BREAD[0]);
 
+    const [recommends, setRecommends] = useState(null);
+
     const [stepDonate, setStepDonate] = useState(1);
     const [amountDonate, setAmountDonate] = useState(null);
     const [nameDonor, setNameDonor] = useState('');
@@ -255,6 +259,13 @@ function CampaignDonationDetails() {
         initJsToggle();
     }, [params.slugCampaignDonation, loading]);
 
+    useEffect(() => {
+        if (campaignInfo === null) {
+            return;
+        }
+        fetchItemRecommend(campaignInfo.id); // eslint-disable-next-line
+    }, [campaignInfo]);
+
     const fetInfoCampaign = async () => {
         setLoading(true);
         try {
@@ -266,6 +277,31 @@ function CampaignDonationDetails() {
 
             if (response.data.data) {
                 setCampaignInfo(response.data.data);
+            }
+
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+    };
+
+    const fetchItemRecommend = async (id) => {
+        if (!id) {
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const response = await axios.get(`/api/campaign/recommends/${id}`, {
+                withCredentials: true,
+            });
+
+            console.log(response.data);
+
+            if (response.data.data) {
+                setRecommends(response.data.data);
             }
 
             setLoading(false);
@@ -606,9 +642,44 @@ function CampaignDonationDetails() {
                     ) : (
                         <></>
                     )}
-
-                    {/* Another Campaigns recommend */}
                 </div>
+
+                {recommends !== null && recommends.length > 0 && (
+                    <>
+                        <div className={cx('container')}>
+                            <div className={cx('list-recommends')}>
+                                <h4>Recommend others Campaign for you</h4>
+                                <div className={cx('grid-wrapper-masonry')}>
+                                    {recommends.map((item, index) => (
+                                        <div className={cx(`masonry-${index}`)} key={item.id}>
+                                            <figure>
+                                                <img
+                                                    className={cx('masonry-img')}
+                                                    alt=""
+                                                    src={`${BASE_URL_IMAGE}${item.thumbnails[0].path}`}
+                                                />
+                                            </figure>
+                                            <p className={cx('name')}>{item.name}</p>
+                                            <button
+                                                onClick={() => {
+                                                    if (item.type_of_campaign.name === 'Humanitarian Relief') {
+                                                        navigate(`/details-campaign-donation/${item.slug}`);
+                                                    } else {
+                                                        navigate(`/details-campaign/${item.slug}`);
+                                                    }
+                                                }}
+                                                className={cx('button')}
+                                            >
+                                                Read more
+                                                <img className={cx('icon')} alt="" src={images.arrowIconRight} />
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
 
             <BackToTop />
