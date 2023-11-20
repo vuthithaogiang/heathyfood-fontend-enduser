@@ -306,6 +306,8 @@ function CampaignDonationDetails() {
 
         console.log(amountDonate);
         setStepDonate(2);
+
+        console.log(donateDetails);
     };
 
     return (
@@ -549,7 +551,7 @@ function CampaignDonationDetails() {
                                             </button>
                                         </div>
 
-                                        <div className={cx('separate')}></div>
+                                        {/* <div className={cx('separate')}></div> */}
                                         {/* List Supporters */}
                                         <div className={cx('list-supporters')}>
                                             <div className={cx('head')}>

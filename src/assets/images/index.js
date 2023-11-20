@@ -139,6 +139,16 @@ const images = {
     nextIcon: require('~/assets/images/next-icon.svg').default,
 
     donateImg: require('~/assets/images/donate-img.png'),
+    likeIcon: require('~/assets/images/like-icon.svg').default,
+
+    userAttending1: require('~/assets/images/user-attending-1.png'),
+    userAttending2: require('~/assets/images/user-attending-2.png'),
+    userAttedning3: require('~/assets/images/user-attending-3.png'),
+    userAttedning4: require('~/assets/images/user-attending-4.png'),
+    useAttending5: require('~/assets/images/user-attending-5.png'),
+    statsClockIcon: require('~/assets/images/stats-clock-icon.svg').default,
+    statsPlayIcon: require('~/assets/images/stats-play-icon.svg').default,
+    statsMedalIcon: require('~/assets/images/stats-medal-icon.svg').default,
 };
 
 export default images;
