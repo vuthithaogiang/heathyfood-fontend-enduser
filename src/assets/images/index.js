@@ -149,6 +149,11 @@ const images = {
     statsClockIcon: require('~/assets/images/stats-clock-icon.svg').default,
     statsPlayIcon: require('~/assets/images/stats-play-icon.svg').default,
     statsMedalIcon: require('~/assets/images/stats-medal-icon.svg').default,
+
+    viewIcon: require('~/assets/images/view-icon.svg').default,
+    checkIcon: require('~/assets/images/check-icon.svg').default,
+    penIcon: require('~/assets/images/pen-icon.svg').default,
+    publishIcon: require('~/assets/images/publish-icon.svg').default,
 };
 
 export default images;

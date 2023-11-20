@@ -137,3 +137,12 @@ li {
         background-color: var(--filter-separate-bg-color);
     }
 }
+
+.ql-toolbar.ql-snow {
+    border: none !important;
+    font-family: 'Inter', sans-serif !important;
+    padding-left: 0 !important;
+}
+.ql-container.ql-snow {
+    border: none !important;
+}

@@ -13,6 +13,7 @@ import NotFound from '~/pages/404NotFound';
 import Campaigns from '~/pages/Campaigns';
 import CampaignsDetails from '~/pages/CampaignDetails';
 import CampaignDonationDetails from '~/pages/CampaignDonationDetails';
+import CreatePost from '~/pages/CreatePost';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -33,6 +34,7 @@ const privateRoute = [
     { path: '/profile', component: Profile },
     { path: '/cart', component: Cart },
     { path: '/favourite-list', component: FavouriteList },
+    { path: '/:nameCampaign/create-post', component: CreatePost },
 ];
 
 export { publicRoutes, privateRoute };
