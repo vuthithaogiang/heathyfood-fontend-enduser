@@ -171,7 +171,7 @@ function Login() {
                         <p className={cx('auth-desc')}>Let’s create your account and Shop like a pro and save money.</p>
 
                         {error !== '' && <p className={cx('error')}>{error}</p>}
-                        <form onSubmit={handleSubmit} action="/" className={cx('auth-form')}>
+                        <form onSubmit={handleSubmit} action="" className={cx('auth-form')}>
                             <div className={cx('form-group')}>
                                 <div className={cx('form-text-input')}>
                                     <input
@@ -182,7 +182,6 @@ function Login() {
                                         className={cx('form-input')}
                                         id="email"
                                         name="email"
-                                        autoComplete="off"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />

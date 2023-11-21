@@ -45,7 +45,6 @@ function Campaigns() {
         },
     ];
 
-
     const [typeOfFilter, setTypeOfFilter] = useState('Popular');
     const [typeOfTimeFrame, setTypeOfTimeFrame] = useState(null);
 
@@ -54,7 +53,7 @@ function Campaigns() {
     const [listCampaign, setListCampaign] = useState(null);
 
     const [loading, setLoading] = useState(false);
-    const [fetchSearchForm, setFetchSarchForm] = useState(false);
+
     const [searchValue, setSearchValue] = useState('');
     const [typeCampaignActive, setTypeCampaignActive] = useState(null);
 
@@ -63,7 +62,11 @@ function Campaigns() {
     const [showPopperTypeFilter, setShowPopperTypeFilter] = useState(false);
     const [showPopperTypeOfTimeFrame, setshowPopperTypeOfTimeFrame] = useState(false);
 
-    const sectionRefs = [useRef(), useRef(), useRef()];
+    const [resultFilter, setResultFilter] = useState([]);
+    const [fetchSearchForm, setFetchSarchForm] = useState(false);
+    const [fetchFilterSuccess, setFetchFilterSuccess] = useState(false);
+
+    const sectionRefs = [useRef(), useRef(), useRef(), useRef()];
 
     const scrollToSection = (index) => {
         if (sectionRefs[index].current) {
@@ -157,7 +160,35 @@ function Campaigns() {
     const handleSubmitFormSearch = async (e) => {
         e.preventDefault();
 
+        if (searchValue.trim() === '') {
+            return;
+        }
+
         setFetchSarchForm(true);
+
+        try {
+            const response = await axios.post(
+                '/api/campaign/filter',
+                {
+                    key: searchValue,
+                },
+                {
+                    withCredentials: true,
+                },
+            );
+
+            console.log(response.data);
+
+            if (response.data.data) {
+                setResultFilter(response.data.data);
+                setFetchFilterSuccess(true);
+            }
+            setFetchSarchForm(false);
+        } catch (error) {
+            console.log(error);
+            setFetchSarchForm(false);
+            setFetchFilterSuccess(false);
+        }
     };
 
     return (
@@ -185,13 +216,16 @@ function Campaigns() {
                                         className={cx('icon', 'icon-small', 'close-icon')}
                                         alt=""
                                         src={images.closeIcon}
-                                        onClick={() => setSearchValue('')}
+                                        onClick={() => {
+                                            setResultFilter([]);
+                                            setSearchValue('');
+                                            setFetchFilterSuccess(false);
+                                        }}
                                     />
                                 )}
 
                                 {fetchSearchForm && (
                                     <img
-                                        onClick={() => setFetchSarchForm(false)}
                                         className={cx('icon', 'icon-small', 'spinner-icon')}
                                         alt=""
                                         src={images.spinnerIcon}
@@ -199,9 +233,11 @@ function Campaigns() {
                                 )}
                             </form>
                         </div>
-                        <div className={fetchSearchForm ? cx('result', 'show') : cx('result')}>
+                        <div className={fetchFilterSuccess ? cx('result', 'show') : cx('result')}>
                             <div>
-                                <p className={cx('text-alert')}>10 result for '{searchValue}'</p>
+                                <p className={cx('text-alert')}>
+                                    {resultFilter.length} result for '{searchValue}'
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -316,7 +352,7 @@ function Campaigns() {
                     </div>
                 </div>
 
-                {listCampaign !== null && listCampaign.length > 0 ? (
+                {resultFilter.length === 0 && listCampaign !== null && listCampaign.length > 0 ? (
                     <>
                         <div className={cx('list-campaign')}>
                             <div className={cx('container')}>
@@ -413,6 +449,61 @@ function Campaigns() {
                     </>
                 ) : (
                     <></>
+                )}
+
+                {resultFilter.length > 0 && (
+                    <div className={cx('list-campaign')}>
+                        <div className={cx('container')}>
+                            <div className={cx('grid-campaigns')}>
+                                {resultFilter.map((cam) => (
+                                    <div key={cam.name}>
+                                        <div className={cx('thumbnail-base')}>
+                                            <figure>
+                                                <img
+                                                    className={cx('thumb')}
+                                                    alt=""
+                                                    src={`${BASE_URL_IMAGE}${cam.thumbnails[0].path}`}
+                                                />
+                                                <div className={cx('actions')}>
+                                                    <button>
+                                                        <img className={cx('icon')} alt="" src={images.followingIcon} />
+                                                    </button>
+                                                </div>
+                                            </figure>
+                                        </div>
+                                        <div className={cx('camp-desc')}>
+                                            <p
+                                                onClick={() => {
+                                                    if (cam.type_of_campaign.id === 8) {
+                                                        navigate(`/details-campaign-donation/${cam.slug}`);
+                                                    } else {
+                                                        navigate(`/details-campaign/${cam.slug}`);
+                                                    }
+                                                }}
+                                                className={cx('camp-name')}
+                                            >
+                                                {cam.name}
+                                            </p>
+                                            <div className={cx('camp-schedule')}>
+                                                <span className={cx('from')}>
+                                                    {formatDateFromBackend(cam.start_date)}
+                                                </span>
+                                                <span className={cx('separate')}></span>
+                                                <span className={cx('to')}>{formatDateFromBackend(cam.end_date)}</span>
+
+                                                {cam.status === 0 && <span className={cx('status-new')}>New</span>}
+                                            </div>
+                                            <p className={cx('camp-objective')}>{cam.objective}</p>
+                                            <button className={cx('camp-read-more')}>
+                                                Read more
+                                                <img className={cx('icon')} alt="" src={images.arrowIconRight} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 )}
             </div>
 

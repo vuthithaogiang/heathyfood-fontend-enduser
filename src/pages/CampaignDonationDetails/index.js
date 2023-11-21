@@ -19,43 +19,6 @@ function CampaignDonationDetails() {
     const axios = useAxios();
     const navigate = useNavigate();
 
-    const width = 55;
-
-    const FAKE_DONATIONS = [
-        {
-            id: 1,
-            avatar: images.fakeAvatar1,
-            name: 'Lwish Koe',
-            message: 'Beatae illo commodi. Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            amount: 24,
-            donateAt: '1 day ago',
-        },
-        {
-            id: 2,
-            avatar: null,
-            name: null,
-            message: 'Beatae illo commodi. Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            amount: 58,
-            donateAt: '3 day ago',
-        },
-        {
-            id: 3,
-            avatar: images.fakeAvatar2,
-            name: 'Ponny Joy',
-            message: '',
-            amount: 112,
-            donateAt: '1 month ago',
-        },
-        {
-            id: 4,
-            avatar: null,
-            name: null,
-            message: 'Beatae illo commodi. Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            amount: 58,
-            donateAt: '1 month ago',
-        },
-    ];
-
     const LIST_BREAD = [
         {
             id: 1,
@@ -200,20 +163,21 @@ function CampaignDonationDetails() {
 
     const [loading, setLoading] = useState(false);
     const [campaignInfo, setCampaignInfo] = useState(null);
+    const [listDonor, setListDonor] = useState([]);
     const [breadItemActive, setBreadItemActive] = useState(LIST_BREAD[0]);
+    const [width, setWidth] = useState(0);
 
     const [recommends, setRecommends] = useState(null);
 
     const [stepDonate, setStepDonate] = useState(1);
     const [amountDonate, setAmountDonate] = useState(null);
-    const [nameDonor, setNameDonor] = useState('');
-    const [emailDobor, setEmailDonor] = useState('');
+    const [nameDonor, setNameDonor] = useState(null);
+    const [emailDobor, setEmailDonor] = useState(null);
     const [messageDonor, setMessageDonor] = useState('');
+    const [user, setUser] = useState(null);
 
     const refPopperAmount = useRef();
     const [showPopperAmount, setshowPopperAmount] = useState(false);
-
-    const [donateDetails, setDonateDetails] = useState(null);
 
     const toggleShowPopperAmount = () => {
         setshowPopperAmount(!showPopperAmount);
@@ -227,6 +191,7 @@ function CampaignDonationDetails() {
 
     useEffect(() => {
         fetInfoCampaign(); // eslint-disable-next-line
+        fetUser(); // eslint-disable-next-line
     }, [params.slugCampaignDonation]);
 
     useEffect(() => {
@@ -277,12 +242,35 @@ function CampaignDonationDetails() {
 
             if (response.data.data) {
                 setCampaignInfo(response.data.data);
+
+                const width = (response.data.data.amount_donate_current / response.data.data.goal_donate) * 100;
+                console.log(width);
+                setWidth(width);
+
+                fetchListDonor(response.data.data.id);
             }
 
             setLoading(false);
         } catch (error) {
             console.log(error);
             setLoading(false);
+        }
+    };
+    const fetchListDonor = async (campaignId) => {
+        if (!campaignId) {
+            return;
+        }
+
+        try {
+            const response = await axios.get(`api/donation/get-by-campaign/${campaignId}`, {
+                withCredentials: true,
+            });
+
+            console.log(response.data);
+
+            setListDonor(response.data.data);
+        } catch (err) {
+            console.log(err);
         }
     };
 
@@ -335,15 +323,87 @@ function CampaignDonationDetails() {
         return formattedDate;
     };
 
+    const calculateDaysToPresent = (dateString) => {
+        const dateObject = new Date(dateString);
+
+        const today = new Date();
+
+        const timeDifference = dateObject - today;
+
+        const numberOfDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        return numberOfDays;
+    };
+
+    const fetUser = async () => {
+        try {
+            const response = await axios.get('/api/auth/profile');
+            console.log(response.data);
+
+            if (response.data) {
+                setUser(response.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const checkValidFormInProcessStep1 = () => {
         if (amountDonate === null) {
             return;
         }
 
         console.log(amountDonate);
-        setStepDonate(2);
 
-        console.log(donateDetails);
+        setStepDonate(2);
+    };
+
+    const handlePrepareStatementDonor = () => {
+        if (user !== null) {
+            setNameDonor(user.name);
+            setEmailDonor(user.email);
+
+            return;
+        }
+
+        setNameDonor('');
+        setEmailDonor('');
+    };
+
+    const storeDonationDetails = async (campaignId, details) => {
+        console.log(campaignId);
+        console.log(details);
+        setLoading(true);
+
+        const formData = new FormData();
+        formData.append('campaignId', campaignId);
+
+        if (emailDobor !== null && emailDobor.trim() !== '') {
+            formData.append('email', emailDobor);
+        }
+        formData.append('message', messageDonor);
+
+        if (details.status === 'COMPLETED') {
+            formData.append('amount', details.amount.value);
+            formData.append('paymentMethod', 'Paypal');
+            formData.append('status', 1);
+            try {
+                const response = await axios.post(`/api/donation/store`, formData, {
+                    withCredentials: true,
+                });
+
+                console.log(response.data);
+
+                fetInfoCampaign();
+                setNameDonor(null);
+                setEmailDonor(null);
+                setAmountDonate(null);
+                setMessageDonor('');
+                setLoading(false);
+            } catch (error) {
+                console.log(error);
+                setLoading(false);
+            }
+        }
     };
 
     return (
@@ -553,32 +613,57 @@ function CampaignDonationDetails() {
                                                     style={{ width: `${width}%` }}
                                                     className={cx('scroll-value')}
                                                 ></div>
-                                                <div style={{ left: `${width}%` }} className={cx('alert')}>
-                                                    US $565766
-                                                </div>
+                                                {width === 0 && (
+                                                    <div style={{ left: `${width}%` }} className={cx('alert')}>
+                                                        ${campaignInfo.amount_donate_current}
+                                                    </div>
+                                                )}
+                                                {width >= 100 && (
+                                                    <div className={cx('alert')} style={{ right: '0' }}>
+                                                        ${campaignInfo.amount_donate_current}
+                                                    </div>
+                                                )}
+                                                {width > 0 && width < 100 && (
+                                                    <div
+                                                        className={cx('alert')}
+                                                        style={{ left: `${width}%`, transform: 'translateX(-50%)' }}
+                                                    >
+                                                        ${campaignInfo.amount_donate_current}
+                                                    </div>
+                                                )}
+
                                                 <div className={cx('scroll')}></div>
                                             </div>
                                             <div className={cx('desc-goal')}>
                                                 <span>Start</span>
-                                                <span>Goal US 4000</span>
+                                                <span>
+                                                    Goal US{' '}
+                                                    {campaignInfo.goal_donate !== null && campaignInfo.goal_donate}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className={cx('stats-details')}>
                                             <div className={cx('item-details')}>
-                                                <p>US 22424</p>
+                                                <p>
+                                                    US {campaignInfo.goal_donate - campaignInfo.amount_donate_current}
+                                                </p>
                                                 <span>Founded</span>
                                             </div>
                                             <div className={cx('item-details')}>
-                                                <p>204</p>
+                                                <p>{listDonor.length}</p>
                                                 <span>Doners</span>
                                             </div>
                                             <div className={cx('item-details')}>
-                                                <p>29</p>
+                                                <p>{calculateDaysToPresent(campaignInfo.end_date)}</p>
                                                 <span>Days to go</span>
                                             </div>
                                         </div>
                                         <div className={cx('group-btns')}>
-                                            <button className={cx('js-toggle')} toggle-target="#popper-donation">
+                                            <button
+                                                className={cx('js-toggle')}
+                                                toggle-target="#popper-donation"
+                                                onClick={handlePrepareStatementDonor}
+                                            >
                                                 Donate Now
                                             </button>
                                             <button>
@@ -589,35 +674,42 @@ function CampaignDonationDetails() {
 
                                         {/* <div className={cx('separate')}></div> */}
                                         {/* List Supporters */}
+
                                         <div className={cx('list-supporters')}>
                                             <div className={cx('head')}>
                                                 <p className={cx('title')}>Supporters</p>
                                                 <p className={cx('count')}>
-                                                    COUNT <span className={cx('count-value')}>25</span>
+                                                    COUNT <span className={cx('count-value')}>{listDonor.length}</span>
                                                 </p>
                                             </div>
-                                            {FAKE_DONATIONS !== null && FAKE_DONATIONS.length > 0 ? (
+                                            {listDonor !== null && listDonor.length > 0 ? (
                                                 <>
-                                                    {FAKE_DONATIONS.map((item) => (
+                                                    {listDonor.map((item) => (
                                                         <div className={cx('item-donate')} key={item.id}>
                                                             <figure className={cx('wrap-avatar')}>
-                                                                {item.avatar !== null ? (
+                                                                {item.user !== null && item.user.avatar !== null ? (
                                                                     <img alt="" src={item.avatar} />
                                                                 ) : (
-                                                                    <span className={cx('anonymous')}>A</span>
+                                                                    <span className={cx('anonymous')}>
+                                                                        {item.user !== null && item.user.name !== null
+                                                                            ? item.user.name.charAt(0)
+                                                                            : 'A'}
+                                                                    </span>
                                                                 )}
                                                             </figure>
 
                                                             <div className={cx('left-item')}>
                                                                 <p className={cx('group')}>
                                                                     by{' '}
-                                                                    {item.name !== null && item.name !== '' ? (
-                                                                        <span className={cx('name')}>{item.name}</span>
+                                                                    {item.user !== null && item.user.name !== null ? (
+                                                                        <span className={cx('name')}>
+                                                                            {item.user.name}
+                                                                        </span>
                                                                     ) : (
                                                                         <span className={cx('name')}>Anonymous</span>
                                                                     )}{' '}
                                                                     <span className={cx('group-separate')}></span>
-                                                                    {item.donateAt}
+                                                                    {formatDateFromBackend(item.created_at)}
                                                                 </p>
                                                                 {item.message !== null && item.message !== '' ? (
                                                                     <p className={cx('message')}>{item.message}</p>
@@ -628,12 +720,12 @@ function CampaignDonationDetails() {
                                                             </div>
                                                         </div>
                                                     ))}
+
+                                                    <button className={cx('btn-show-more')}>Show more</button>
                                                 </>
                                             ) : (
                                                 <></>
                                             )}
-
-                                            <button className={cx('btn-show-more')}>Show more</button>
                                         </div>
                                     </div>
                                 </div>
@@ -776,6 +868,7 @@ function CampaignDonationDetails() {
 
                                         <div className={cx('form-control')}>
                                             <input
+                                                name="name"
                                                 type="text"
                                                 className={cx('form-input')}
                                                 value={nameDonor}
@@ -793,6 +886,7 @@ function CampaignDonationDetails() {
 
                                         <div className={cx('form-control')}>
                                             <input
+                                                name="email"
                                                 type="email"
                                                 className={cx('form-input')}
                                                 value={emailDobor}
@@ -882,7 +976,7 @@ function CampaignDonationDetails() {
 
                                                         console.log(donateDetails);
 
-                                                        setDonateDetails(donateDetails);
+                                                        storeDonationDetails(campaignInfo.id, donateDetails);
                                                         setStepDonate(3);
                                                     }}
                                                     onCancel={() => {
@@ -931,7 +1025,11 @@ function CampaignDonationDetails() {
                 </div>
             </div>
 
-            <div className={cx('popper-overlay-donation', 'js-toggle')} toggle-target="#popper-donation"></div>
+            <div
+                className={cx('popper-overlay-donation', 'js-toggle')}
+                toggle-target="#popper-donation"
+                onClick={() => setStepDonate(1)}
+            ></div>
             {/* End */}
         </>
     );
