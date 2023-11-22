@@ -244,7 +244,6 @@ function Campaigns() {
                 </div>
 
                 {/* Filter*/}
-
                 <div className={cx('filter-group')}>
                     <div className={cx('row-filter')}>
                         <div className={cx('filter-left')}>

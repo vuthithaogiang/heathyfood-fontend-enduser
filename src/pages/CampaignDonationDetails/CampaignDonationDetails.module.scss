@@ -326,6 +326,14 @@
     cursor: pointer;
     font-weight: 500;
     color: #0075ff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    img {
+        width: 12px;
+        animation: spinner infinite 1.4s;
+    }
 
     &:hover {
         text-decoration: underline;
@@ -1235,5 +1243,14 @@
             object-fit: cover;
             border-radius: 6px;
         }
+    }
+}
+
+@keyframes spinner {
+    from {
+        rotate: 0;
+    }
+    to {
+        rotate: 180deg;
     }
 }

@@ -176,8 +176,12 @@ function CampaignDonationDetails() {
     const [messageDonor, setMessageDonor] = useState('');
     const [user, setUser] = useState(null);
 
+    const [nextCursor, setNextCursor] = useState(null);
+
     const refPopperAmount = useRef();
     const [showPopperAmount, setshowPopperAmount] = useState(false);
+
+    const [fetchShowMoreDonors, setFetchshowMoreDonors] = useState(false);
 
     const toggleShowPopperAmount = () => {
         setshowPopperAmount(!showPopperAmount);
@@ -262,13 +266,14 @@ function CampaignDonationDetails() {
         }
 
         try {
-            const response = await axios.get(`api/donation/get-by-campaign/${campaignId}`, {
+            const response = await axios.get(`api/donation/pagination/${campaignId}`, {
                 withCredentials: true,
             });
 
             console.log(response.data);
 
             setListDonor(response.data.data);
+            setNextCursor(response.data.next_cursor);
         } catch (err) {
             console.log(err);
         }
@@ -403,6 +408,31 @@ function CampaignDonationDetails() {
                 console.log(error);
                 setLoading(false);
             }
+        }
+    };
+
+    const handleFetchMoreDonors = async () => {
+        if (nextCursor === null) {
+            return;
+        }
+
+        setFetchshowMoreDonors(true);
+
+        try {
+            const response = await axios.get(`/api/donation/pagination/${campaignInfo.id}/${nextCursor}`, {
+                withCredentials: true,
+            });
+
+            console.log(response.data);
+
+            const nextDonors = response.data.data;
+
+            setListDonor((prev) => [...prev, ...nextDonors]);
+            setNextCursor(response.data.next_cursor);
+            setFetchshowMoreDonors(false);
+        } catch (error) {
+            console.log(error);
+            setFetchshowMoreDonors(false);
         }
     };
 
@@ -721,7 +751,23 @@ function CampaignDonationDetails() {
                                                         </div>
                                                     ))}
 
-                                                    <button className={cx('btn-show-more')}>Show more</button>
+                                                    {nextCursor !== null && (
+                                                        <>
+                                                            <button
+                                                                onClick={handleFetchMoreDonors}
+                                                                className={cx('btn-show-more')}
+                                                            >
+                                                                Show more
+                                                                {fetchShowMoreDonors && (
+                                                                    <img
+                                                                        className={cx('icon', 'icon-small')}
+                                                                        alt=""
+                                                                        src={images.spinnerIcon}
+                                                                    />
+                                                                )}
+                                                            </button>
+                                                        </>
+                                                    )}
                                                 </>
                                             ) : (
                                                 <></>
