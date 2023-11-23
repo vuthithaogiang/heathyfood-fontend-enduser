@@ -16,38 +16,52 @@ function Products() {
     const axios = useAxios();
 
     const MIN = 0;
-    const MAX = 300;
+    const MAX = 150;
 
-    const QUANTITIES = [
+    const TYPE_ODERS = [
         {
-            type: 'Gram',
-            list: [100, 200, 400, 500],
+            id: 1,
+            title: 'Price Low to High',
         },
         {
-            type: 'Kilogram',
-            list: [1, 2, 3],
+            id: 2,
+            title: 'Price High to Low',
         },
         {
-            type: 'Mililit',
-            list: [100, 200, 300, 500],
+            id: 3,
+            title: 'Name a-z',
         },
         {
-            type: 'Lit',
-            list: [1, 2, 3, 5, 6],
+            id: 4,
+            title: 'Name z-a',
         },
     ];
 
-    const UNITS = ['Gram', 'Kilogram', 'Mililit', 'Lit'];
+    const STATUS = [
+        {
+            id: 2,
+            title: 'Upcoming',
+        },
+        {
+            id: 3,
+            title: 'New Arrival',
+        },
+        {
+            id: 5,
+            title: 'Best Seller',
+        },
+    ];
 
     const [showFlter, setShowFilter] = useState(false);
     const refFilter = useRef();
-    const refOptionQuantty = useRef();
+    const refOptionTypeOrder = useRef();
     const refOptionUnit = useRef();
     const navigate = useNavigate();
     const [values, setValues] = useState([MIN, MAX]);
-    const [unit, setUnit] = useState(UNITS[0]);
-    const [quantity, setQuantity] = useState(null);
-    const [showOptionQuantity, setshowOptionQuantity] = useState(false);
+    const [statusFilter, setStatusFilter] = useState(null);
+    const [valueSearchBrand, setValueSearchBrand] = useState('');
+    const [typeOrder, setTypeOrder] = useState(null);
+    const [showOptionTypeOrder, setshowOptionTypeOrder] = useState(false);
     const [showOptionUnit, setshowOptionUnit] = useState(false);
 
     const [listCategoryProduct, setListCategoryProducts] = useState([]);
@@ -86,7 +100,9 @@ function Products() {
             });
 
             console.log(response.data);
-            setListCategoryProducts(response.data);
+
+            const array = response.data.filter((item) => item.products.length > 0);
+            setListCategoryProducts(array);
 
             setLoading(false);
         } catch (error) {
@@ -142,8 +158,8 @@ function Products() {
         setShowFilter(!showFlter);
     };
 
-    const toggleShowOptionQuantity = () => {
-        setshowOptionQuantity(!showOptionQuantity);
+    const toggleShowOptionTypeOrder = () => {
+        setshowOptionTypeOrder(!showOptionTypeOrder);
     };
 
     const toggleShowOptionUnit = () => {
@@ -154,8 +170,8 @@ function Products() {
         setShowFilter(false);
     };
 
-    const hiddenOptionQuantity = () => {
-        setshowOptionQuantity(false);
+    const hiddenOptionTypeOrder = () => {
+        setshowOptionTypeOrder(false);
     };
 
     const hiddenOptionUnit = () => {
@@ -164,9 +180,69 @@ function Products() {
 
     useOnClickOutside(refFilter, hiddenFilter);
 
-    useOnClickOutside(refOptionQuantty, hiddenOptionQuantity);
+    useOnClickOutside(refOptionTypeOrder, hiddenOptionTypeOrder);
 
     useOnClickOutside(refOptionUnit, hiddenOptionUnit);
+
+    const handleSubmitFilter = async (e) => {
+        e.preventDefault();
+
+        console.log('Min', values[0]);
+        console.log('Max', values[1]);
+        console.log('Type order', typeOrder);
+        console.log('Status: ', statusFilter);
+
+        const formData = new FormData();
+
+        formData.append('min', values[0]);
+        formData.append('max', values[1]);
+
+        if (statusFilter !== null) {
+            formData.append('status', statusFilter.id);
+        }
+
+        if (typeOrder !== null) {
+            if (typeOrder.title === 'Price Low to High') {
+                formData.append('orderBy', 'price');
+                formData.append('orderType', 'asc');
+            } else if (typeOrder.title === 'Price High to Low') {
+                formData.append('orderBy', 'price');
+                formData.append('orderType', 'desc');
+            } else if (typeOrder.title === 'Name a-z') {
+                formData.append('orderBy', 'name');
+                formData.append('orderType', 'asc');
+            } else if (typeOrder.title === 'Name z-a') {
+                formData.append('orderBy', 'name');
+                formData.append('orderType', 'desc');
+            }
+        }
+        setLoading(true);
+        try {
+            const response = await axios.post('/api/product/get-filter', formData, {
+                withCredentials: true,
+            });
+
+            console.log(response.data);
+
+            setListProduct(response.data.data);
+            setNextCursor(null);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            hiddenFilter();
+            setLoading(false);
+        }
+    };
+
+    const clearFilter = () => {
+        setValues([MIN, MAX]);
+        setTypeOrder(null);
+        setStatusFilter(null);
+        setValueSearchBrand('');
+
+        hiddenFilter();
+        fetchListProduct();
+    };
 
     return (
         <>
@@ -225,17 +301,12 @@ function Products() {
                             <div className={showFlter === true ? cx('filter') : cx('filter', 'none')}>
                                 <img className={cx('filter-arrow')} alt="" src={images.arrowUpIcon} />
                                 <h3 className={cx('filter-heading')}>Filter</h3>
-                                <form method="post" onSubmit={(e) => e.preventDefault()} className={cx('filter-form')}>
+                                <form method="post" onSubmit={handleSubmitFilter} className={cx('filter-form')}>
                                     <div className={cx('filter-row')}>
                                         {/* Column 1 */}
                                         <div className={cx('filter-col')}>
                                             <label className={cx('filter-form-label')}>Price</label>
                                             <div className={cx('filter-form-group')}>
-                                                {/* <div
-                                                    style={{ '--min-value': 10 + '%', '--max-value': 60 + '%' }}
-                                                    className={cx('filter-form-slider')}
-                                                ></div> */}
-
                                                 <ReactSlider
                                                     min={MIN}
                                                     max={MAX}
@@ -270,18 +341,18 @@ function Products() {
 
                                         {/* Column 2 */}
                                         <div className={cx('filter-col')}>
-                                            <label className={cx('filter-form-label')}>Size/Weight</label>
+                                            <label className={cx('filter-form-label')}>Group by</label>
                                             <div className={cx('filter-form-group')}>
                                                 <div className={cx('filter-select-wrap')}>
                                                     <div
-                                                        onClick={toggleShowOptionQuantity}
-                                                        ref={refOptionQuantty}
+                                                        onClick={toggleShowOptionTypeOrder}
+                                                        ref={refOptionTypeOrder}
                                                         className={cx('filter-select', 'select-quantities')}
                                                     >
-                                                        {quantity === null ? 'Select' : quantity}
+                                                        {typeOrder === null ? 'Select' : typeOrder.title}
                                                         <img
                                                             className={
-                                                                showOptionQuantity === true
+                                                                showOptionTypeOrder === true
                                                                     ? cx('icon', 'icon-rotate')
                                                                     : cx('icon')
                                                             }
@@ -290,35 +361,27 @@ function Products() {
                                                         />
                                                         <div
                                                             className={
-                                                                showOptionQuantity === true
+                                                                showOptionTypeOrder === true
                                                                     ? cx('wrap-options')
                                                                     : cx('wrap-options', 'none')
                                                             }
                                                         >
-                                                            {QUANTITIES.map((item, index) => {
-                                                                if (item.type === unit) {
-                                                                    return (
-                                                                        <div key={index} className={cx('list-options')}>
-                                                                            {item.list.map((option) => (
-                                                                                <div
-                                                                                    onClick={() =>
-                                                                                        setQuantity(
-                                                                                            `${option} ${unit.toLowerCase()}`,
-                                                                                        )
-                                                                                    }
-                                                                                    className={cx('option')}
-                                                                                    key={option}
-                                                                                >
-                                                                                    <span>
-                                                                                        {option} {unit.toLowerCase()}
-                                                                                    </span>
-                                                                                </div>
-                                                                            ))}
+                                                            {TYPE_ODERS.map((item, index) => {
+                                                                return (
+                                                                    <div key={index} className={cx('list-options')}>
+                                                                        <div
+                                                                            onClick={() => setTypeOrder(item)}
+                                                                            className={
+                                                                                typeOrder !== null &&
+                                                                                item.id === typeOrder.id
+                                                                                    ? cx('option', 'active')
+                                                                                    : cx('option')
+                                                                            }
+                                                                        >
+                                                                            <span>{item.title}</span>
                                                                         </div>
-                                                                    );
-                                                                } else {
-                                                                    return <></>;
-                                                                }
+                                                                    </div>
+                                                                );
                                                             })}
                                                         </div>
                                                     </div>
@@ -327,7 +390,7 @@ function Products() {
                                                         onClick={toggleShowOptionUnit}
                                                         className={cx('filter-select', 'select-units')}
                                                     >
-                                                        {unit}
+                                                        {statusFilter === null ? 'Status' : statusFilter.title}
                                                         <img
                                                             className={
                                                                 showOptionUnit === true
@@ -344,13 +407,18 @@ function Products() {
                                                                     : cx('wrap-options', 'none')
                                                             }
                                                         >
-                                                            {UNITS.map((item) => (
+                                                            {STATUS.map((item) => (
                                                                 <div
-                                                                    onClick={() => setUnit(item)}
-                                                                    key={item}
-                                                                    className={cx('option')}
+                                                                    onClick={() => setStatusFilter(item)}
+                                                                    key={item.id}
+                                                                    className={
+                                                                        statusFilter !== null &&
+                                                                        item.id === statusFilter.id
+                                                                            ? cx('option', 'active')
+                                                                            : cx('option')
+                                                                    }
                                                                 >
-                                                                    <span>{item}</span>
+                                                                    <span>{item.title}</span>
                                                                 </div>
                                                             ))}
                                                         </div>
@@ -359,9 +427,18 @@ function Products() {
                                             </div>
                                             <div className={cx('filter-form-group')}>
                                                 <div className={cx('filter-form-tags')}>
-                                                    <button className={cx('filter-form-tag')}>Small</button>
-                                                    <button className={cx('filter-form-tag')}>Medium</button>
-                                                    <button className={cx('filter-form-tag')}>Large</button>
+                                                    <span
+                                                        className={cx('filter-form-tag')}
+                                                        onClick={() => setStatusFilter(STATUS[2])}
+                                                    >
+                                                        Best Seller
+                                                    </span>
+                                                    <span
+                                                        className={cx('filter-form-tag')}
+                                                        onClick={() => setStatusFilter(STATUS[1])}
+                                                    >
+                                                        New Arrival
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -373,21 +450,41 @@ function Products() {
                                             <label className={cx('filter-form-label')}>Brand</label>
                                             <div className={cx('filter-form-group')}>
                                                 <div className={cx('filter-form-text')}>
-                                                    <input type="text" placeholder="Search brand name" />
+                                                    <input
+                                                        value={valueSearchBrand}
+                                                        onChange={(e) => setValueSearchBrand(e.target.value)}
+                                                        type="text"
+                                                        placeholder="Search brand name"
+                                                    />
                                                     <img className={cx('icon')} alt="" src={images.searchIcon} />
                                                 </div>
                                             </div>
                                             <div className={cx('filter-form-group')}>
                                                 <div className={cx('filter-form-tags')}>
-                                                    <button className={cx('filter-form-tag')}>Lavazza</button>
-                                                    <button className={cx('filter-form-tag')}>Nescafe</button>
-                                                    <button className={cx('filter-form-tag')}>Starbcks</button>
+                                                    <span
+                                                        onClick={() => setValueSearchBrand('Fresh Garden')}
+                                                        className={cx('filter-form-tag')}
+                                                    >
+                                                        Fresh Garden
+                                                    </span>
+                                                    <span
+                                                        onClick={() => setValueSearchBrand('Tropical Fruits')}
+                                                        className={cx('filter-form-tag')}
+                                                    >
+                                                        Tropical Fruits
+                                                    </span>
+                                                    <span
+                                                        onClick={() => setValueSearchBrand('Jasmire Rice')}
+                                                        className={cx('filter-form-tag')}
+                                                    >
+                                                        Jasmine Rice
+                                                    </span>
                                                 </div>
                                             </div>
 
                                             <div className={cx('filter-form-group')}>
                                                 <div className={cx('btn-group')}>
-                                                    <button>Cancel</button>
+                                                    <span onClick={clearFilter}>Cancel</span>
                                                     <button type="submit">Show Result</button>
                                                 </div>
                                             </div>

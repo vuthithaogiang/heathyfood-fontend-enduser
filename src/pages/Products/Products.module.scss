@@ -5,7 +5,7 @@
 
 .filter-products {
     margin-top: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -268,6 +268,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    gap: 12px;
     justify-content: space-between;
     height: calc(100% - 12px);
     padding: 0 14px;
@@ -276,27 +277,30 @@
     line-height: 1.43;
 
     img {
-        width: 15px;
+        width: 12px;
         transition: rotate 0.5s;
         user-select: none;
     }
 }
 
 .filter-select:nth-child(1) {
-    min-width: 158px;
+    min-width: 180px;
     border-right: 1px solid #d2d1d6;
 }
 
 .filter-select:nth-child(2) {
-    min-width: 110px;
+    min-width: 140px;
 }
 
 .filter-form-tags {
     display: flex;
+    flex-wrap: wrap;
+
     align-items: center;
     gap: 20px;
 
     .filter-form-tag {
+        flex-shrink: 0;
         padding: 6px 12px;
         border-radius: 6px;
         background-color: var(--filter-tag-bg-color);
@@ -325,11 +329,13 @@
 
 .btn-group {
     display: flex;
+    align-items: center;
     gap: 20px;
 
-    button:nth-child(1) {
+    span {
         cursor: pointer;
-        margin-left: auto;
+        font-size: 1.4rem;
+        font-weight: 500;
     }
 
     button:nth-child(2) {
@@ -375,6 +381,10 @@
             background-color: #d2d2d269;
         }
     }
+
+    .option.active {
+        background-color: #e6ebf1;
+    }
 }
 
 .filter-select.select-units {
@@ -402,6 +412,9 @@
         &:hover {
             background-color: #d2d2d269;
         }
+    }
+    .option.active {
+        background-color: #e6ebf1;
     }
 }
 
