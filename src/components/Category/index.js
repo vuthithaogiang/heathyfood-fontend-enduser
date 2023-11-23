@@ -3,13 +3,9 @@ import styles from './Category.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Category({ data }) {
+function Category({ data, active }) {
     return (
-        <div className={cx('item')}>
-            <div className={cx('group-icon')}>
-                <img src={data.icon1} alt="" />
-                <img src={data.icon2} alt="" className={cx('icon')} />
-            </div>
+        <div className={active ? cx('item', 'active') : cx('item')}>
             <span>{data.title}</span>
         </div>
     );

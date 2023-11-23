@@ -23,7 +23,7 @@ const publicRoutes = [
     { path: '/create-new-password', component: CreateNewPassword, layout: null },
     { path: '/bmi', component: BMICalculator },
     { path: '/products', component: Products },
-    { path: '/product-detail/:slug', component: ProductDetails },
+    { path: '/product-detail/:slugProduct', component: ProductDetails },
     { path: '/campaigns', component: Campaigns },
     { path: '/details-campaign-donation/:slugCampaignDonation', component: CampaignDonationDetails },
     { path: '/details-campaign/:slugCampaign', component: CampaignsDetails },

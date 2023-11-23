@@ -119,7 +119,7 @@ function CampaignsDetails() {
     const [campaignInfo, setCampaignInfo] = useState(null);
     const [loading, setLoading] = useState(false);
     const [recommends, setRecommends] = useState(null);
-    const [navbarActive, setNavbarActive] = useState(NAV_LINKS[0]);
+    const [navbarActive, setNavbarActive] = useState(NAV_LINKS[3]);
     const [schedules, setSchedules] = useState(null);
 
     const [attended, setAttended] = useState(false);
